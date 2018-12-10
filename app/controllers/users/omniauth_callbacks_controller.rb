@@ -11,4 +11,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end
   end
+
+  def github
+    @user = User.find_for_github_oauth(request.env["omniauth.auth"])
+    sign_in_and_redirect @user
+  end
+
+  def trello
+    @user = User.find_for_trello_oauth(request.env["omniauth.auth"])
+    sign_in_and_redirect @user
+  end
 end

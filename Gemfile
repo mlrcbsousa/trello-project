@@ -32,7 +32,8 @@ end
 # Added after minimal install
 gem 'devise'
 gem 'faker'
-gem 'ruby-trello'
-gem 'omniauth-trello'
-gem 'omniauth-facebook'
 gem 'figaro'
+gem 'ruby-trello'
+gem 'omniauth-facebook'
+gem 'omniauth-trello'
+gem 'omniauth-github'

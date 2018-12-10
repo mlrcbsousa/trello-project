@@ -264,6 +264,12 @@ Devise.setup do |config|
     secure_image_url: true,
     display: 'popup'
 
+  config.omniauth :github, ENV["GITHUB_ID"], ENV["GITHUB_SECRET"], scope: 'email'
+
+  config.omniauth :trello, ENV["TRELLO_ID"], ENV["TRELLO_SECRET"],
+    scope: 'read,write,account',
+    expiration: 'never'
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
