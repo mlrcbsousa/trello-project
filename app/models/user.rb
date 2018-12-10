@@ -4,32 +4,21 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  devise :omniauthable, omniauth_providers: %i[facebook github trello]
+  devise :omniauthable, omniauth_providers: [:trello]
 
-  def self.find_for_github_oauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-    end
-  end
+    # where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    #   user.email = auth.info.email
+    #   user.password = Devise.friendly_token[0, 20]
+    #   user.full_name = auth.info.fullName
+    #   # user.image = auth.info.image # assuming the user model has an image
+    # end
 
-  def self.find_for_trello_oauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-    end
-  end
-
-  def self.find_for_facebook_oauth(auth)
+  def self.from_trello_omniauth(auth)
     user_params = auth.slice(:provider, :uid)
-    user_params.merge! auth.info.slice(:email, :first_name, :last_name)
-    user_params[:facebook_picture_url] = auth.info.image
-    user_params[:token] = auth.credentials.token
-    user_params[:token_expiry] = Time.at(auth.credentials.expires_at)
+    user_params.merge! auth.extra.raw_info.slice(:email, :username)
+    user_params[:trello_avatar_url] = auth.extra.raw_info.avatarUrl
+    user_params[:full_name] = auth.extra.raw_info.fullName
+    user_params.merge! auth.credentials.slice(:token, :secret)
     user_params = user_params.to_h
 
     user = User.find_by(provider: auth.provider, uid: auth.uid)

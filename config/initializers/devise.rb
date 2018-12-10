@@ -257,16 +257,17 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :facebook, ENV["FB_ID"], ENV["FB_SECRET"],
-    scope: 'email',
-    info_fields: 'email, first_name, last_name',
-    image_size: 'square',  # 50x50, guaranteed ratio
-    secure_image_url: true,
-    display: 'popup'
 
-  config.omniauth :github, ENV["GITHUB_ID"], ENV["GITHUB_SECRET"], scope: 'email'
+  # config.omniauth :facebook, ENV["FB_ID"], ENV["FB_SECRET"],
+  #   scope: 'email',
+  #   info_fields: 'email, first_name, last_name',
+  #   image_size: 'square',  # 50x50, guaranteed ratio
+  #   secure_image_url: true,
+  #   display: 'popup'
 
-  config.omniauth :trello, ENV["TRELLO_ID"], ENV["TRELLO_SECRET"],
+  config.omniauth :trello, ENV["TRELLO_KEY"], ENV["TRELLO_SECRET"],
+    token_params: { parse: :json },
+    app_name: "burndown-awesome",
     scope: 'read,write,account',
     expiration: 'never'
 
