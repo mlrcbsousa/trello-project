@@ -10,10 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_10_175729) do
+ActiveRecord::Schema.define(version: 2018_12_11_143334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cards", force: :cascade do |t|
+    t.string "id_trello", null: false
+    t.bigint "list_id"
+    t.integer "size", default: 2, null: false
+    t.bigint "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_cards_on_list_id"
+    t.index ["member_id"], name: "index_cards_on_member_id"
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "id_trello"
+    t.bigint "sprint_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sprint_id"], name: "index_lists_on_sprint_id"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.string "id_trello", null: false
+    t.bigint "sprint_id"
+    t.boolean "contributor", default: true, null: false
+    t.integer "days_per_sprint"
+    t.integer "hours_per_day", default: 8, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "full_name"
+    t.string "trello_avatar_url"
+    t.index ["sprint_id"], name: "index_members_on_sprint_id"
+  end
+
+  create_table "sprints", force: :cascade do |t|
+    t.string "id_trello", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "man_hours"
+    t.bigint "user_id"
+    t.string "trello_url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sprints_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -34,4 +78,9 @@ ActiveRecord::Schema.define(version: 2018_12_10_175729) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cards", "lists"
+  add_foreign_key "cards", "members"
+  add_foreign_key "lists", "sprints"
+  add_foreign_key "members", "sprints"
+  add_foreign_key "sprints", "users"
 end

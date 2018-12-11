@@ -6,12 +6,19 @@ class User < ApplicationRecord
 
   devise :omniauthable, omniauth_providers: [:trello]
 
-    # where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    #   user.email = auth.info.email
-    #   user.password = Devise.friendly_token[0, 20]
-    #   user.full_name = auth.info.fullName
-    #   # user.image = auth.info.image # assuming the user model has an image
-    # end
+  # Associations
+  has_many :sprints, dependent: :destroy
+
+  # Validations
+  validates :username,
+            length: { in: 0..20 },
+            allow_blank: false,
+            # must be a word character (letter, number, underscore)
+            format: { with: /\A(\w+)\z/ }
+
+  # must be a-z or ' ' (case-insensitive)
+  validates :full_name, allow_blank: false, format: { with: /\A([a-z \'\.']+)\z/i }
+  validates :provider, :uid, :token, :secret, presence: true
 
   def self.from_trello_omniauth(auth)
     user_params = auth.slice(:provider, :uid)
@@ -30,7 +37,6 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20] # Fake password for validation
       user.save
     end
-
     return user
   end
 end
