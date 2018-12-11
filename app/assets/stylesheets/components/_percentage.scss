@@ -1,0 +1,70 @@
+// _percentage.scss
+//  can apply changes in one place, the base font size
+//  here and it will scale the rest around that
+
+/*different sizes*/
+.bar-base {
+  font-size: 8px; //<-- small
+}
+.bar-base-team {
+  font-size: 12px; //<-- medium
+}
+.bar-base-profile {
+  font-size: 18px; //<-- large
+}
+
+/*bar base*/
+.bar-frame {
+  width: 32em;
+  height: 6em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+.bar-content {
+  height: 4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bar {
+  width: 24em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bar-progress {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  height: 100%;
+  /*variable*/
+  width: 70%;
+}
+.bar-remain {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  opacity: 0.3;
+  height: 100%;
+  /*variable*/
+  width: 30%;
+}
+.bar-percent {
+  width: 6em;
+}
+
+/*bar team*/
+.bar-avatar {
+  width: 6em;
+}
+.bar-frame-team {
+  width: 36em;
+}
+
+/*bar profile*/
+.bar-subcontent {
+  height: 5em;
+}
+.bar-profile {
+  height: 3em;
+}
