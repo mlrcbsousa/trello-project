@@ -14,3 +14,4 @@ yarn-error.log
 .byebug_history
 .env*
 manel-json-response-from-trello.json
+.env*
