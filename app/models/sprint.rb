@@ -4,9 +4,7 @@ class Sprint < ApplicationRecord
   has_many :lists, dependent: :destroy
 
   # Validations
-  validates :trello_ext_id, presence: true, uniqueness: true
-
-  validates :start_date, :end_date, presence: true
+  validates :start_date, :end_date, :trello_ext_id, :name, presence: true
   # validates_timeliness gem
   # rails generate validates_timeliness:install
   validates_date :end_date, on_or_after: :start_date
@@ -25,9 +23,9 @@ class Sprint < ApplicationRecord
     webhook = Trello::Webhook.new(
       description: "Sprint webhook",
       id_model: trello_ext_id,
+      # BASE_URL is your website's url. Use ngrok in dev.
       callback_url: "#{ENV['BASE_URL']}/trello_webhooks"
     )
-    # BASE_URL is your website's url. Use ngrok in dev.
     webhook.save
   end
 end

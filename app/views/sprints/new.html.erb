@@ -1,11 +1,19 @@
-<%= simple_form_for @sprint do |f| %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
+<!-- app/views/office_attachments/new.html.erb -->
+<div class="container padding-top-30">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div>
+        <h1>Sprint time</h1>
 
-<!--     t.string "name"
-    t.integer "man_hours", default: 0
-    t.bigint "user_id"
-    t.string "trello_url", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false -->
-<% end %>
+        <%= simple_form_for @sprint do |f| %>
+          <%= f.input :start_date %>
+          <%= f.input :end_date %>
+          <%= f.input :name, as: :hidden, input_html: { value: @name } %>
+          <%= f.input :title, as: :hidden, input_html: { value: @trello_ext_id } %>
+          <%= f.button :submit %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

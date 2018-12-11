@@ -1,0 +1,14 @@
+<!-- config.html.erb -->
+<%= form_tag onboard_path, html: { class: "form-inline" }, method: :get do %>
+  <div class="input-group">
+    <%= text_field_tag :query,
+      @query,
+      class: "form-control office-address",
+      placeholder: "#{@query ? @query : "Search"}"
+    %>
+  </div>
+
+  <span class="input-group-btn">
+    <%= button_tag 'onboard members', class: "btn btn-default" %>
+  </span>
+<% end %>
