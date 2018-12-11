@@ -1,3 +1,8 @@
+
+Select which trello board
+
 <% @boards.each do |board| %>
-  <%= board[:name] %>
+  <p><%= board[:name] %></p>
 <% end %>
+
+@boards.each { |board| puts board[:name] }
