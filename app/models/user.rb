@@ -20,6 +20,7 @@ class User < ApplicationRecord
   validates :full_name, allow_blank: false, format: { with: /\A([a-z \'\.']+)\z/i }
   validates :provider, :uid, :token, :secret, presence: true
 
+  # login with trello
   def self.from_trello_omniauth(auth)
     user_params = auth.slice(:provider, :uid)
     user_params.merge! auth.extra.raw_info.slice(:email, :username)
@@ -37,8 +38,24 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20] # Fake password for validation
       user.save
     end
+
+    # TODO: also need to turn the board id list into name list for the user to pick
+
     return user
   end
 
+  # create a client with ruby-trello gem
+  def client
+    Trello::Client.new(
+      consumer_key: ENV['TRELLO_KEY'],
+      consumer_secret: ENV['TRELLO_SECRET'],
+      oauth_token: token,
+      oauth_token_secret: secret
+    )
+  end
 
+  # Thread.new do
+  #   user.client.find(:members, "bobtester")
+  #   user.client.find(:boards, "bobs_board_id")
+  # end
 end
