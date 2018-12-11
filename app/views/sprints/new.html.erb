@@ -1,8 +1,11 @@
+<%= simple_form_for @sprint do |f| %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
 
-Select which trello board
-
-<% @boards.each do |board| %>
-  <p><%= board[:name] %></p>
+<!--     t.string "name"
+    t.integer "man_hours", default: 0
+    t.bigint "user_id"
+    t.string "trello_url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false -->
 <% end %>
-
-@boards.each { |board| puts board[:name] }

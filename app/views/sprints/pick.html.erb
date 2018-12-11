@@ -1,0 +1,10 @@
+Select which trello board
+
+<% @boards.each do |board| %>
+  <%= link_to "/sprints/new/#{board[:trello_ext_id]}/#{board[:name]}" do %>
+
+    <p><%= board[:name] %></p>
+
+  <% end %>
+<% end %>
+
