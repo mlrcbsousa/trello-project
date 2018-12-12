@@ -1,12 +1,14 @@
 class MembersController < ApplicationController
-  def config
-    sprint = Sprint.find(params[:id])
-    @members = sprint.members
+  def contribute
+    @sprint = Sprint.find(params[:sprint_id])
+    @members = @sprint.members
+    raise
     # contributor:,
   end
 
   def labour
-    sprint = Sprint.find(params[:id])
+    raise
+    sprint = Sprint.find(params[:sprint_id])
     @members = sprint.members
     # days_per_sprint:,
     # hours_per_day:,
