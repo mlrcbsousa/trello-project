@@ -23,6 +23,6 @@ class Member < ApplicationRecord
   end
 
   def set_total_hours
-    self.total_hours = hours_per_day * days_per_sprint
+    update(total_hours: hours_per_day * days_per_sprint)
   end
 end

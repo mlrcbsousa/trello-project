@@ -1,32 +1,31 @@
-<!-- contribute.html.erb -->
+<!-- labour.html.erb -->
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
       <h1>
         <%= @sprint.name %>
       </h1>
-      <h3>Select observers</h3>
+      <h3>Contributor schedules</h3>
 
-      <%= form_tag sprint_labour_path(@sprint), method: :patch do %>
+      <%= form_tag sprint_path(@sprint), method: :patch do %>
 
         <% @members.each do |member| %>
 
           <div class="form-group">
-            <%= check_box_tag :"contribute-#{member.id}" %>
             <%= label_tag :"full_name-#{member.id}", member.full_name, class: "control-label" %>
+            <%= text_field_tag :"days_per_sprint-#{member.id}" %>
+            <%= text_field_tag :"hours_per_day-#{member.id}" %>
           </div>
 
         <% end %>
 
         <span class="input-group-btn">
-          <%= submit_tag 'Next', class: "btn btn-default" %>
+          <%= submit_tag 'Complete', class: "btn btn-default" %>
         </span>
 
       <% end %>
     </div>
   </div>
 </div>
-
-
 
 

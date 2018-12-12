@@ -2,26 +2,26 @@ class MembersController < ApplicationController
   def contribute
     @sprint = Sprint.find(params[:sprint_id])
     @members = @sprint.members
-    raise
-    # contributor:,
   end
 
   def labour
-    raise
-    sprint = Sprint.find(params[:sprint_id])
-    @members = sprint.members
-    # days_per_sprint:,
-    # hours_per_day:,
+    @sprint = Sprint.find(params[:sprint_id])
+    @sprint.members.pluck(:id).each do |id|
+      Member.find(id).update(contributor: false) if params[:"contribute-#{id}"]
+    end
+    @members = @sprint.members.where(contributor: true)
   end
 
   def onboard
-    # update.params[]
-    # @sprint.update_man_hours
+    @sprint = Sprint.find(params[:sprint_id])
+    @sprint.members.pluck(:id).each do |id|
+      Member.find(id).update(
+        days_per_sprint: params[:"days_per_sprint-#{id}"],
+        hours_per_day: params[:"hours_per_day-#{id}"]
+      )
+    end
+    @members = @sprint.members
+    @sprint.update_man_hours
+    redirect_to sprint_path(@sprint)
   end
-
-  private
-
-  # def onboarding_params
-
-  # end
 end

@@ -36,7 +36,6 @@ class SprintsController < ApplicationController
       )
     end
 
-    raise
     # # create lists
     # ext_board.lists.each do |list|
     #   List.create(

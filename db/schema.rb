@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2018_12_11_192731) do
   create_table "members", force: :cascade do |t|
     t.string "trello_ext_id", null: false
     t.bigint "sprint_id"
-    t.boolean "contributor", default: true, null: false
+    t.boolean "contributor", default: true
     t.integer "days_per_sprint"
     t.integer "total_hours", default: 0, null: false
     t.integer "hours_per_day", default: 8, null: false
