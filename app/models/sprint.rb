@@ -15,7 +15,6 @@ class Sprint < ApplicationRecord
   end
 
   def update_man_hours
-    # TODO: what if we arent saving board information after member information
     update(man_hours: members.pluck(:total_hours).sum)
   end
 

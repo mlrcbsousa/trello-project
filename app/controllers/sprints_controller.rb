@@ -1,7 +1,8 @@
 class SprintsController < ApplicationController
+  layout 'onboarding', only: %i[new pick]
+
   def pick
     board_ids = current_user.boards.pluck(:trello_ext_id)
-
     @boards = board_ids.map do |board_id|
       {
         name: current_user.client.find(:boards, board_id).name,
@@ -21,10 +22,7 @@ class SprintsController < ApplicationController
   end
 
   def show
-    # @sprints = [5, 10, 5, 3, 2]
-  end
-
-  def index
+    @sprint = Sprint.find(params[:id])
   end
 
   def trello
@@ -50,7 +48,8 @@ class SprintsController < ApplicationController
       )
     end
 
-    raise
+    redirect_to sprint_contribute_path(@sprint)
+
     # # create lists
     # ext_board.lists.each do |list|
     #   List.create(
@@ -69,8 +68,6 @@ class SprintsController < ApplicationController
     #   )
     # end
 
-    # redirect to members#config
-    redirect_to sprint_contribute_path(@sprint)
   end
 
   private
