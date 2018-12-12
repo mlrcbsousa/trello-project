@@ -1,4 +1,8 @@
 <%= render 'shared/sidebar' %>
 <div class="container">
   <h1>embedded trello board</h1>
+  <blockquote class="trello-board-compact">
+    <a href="<%= @sprint.trello_url %>">Trello Board</a>
+  </blockquote>
+  <script src="https://p.trellocdn.com/embed.min.js"></script>
 </div>
