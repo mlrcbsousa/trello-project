@@ -12,7 +12,7 @@ class Member < ApplicationRecord
   # days_per_sprint
   validate :days_per_sprint_less_than_total
   before_validation :days_per_sprint_default
-  after_save :set_total_hours
+  before_validation :set_total_hours
 
   def days_per_sprint_less_than_total
     errors.add(:member, "can't participate more days than the sprint total") if days_per_sprint > sprint.total_days
