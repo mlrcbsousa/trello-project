@@ -1,13 +1,11 @@
-<%= render 'shared/sidebar' %>
-<div class="card-sprint">
-  <div class="col-xs-12 col-sm-4">
-    <div class="card-sprint">
-      <div class="sprint-background">
+<div class="col-xs-12 col-sm-4">
+  <div class="card-sprint">
+    <div class="card-sprint-background" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url(<%= cl_image_path 'sprint' %>)">
+      <%= lin_to '', sprint_path(sprint), class: 'card-sprint-link' %>
+    </div>
+    <div class="card-sprint-description">
         <p>To do</p>
-      </div>
-      <div class="sprint-info">
-        <p>To do</p>
-      </div>
+    </div>
     </div>
   </div>
 </div>
