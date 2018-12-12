@@ -8,7 +8,7 @@ class Sprint < ApplicationRecord
   # validates_timeliness gem
   # rails generate validates_timeliness:install
   validates_date :end_date, on_or_after: :start_date
-  after_create :create_webhook
+  # after_create :create_webhook
 
   def total_days
     (end_date - start_date).to_i
