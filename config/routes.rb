@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get 'sprints/pick', to: 'sprints#pick', as: 'pick'
   get 'sprints/new/:trello_ext_id/:name', to: 'sprints#new'
-  resources :sprints, only: %i[create] do
+  resources :sprints, only: %i[create show index] do
     get 'members/config', to: 'members#config', as: 'config'
     post 'members/onboard', to: 'members#onboard', as: 'onboard'
   end
