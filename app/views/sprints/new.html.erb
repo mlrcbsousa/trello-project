@@ -1,20 +1,20 @@
-<!-- app/views/office_attachments/new.html.erb -->
-<div class="container padding-top-30">
+<!-- app/views/sprints/new.html.erb -->
+<div class="col-xs-12 text-center">
+  <h1>Sprint time</h1>
+  <h3><%= @name %></h3>
   <div class="row">
-    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-      <div>
-        <h1>Sprint time</h1>
-        <h3><%= @name %></h3>
-
-        <%= simple_form_for @sprint do |f| %>
-          <%= f.input :start_date %>
-          <%= f.input :end_date %>
-          <%= f.input :name, as: :hidden, input_html: { value: @name } %>
-          <%= f.input :trello_ext_id, as: :hidden, input_html: { value: @trello_ext_id } %>
-          <%= f.button :submit %>
-        <% end %>
-
-      </div>
+    <div class="col-xs-12" style="text-align: left;">
+      <%= simple_form_for @sprint do |f| %>
+        <%= f.input :start_date %>
+        <%= f.input :end_date %>
+        <%= f.input :name, as: :hidden, input_html: { value: @name } %>
+        <%= f.input :trello_ext_id, as: :hidden, input_html: { value: @trello_ext_id } %>
+        <%= f.button :submit %>
+      <% end %>
     </div>
   </div>
 </div>
+
+
+
+

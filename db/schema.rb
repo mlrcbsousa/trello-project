@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2018_12_11_192731) do
   create_table "cards", force: :cascade do |t|
     t.string "trello_ext_id", null: false
     t.bigint "list_id"
-    t.integer "size", default: 2, null: false
+    t.integer "size", default: 0, null: false
     t.bigint "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

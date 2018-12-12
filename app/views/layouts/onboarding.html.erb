@@ -11,8 +11,20 @@
   </head>
   <body>
     <%= render 'shared/flashes' %>
-      <%= yield %>
+
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-6">
+        <div class="section-flex justify-center align-center" style="height: 100vh;">
+          <div>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 blue" style="height: 100vh;"></div>
     </div>
+
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
   </body>

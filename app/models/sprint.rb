@@ -2,6 +2,7 @@ class Sprint < ApplicationRecord
   belongs_to :user
   has_many :members, dependent: :destroy
   has_many :lists, dependent: :destroy
+  has_many :cards, through: :lists, dependent: :destroy
 
   # Validations
   validates :start_date, :end_date, :trello_ext_id, :name, presence: true
@@ -15,7 +16,8 @@ class Sprint < ApplicationRecord
   end
 
   def update_man_hours
-    update(man_hours: members.pluck(:total_hours).sum)
+    total_hours = members.where(contributor: true).pluck(:total_hours)
+    update(man_hours: total_hours.sum)
   end
 
   def create_webhook

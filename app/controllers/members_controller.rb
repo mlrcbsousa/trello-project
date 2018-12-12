@@ -17,14 +17,14 @@ class MembersController < ApplicationController
   def onboard
     @sprint = Sprint.find(params[:sprint_id])
     @sprint.members.pluck(:id).each do |id|
-      member = Member.find(id).update(
-        days_per_sprint: params[:"days_per_sprint-#{id}"],
-        hours_per_day: params[:"hours_per_day-#{id}"]
+      Member.find(id).update(
+        days_per_sprint: params[:"days_per_sprint-#{id}"].to_i,
+        hours_per_day: params[:"hours_per_day-#{id}"].to_i
       )
-      member.set_total_hours
     end
-    @members = @sprint.members
+    # update man hours everytime you change labour hours
     @sprint.update_man_hours
+    @members = @sprint.members
     redirect_to sprint_path(@sprint), notice: "Successfully created your sprint"
   end
 end

@@ -13,12 +13,17 @@ class Member < ApplicationRecord
   before_validation :days_per_sprint_default
   before_validation :set_total_hours
 
+  # before_save :default_values
+  # def default_values
+  #   self.status ||= 'P' # note self.status = 'P' if self.status.nil? might be safer (per @frontendbeauty)
+  # end
+
   def days_per_sprint_less_than_total
     errors.add(:member, "can't participate more days than the sprint total") if days_per_sprint > sprint.total_days
   end
 
   def days_per_sprint_default
-    self.days_per_sprint = sprint.total_days if days_per_sprint.zero?
+    self.days_per_sprint = sprint.total_days if days_per_sprint.nil?
   end
 
   def set_total_hours

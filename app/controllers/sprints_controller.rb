@@ -1,16 +1,6 @@
 class SprintsController < ApplicationController
   layout 'onboarding', only: %i[new pick]
 
-  def pick
-    board_ids = current_user.boards.pluck(:trello_ext_id)
-    @boards = board_ids.map do |board_id|
-      {
-        name: current_user.client.find(:boards, board_id).name,
-        trello_ext_id: board_id
-      }
-    end
-  end
-
   def index
     @sprints = Sprint.all
   end
@@ -28,46 +18,29 @@ class SprintsController < ApplicationController
   def trello
   end
 
+  def pick
+    board_ids = current_user.boards.pluck(:trello_ext_id)
+    @boards = board_ids.map do |board_id|
+      {
+        name: current_user.client.find(:boards, board_id).name,
+        trello_ext_id: board_id
+      }
+    end
+  end
+
   def create
     @sprint = Sprint.new(sprint_params)
     @sprint.user = current_user
-
     # board request using client
     ext_board = current_user.client.find(:boards, @sprint.trello_ext_id)
-
     @sprint.trello_url = ext_board.url
-    @sprint.save
 
-    # create members
-    ext_board.members.each do |member|
-      Member.create!(
-        trello_ext_id: member.id,
-        sprint: @sprint,
-        full_name: member.full_name,
-        trello_avatar_url: 'placeholder'
-      )
+    if @sprint.save
+      TrelloService.new(@sprint, ext_board).onboard
+      redirect_to sprint_contribute_path(@sprint)
+    else
+      render :new, alert: 'Unable to create your sprint!'
     end
-
-    redirect_to sprint_contribute_path(@sprint)
-
-    # # create lists
-    # ext_board.lists.each do |list|
-    #   List.create(
-    #     trello_ext_id: list.id,
-    #     sprint: @sprint
-    #   )
-    # end
-
-    # # create cards
-    # ext_board.cards.each do |card|
-    #   Card.create(
-    #     list: List.find_by(trello_ext_id: card.list.id),
-    #     trello_ext_id: card.id,
-    #     size: card.name.split('|')[-1].downcase.strip,
-    #     member: Member.find_by(trello_ext_id: card.member_ids.first)
-    #   )
-    # end
-
   end
 
   private

@@ -1,0 +1,47 @@
+class TrelloService
+  def initialize(sprint, ext_board)
+    @sprint = sprint
+    @cards = ext_board.cards
+    @lists = ext_board.lists
+    @members = ext_board.members
+  end
+
+  def onboard
+    create_members
+    create_lists
+    create_cards
+  end
+
+  def create_members
+    @members.each do |member|
+      Member.create!(
+        trello_ext_id: member.id,
+        sprint: @sprint,
+        full_name: member.full_name,
+        trello_avatar_url: 'placeholder'
+      )
+    end
+  end
+
+  def create_lists
+    @lists.each do |list|
+      List.create!(
+        trello_ext_id: list.id,
+        sprint: @sprint
+      )
+    end
+  end
+
+  def create_cards
+    @cards.each do |card|
+      last = card.name.split(/\b/)[-1].downcase
+      size = %w[xs s m l xl xxl].include?(last) ? :"#{last}" : :o
+      Card.create!(
+        list: List.find_by(trello_ext_id: card.list.id),
+        trello_ext_id: card.id,
+        size: size,
+        member: Member.find_by(trello_ext_id: card.member_ids.first)
+      )
+    end
+  end
+end
