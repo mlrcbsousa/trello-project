@@ -16,6 +16,16 @@ class SprintsController < ApplicationController
     @sprint = Sprint.new
   end
 
+  def show
+    # @sprints = [5, 10, 5, 3, 2]
+  end
+
+  def index
+  end
+
+  def trello
+  end
+
   def create
     @sprint = Sprint.new(sprint_params)
     @sprint.user = current_user
