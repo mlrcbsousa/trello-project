@@ -1,9 +1,4 @@
 class SprintsController < ApplicationController
-
-  def index
-    @sprints = Sprint.all
-  end
-
   def pick
     board_ids = current_user.boards.pluck(:trello_ext_id)
 
@@ -13,6 +8,10 @@ class SprintsController < ApplicationController
         trello_ext_id: board_id
       }
     end
+  end
+
+  def index
+    @sprints = Sprint.all
   end
 
   def new

@@ -1,6 +1,10 @@
 // ----- BANNER HOMEPAGE -----
-.banner {
+.home-box {
+  height: 50vh;
+}
 
+.banner {
+  background-color: $trello-blue;
   color: $mine-shaft;
   position: relative;
   height: 70vh;
@@ -10,6 +14,8 @@
   align-items: center;
   justify-content: center;
 }
+
+
 
 .banner h1 {
   font-size: 50px;
