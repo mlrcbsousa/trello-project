@@ -1,17 +1,13 @@
 class SprintsController < ApplicationController
   def pick
     board_ids = current_user.boards.pluck(:trello_ext_id)
-    # building api client
-    client = current_user.create_client
 
-    # Thread.new do
     @boards = board_ids.map do |board_id|
       {
-        name: client.find(:boards, board_id).name,
+        name: current_user.client.find(:boards, board_id).name,
         trello_ext_id: board_id
       }
     end
-    # end
   end
 
   def new
@@ -25,8 +21,7 @@ class SprintsController < ApplicationController
     @sprint.user = current_user
 
     # building api client
-    client = current_user.create_client
-    ext_board = client.find(:boards, @sprint.trello_ext_id)
+    ext_board = current_user.client.find(:boards, @sprint.trello_ext_id)
 
     @sprint.trello_url = ext_board.url
     @sprint.save
