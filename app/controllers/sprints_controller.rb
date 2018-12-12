@@ -1,6 +1,7 @@
 class SprintsController < ApplicationController
   def pick
     board_ids = current_user.boards.pluck(:trello_ext_id)
+    # building api client
     client = current_user.create_client
 
     # Thread.new do
@@ -23,44 +24,45 @@ class SprintsController < ApplicationController
     @sprint = Sprint.new(sprint_params)
     @sprint.user = current_user
 
+    # building api client
     client = current_user.create_client
     ext_board = client.find(:boards, @sprint.trello_ext_id)
+
+    @sprint.trello_url = ext_board.url
+    @sprint.save
+
+    # create members
+    ext_board.members.each do |member|
+      Member.create(
+        trello_ext_id: member.id,
+        sprint: @sprint,
+        full_name: member.full_name,
+        trello_avatar_url: 'placeholder'
+      )
+    end
+
     raise
 
-    # # create members
-    # ext_board.members.each do |member|
-    #   Member.create(
-    #     trello_ext_id:,
-    #     sprint: @sprint,
-    #     full_name:,
-    #     trello_avatar_url:,
-    #     # contributor:,
-    #     # days_per_sprint:,
-    #     # hours_per_day:,
-    #     # member.sprint.update_man_hours
-    #   )
-    # end
+    # create lists
+    ext_board.lists.each do |list|
+      List.create(
+        trello_ext_id: list.id,
+        sprint: @sprint
+      )
+    end
 
-    # # create lists
-    # ext_board.lists.each do |list|
-    #   List.create(
-    #     trello_ext_id:,
-    #     sprint: @sprint,
-    #   )
-    # end
+    # create cards
+    ext_board.cards.each do |card|
+      Card.create(
+        list: List.find_by(trello_ext_id: card.list.id),
+        trello_ext_id: card.id,
+        size: card.name.split('|')[-1].downcase.strip,
+        member: Member.find_by(trello_ext_id: card.member_ids.first)
+      )
+    end
 
-    # # create cards
-    # ext_board.cards.each do |card|
-    #   Card.create(
-    #     list: List.find,_by(),
-    #     trello_ext_id:,
-    #     size:, #regex
-    #     member: Member.find_by(trello_ext_id: ext_card.members.first.id)
-    #   )
-    # end
-
-    # redirect to member details edit page
-    # redirect onboard_members
+    # redirect to members#config
+    redirect_to config_path
   end
 
   private
