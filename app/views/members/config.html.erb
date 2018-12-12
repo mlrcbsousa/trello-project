@@ -1,0 +1,22 @@
+<!-- config.html.erb -->
+<%= form_tag labour_path, html: { class: "form-inline" } do %>
+  <div class="input-group">
+    <%= text_field_tag :query,
+      @query,
+      class: "form-control",
+      placeholder: "hours"
+    %>
+
+    <% @members.each do |member| %>
+      <%= text_field_tag member.name %>
+    <% end %>
+
+
+  </div>
+
+
+
+  <span class="input-group-btn">
+    <%= button_tag 'Next', class: "btn btn-default" %>
+  </span>
+<% end %>

@@ -6,7 +6,7 @@ class CreateSprints < ActiveRecord::Migration[5.2]
       t.date :end_date, null: false
       t.integer :man_hours, default: 0
       t.references :user, foreign_key: true
-      t.string :trello_url, null: false, unique: true
+      t.string :trello_url
 
       t.timestamps
     end

@@ -52,6 +52,15 @@ class User < ApplicationRecord
     return user
   end
 
+  def trello_client
+    @trello_client ||= Trello::Client.new(
+      consumer_key: ENV['TRELLO_KEY'],
+      consumer_secret: ENV['TRELLO_SECRET'],
+      oauth_token: token,
+      oauth_token_secret: secret
+    )
+  end
+
   # create a client with ruby-trello gem
   def create_client
     Trello::Client.new(
