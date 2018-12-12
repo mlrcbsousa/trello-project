@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  layout 'onboarding', only: %i[contribute labour onboard]
+
   def contribute
     @sprint = Sprint.find(params[:sprint_id])
     @members = @sprint.members

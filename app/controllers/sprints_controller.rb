@@ -1,7 +1,8 @@
 class SprintsController < ApplicationController
+  layout 'onboarding', only: %i[new pick]
+
   def pick
     board_ids = current_user.boards.pluck(:trello_ext_id)
-
     @boards = board_ids.map do |board_id|
       {
         name: current_user.client.find(:boards, board_id).name,
@@ -10,10 +11,21 @@ class SprintsController < ApplicationController
     end
   end
 
+  def index
+    @sprints = Sprint.all
+  end
+
   def new
     @name = params[:name]
     @trello_ext_id = params[:trello_ext_id]
     @sprint = Sprint.new
+  end
+
+  def show
+    @sprint = Sprint.find(params[:id])
+  end
+
+  def trello
   end
 
   def create

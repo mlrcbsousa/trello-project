@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :sprints, only: %i[create show index] do
     get 'members/contribute', to: 'members#contribute', as: 'contribute'
+    get 'trello', to: 'sprints#trello', as: 'trello'
     patch 'members/labour', to: 'members#labour', as: 'labour'
     patch 'members/onboard', to: 'members#onboard', as: 'onboard'
   end
