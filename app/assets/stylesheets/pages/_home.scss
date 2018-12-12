@@ -1,1 +1,31 @@
 // Specific CSS for your home-page
+body {
+  background-color: white;
+}
+.home-content {
+  margin-top: 50px;
+}
+
+.home-boxes {
+  position: relative;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+  margin-bottom: 30px;
+  line-height: 25px;
+}
+
+.copy {
+  background-color: $trello-blue;
+  display: inline-block;
+  align-items: center;
+  margin-top: 20vh;
+}
+
+.illustration {
+  background-color: $trello-blue;
+  display: inline-block;
+  align-items: center;
+  margin-top: 20vh;
+}

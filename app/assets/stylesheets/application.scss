@@ -27,7 +27,11 @@ body {
   line-height: 1.5;
   h1 {
     font-weight: 600;
+    font-size: 32px;
   }
+}
+div {
+  border: 1px solid black;
 }
 .circle {
   border-radius: 50%;

@@ -10,12 +10,8 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    <!-- render 'shared/sidebar' -->
     <%= render 'shared/flashes' %>
-    <div  <% unless current_page?(root_path) %>
-            class="margin-left-80"
-          <% end %>
-    >
+    <%= render 'shared/navbar' %>
       <%= yield %>
     </div>
     <%= javascript_include_tag 'application' %>

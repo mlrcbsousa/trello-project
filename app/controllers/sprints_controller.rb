@@ -10,6 +10,10 @@ class SprintsController < ApplicationController
     end
   end
 
+  def index
+    @sprints = Sprint.all
+  end
+
   def new
     @name = params[:name]
     @trello_ext_id = params[:trello_ext_id]
