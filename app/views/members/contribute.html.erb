@@ -1,5 +1,8 @@
-<!-- config.html.erb -->
-<%= form_tag labour_path, html: { class: "form-inline" } do %>
+<!-- contribute.html.erb -->
+
+<%= @sprint.name %>
+
+<%= form_tag sprint_labour_path(@sprint), html: { class: "form-inline" } do %>
   <div class="input-group">
     <%= text_field_tag :query,
       @query,
@@ -7,9 +10,6 @@
       placeholder: "hours"
     %>
 
-    <% @members.each do |member| %>
-      <%= text_field_tag member.name %>
-    <% end %>
 
 
   </div>
@@ -20,3 +20,7 @@
     <%= button_tag 'Next', class: "btn btn-default" %>
   </span>
 <% end %>
+
+    <% @members.each do |member| %>
+      <%= member.full_name %>
+    <% end %>

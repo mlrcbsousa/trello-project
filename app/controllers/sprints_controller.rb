@@ -20,7 +20,7 @@ class SprintsController < ApplicationController
     @sprint = Sprint.new(sprint_params)
     @sprint.user = current_user
 
-    # building api client
+    # board request using client
     ext_board = current_user.client.find(:boards, @sprint.trello_ext_id)
 
     @sprint.trello_url = ext_board.url
@@ -28,7 +28,7 @@ class SprintsController < ApplicationController
 
     # create members
     ext_board.members.each do |member|
-      Member.create(
+      Member.create!(
         trello_ext_id: member.id,
         sprint: @sprint,
         full_name: member.full_name,
@@ -37,27 +37,26 @@ class SprintsController < ApplicationController
     end
 
     raise
+    # # create lists
+    # ext_board.lists.each do |list|
+    #   List.create(
+    #     trello_ext_id: list.id,
+    #     sprint: @sprint
+    #   )
+    # end
 
-    # create lists
-    ext_board.lists.each do |list|
-      List.create(
-        trello_ext_id: list.id,
-        sprint: @sprint
-      )
-    end
-
-    # create cards
-    ext_board.cards.each do |card|
-      Card.create(
-        list: List.find_by(trello_ext_id: card.list.id),
-        trello_ext_id: card.id,
-        size: card.name.split('|')[-1].downcase.strip,
-        member: Member.find_by(trello_ext_id: card.member_ids.first)
-      )
-    end
+    # # create cards
+    # ext_board.cards.each do |card|
+    #   Card.create(
+    #     list: List.find_by(trello_ext_id: card.list.id),
+    #     trello_ext_id: card.id,
+    #     size: card.name.split('|')[-1].downcase.strip,
+    #     member: Member.find_by(trello_ext_id: card.member_ids.first)
+    #   )
+    # end
 
     # redirect to members#config
-    redirect_to config_path
+    redirect_to sprint_contribute_path(@sprint)
   end
 
   private
