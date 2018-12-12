@@ -6,15 +6,16 @@
         <%= @sprint.name %>
       </h1>
       <h3>Contributor schedules</h3>
-
+      <span>days/sprint</span>-
+      <span>hours/day</span>
       <%= form_tag sprint_path(@sprint), method: :patch do %>
 
         <% @members.each do |member| %>
 
           <div class="form-group">
+            <%= number_field_tag :"days_per_sprint-#{member.id}", @sprint.total_days, in: 1..@sprint.total_days %>
+            <%= number_field_tag :"hours_per_day-#{member.id}", 8, in: 1..24 %>
             <%= label_tag :"full_name-#{member.id}", member.full_name, class: "control-label" %>
-            <%= text_field_tag :"days_per_sprint-#{member.id}" %>
-            <%= text_field_tag :"hours_per_day-#{member.id}" %>
           </div>
 
         <% end %>

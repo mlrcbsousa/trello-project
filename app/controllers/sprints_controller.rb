@@ -36,6 +36,8 @@ class SprintsController < ApplicationController
       )
     end
 
+    redirect_to sprint_contribute_path(@sprint)
+
     # # create lists
     # ext_board.lists.each do |list|
     #   List.create(
@@ -54,8 +56,6 @@ class SprintsController < ApplicationController
     #   )
     # end
 
-    # redirect to members#config
-    redirect_to sprint_contribute_path(@sprint)
   end
 
   private

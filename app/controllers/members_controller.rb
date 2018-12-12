@@ -23,6 +23,6 @@ class MembersController < ApplicationController
     end
     @members = @sprint.members
     @sprint.update_man_hours
-    redirect_to sprint_path(@sprint)
+    redirect_to sprint_path(@sprint), notice: "Successfully created your sprint"
   end
 end

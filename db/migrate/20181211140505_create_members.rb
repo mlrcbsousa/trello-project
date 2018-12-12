@@ -5,7 +5,7 @@ class CreateMembers < ActiveRecord::Migration[5.2]
       t.references :sprint, foreign_key: true
       t.boolean :contributor, default: true
       t.integer :days_per_sprint
-      t.integer :total_hours, null: false
+      t.integer :total_hours, null: false, default: 0
       t.integer :hours_per_day, null: false, default: 8
       t.timestamps
     end
