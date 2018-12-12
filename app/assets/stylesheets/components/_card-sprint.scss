@@ -1,0 +1,85 @@
+// .card {
+//   width: 100%;
+//   height: 250px;
+//   margin: .5rem 0 1rem 0;
+//   border-radius: 2px;
+//   display: flex;
+//   flex-direction: column;
+//   background-size: cover !important;
+//   background-position: center;
+//   color: white;
+//   // position: relative;
+//   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.02), 0 1px 1px -2px rgba(0,0,0,0.2);
+// }
+
+// .card-pictures{
+//   position: relative;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-size: cover;
+//   background-color: $trello-blue;
+//   height: 60%;
+//   text-align: center;
+//   padding: 20px;
+//   text-transform: capitalize;
+//   h4 {
+//     text-shadow: 0 1px 1px rgba(0,0,0,0.14);
+//   }
+
+//   .card-edits {
+//     position: absolute;
+//     top: 10px;
+//     right: 10px;
+//     p {
+//       color: $athens-gray;
+//     }
+//   }
+// }
+
+// .card-description {
+//   display: flex;
+//   position: relative;
+//   height: 40%;
+//   h3 {
+//    font-size: 22px;
+//    color: $gray;
+//   }
+//   p {
+//     font-size: 14px;
+//     color: $gray;
+//     font-weight: lighter;
+//   }
+//     .card-info {
+//       position: absolute;
+//       top: 0px;
+//       left: 15px;
+//     }
+//     .card-cup-ratings {
+//       position: absolute;
+//       bottom: 15px;
+//       right: 15px;
+//       font-size: 15px;
+//       text-transform: uppercase;
+//     }
+//     .card-user {
+//       position: absolute;
+//       right: 15px;
+//       top: 5px;
+//       width: 40px;
+//       border-radius: 50%;
+//     }
+// }
+
+// .card-link {
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   right: 0;
+//   width: 100%;
+//   z-index: 2;
+//   background: $gray;
+//   opacity: 0;
+//   &:hover {
+//     opacity: 0.15;
+//   }
+// }
