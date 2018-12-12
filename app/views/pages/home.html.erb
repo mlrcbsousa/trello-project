@@ -1,34 +1,81 @@
 <%= render 'shared/navbar' %>
-    <div class="container">
-      <div class="row home-content">
-        <div class="col-sm-12 col-md-6">
-            <div class="home-boxes">
-              <div class="copy">
-                <h1>Tech companies</h1>
-                <h1>Make your sprint visual</h1>
-                <p>Sprint Awesome helps Product Owners organizing their sprints on Trello visualize their sprint progress</p>
-                <a href="#" class="roboto btn btn-primary">Bondi Blue</a>
-              </div>
+<div class="wrapper">
+  <div class="container">
+    <div class="row home-content">
+      <div class="col-sm-12 col-md-6">
+          <div class="home-boxes usp">
+            <div class="title-home">
+              <h1>Tech product owner.</h1>
+              <h1>Make your sprint visual</h1>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="home-boxes">
-              <div class="illustration">
-                <p>render 'shared/'</p>
-              </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="home-boxes">
-              <h1>SPRINT AWESOME</h1>
+
+
+            <div class="title-home">
               <p>Sprint Awesome helps Product Owners organizing their sprints on Trello visualize their sprint progress</p>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="home-boxes">
-              <h1>SPRINT AWESOME</h1>
-              <p>Sprint Awesome helps Product Owners organizing their sprints on Trello visualize their sprint progress</p>
+            <div class="title-home">
+              <%= link_to 'Sign Up', pick_path, class: "roboto btn btn-primary" %>
             </div>
-        </div>
+          </div>
+      </div>
+      <div class="col-sm-12 col-md-6">
+          <div class="home-boxes">
+            <div class="illustration">
+                <p><%= render 'shared/burndown' %></p>
+            </div>
+          </div>
+      </div>
+    </div>
   </div>
-    <%= link_to 'begin onboarding', pick_path %>
+
+<div class="wrapper">
+
+</div>
+  <div class="container container-2">
+    <div class="col-sm-12 col-md-4">
+      <div class="product-description">
+        <div class="product-description-icon color-green">
+          <h2><i class="fas fa-eye"></i></h2>
+        </div>
+        <div class="product-description-title">
+          <h3>Your sprint at a glance</h3>
+        </div>
+        <div class="product-description-content">
+          <p>This will give you in a sec if your team is on track to meet your objectives</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+    <div class="col-sm-12 col-md-4">
+      <div class="product-description">
+        <div class="product-description-icon color-yellow">
+          <h2><i class="fas fa-chart-pie"></i></h2>
+        </div>
+        <div class="product-description-title">
+          <h3>Look at your statistics</h3>
+        </div>
+        <div class="product-description-content">
+          <p>Follow the most important statistics like your total sprint weight, the total numbers of user stories, the total hours planned, etc ...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+    <div class="col-sm-12 col-md-4">
+      <div class="product-description">
+        <div class="product-description-icon color-red">
+          <h2><i class="fas fa-walking"></i></h2>
+        </div>
+        <div class="product-description-title">
+          <h3>Follow your team performance</h3>
+        </div>
+        <div class="product-description-content">
+          <p>Congratulate and encourage your best contributors and help take actions to support the one falling behind.</p>
+        </div>
+      </div>
+    </div>
+
+      <%= link_to 'Sign Up', pick_path, class: "roboto btn btn-primary" %>
+  </div>
+</div>
