@@ -15,7 +15,7 @@ class Member < ApplicationRecord
   after_save :set_total_hours
 
   def days_per_sprint_less_than_total
-    errors.add(:member, "can't participate more days than the sprint total") if days_per_sprint <= sprint.total_days
+    errors.add(:member, "can't participate more days than the sprint total") if days_per_sprint > sprint.total_days
   end
 
   def days_per_sprint_default
