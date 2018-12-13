@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_143818) do
+ActiveRecord::Schema.define(version: 2018_12_13_175602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,15 +40,16 @@ ActiveRecord::Schema.define(version: 2018_12_13_143818) do
     t.bigint "sprint_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rank"
     t.index ["sprint_id"], name: "index_lists_on_sprint_id"
   end
 
   create_table "members", force: :cascade do |t|
     t.string "trello_ext_id", null: false
     t.bigint "sprint_id"
-    t.boolean "contributor", default: true, null: false
+    t.boolean "contributor", default: true
     t.integer "days_per_sprint"
-    t.integer "total_hours", null: false
+    t.integer "total_hours", default: 0, null: false
     t.integer "hours_per_day", default: 8, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

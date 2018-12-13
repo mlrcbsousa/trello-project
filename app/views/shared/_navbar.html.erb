@@ -10,6 +10,7 @@
     <div class="navbar-wagon-right hidden-xs hidden-sm">
       <% if user_signed_in? %>
         <!-- Links when logged in -->
+        <%= link_to 'My Sprints', sprints_path, class: "navbar-wagon-item navbar-wagon-link signup-btn" %>
         <%= link_to "Knowledge", "/knowledge", class: "navbar-wagon-item navbar-wagon-link" %>
         <%= link_to "Pricing", "/pricing", class: "navbar-wagon-item navbar-wagon-link" %>
         <%= link_to "About", "/about", class: "navbar-wagon-item navbar-wagon-link" %>
