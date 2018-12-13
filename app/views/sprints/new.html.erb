@@ -1,7 +1,9 @@
 <!-- app/views/sprints/new.html.erb -->
 <div class="col-xs-12 text-center">
-  <h1>Sprint time</h1>
-  <h3><%= @name %></h3>
+  <div class="header">
+    <h1>Sprint time</h1>
+    <h3><%= @name %></h3>
+  </div>
   <div class="row">
     <div class="col-xs-12" style="text-align: left;">
       <%= simple_form_for @sprint do |f| %>
@@ -10,7 +12,7 @@
         <%= f.input :name, as: :hidden, input_html: { value: @name } %>
         <%= f.input :trello_ext_id, as: :hidden, input_html: { value: @trello_ext_id } %>
         <%= f.input :trello_url, as: :hidden, input_html: { value: @trello_url } %>
-        <%= f.button :submit %>
+        <%= f.button :submit class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
