@@ -1,6 +1,6 @@
 // Specific CSS for your home-page
 body {
-  background-color: white;
+  background-color: white !important;
 }
 .home-content {
   margin-top: 20px;
@@ -75,8 +75,6 @@ body {
   }
 }
 
-.container-2 {
-  background-color: $athens-gray;
-  margin: 0px;
-  padding:20px 50px;
+.progressline {
+  margin: 50px 100px;
 }
