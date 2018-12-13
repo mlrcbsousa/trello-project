@@ -1,8 +1,9 @@
 class SprintsController < ApplicationController
+  before_action :set_sprint, only: %i[show trello]
   layout 'onboarding', only: %i[new pick]
 
   def index
-    @sprints = Sprint.all
+    @sprints = current_user.sprints
   end
 
   def new
@@ -12,7 +13,6 @@ class SprintsController < ApplicationController
   end
 
   def show
-    @sprint = Sprint.find(params[:id])
   end
 
   def trello
@@ -44,6 +44,10 @@ class SprintsController < ApplicationController
   end
 
   private
+
+  def set_sprint
+    @sprint = Sprint.find(params[:id])
+  end
 
   def sprint_params
     params.require(:sprint).permit(

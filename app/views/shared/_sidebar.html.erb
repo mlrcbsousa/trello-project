@@ -11,6 +11,8 @@
   </div>
 
   <div class="sidebar-link-trello">
-    <a href=""><i class="fab fa-trello"></i></a>
+    <%= link_to trello_path(@sprint) do %>
+      <i class="fab fa-trello"></i>
+    <% end %>
   </div>
 </div>

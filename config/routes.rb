@@ -8,10 +8,10 @@ Rails.application.routes.draw do
 
   resources :sprints, only: %i[create show index] do
     get 'members/contribute', to: 'members#contribute', as: 'contribute'
-    get 'trello', to: 'sprints#trello', as: 'trello'
     patch 'members/labour', to: 'members#labour', as: 'labour'
     patch 'members/onboard', to: 'members#onboard', as: 'onboard'
   end
+  get 'trello/:id', to: 'sprints#trello', as: 'trello'
 
   resource :trello_webhooks, only: %i[show create], defaults: { formats: :json }
 end
