@@ -14,20 +14,36 @@ class SprintsController < ApplicationController
   end
 
   def show
+    # total man hours
+    @man_hours = @sprint.man_hours
+
+    # total cards
+    @total_cards = @sprint.cards.count
+
     # cards per size
     @cards_per_size = @sprint.cards.group(:size).count
 
     # cards per member
-    @cards_per_member = @sprint.cards.group(:member).count
-                               .transform_keys do |key|
-                                 key.respond_to?(:full_name) ? key.full_name : 'Unassigned'
-                               end
+    assigned = @sprint.cards.group(:member).count
+                      .select { |key, _value| key.contributor if key.respond_to?(:contributor) }
+                      .transform_keys(&:full_name)
+    @cards_per_member = assigned.merge!('Unassigned' => (@sprint.cards.count - assigned.values.sum))
 
     # total story points
-    sprint.cards.sizes.merge(sprint.cards.group(:size).count){|key, oldval, newval| newval * oldval}
-    # story points per member
-    # story points per size
+    @total_story_points = @sprint.cards.pluck(:size).map { |size| Card.sizes[size] }.sum
 
+    # story points per member
+    assigned = @sprint.members.where(contributor: true)
+                      .map { |member| [member.full_name, member.cards.pluck(:size).map { |size| Card.sizes[size] }.sum] }
+                      .to_h
+    @story_points_per_member = assigned.merge!('Unassigned' => (@total_story_points - assigned.values.sum))
+
+    # story points per size
+    @story_points_per_size = sprint.cards.group(:size).count
+                                   .each_with_object({}) { |(k, v), h| h[k] = v * Card.sizes[k] }
+                                   .except('o')
+
+    # progress
   end
 
   def trello
