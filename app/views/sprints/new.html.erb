@@ -9,6 +9,7 @@
         <%= f.input :end_date %>
         <%= f.input :name, as: :hidden, input_html: { value: @name } %>
         <%= f.input :trello_ext_id, as: :hidden, input_html: { value: @trello_ext_id } %>
+        <%= f.input :trello_url, as: :hidden, input_html: { value: @trello_url } %>
         <%= f.button :submit %>
       <% end %>
     </div>

@@ -1,11 +1,21 @@
+<!-- views/sprints/index -->
 <div class="container">
-  <h1>show all sprints</h1>
+  <p>Choose which sprint to visualize</p>
   <div class="row">
-    <div class="col-sm-6">
-      <ul>
-        <li>
-          <%= link_to 'Visualise your sprint', "sprints/show" %></li>
-      </ul>
-    </div>
+
+    <% @sprints.each do |sprint| %>
+      <div class="col-xs-12 col-sm-6">
+
+        <blockquote class="trello-board-compact">
+          <a href="<%= sprint.trello_url %>"><%= sprint.name %></a>
+        </blockquote>
+
+        <%= link_to 'Visualise your sprint', sprints_path(sprint) %></li>
+      </div>
+    <% end %>
+
   </div>
 </div>
+
+<script src="https://p.trellocdn.com/embed.min.js"></script>
+
