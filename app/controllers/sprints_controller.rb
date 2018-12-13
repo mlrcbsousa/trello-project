@@ -19,10 +19,10 @@ class SprintsController < ApplicationController
   end
 
   def pick
-    board_ids = current_user.boards.pluck(:trello_ext_id)
-    @boards = board_ids.map do |board_id|
+    board_trello_ids = current_user.boards.pluck(:trello_ext_id)
+    @boards = board_trello_ids.map do |trello_ext_id|
       {
-        name: current_user.client.find(:boards, board_id).name,
+        name: current_user.client.find(:boards, trello_ext_id).name,
         trello_ext_id: board_id
       }
     end
