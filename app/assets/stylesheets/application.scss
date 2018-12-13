@@ -73,3 +73,11 @@ body {
 .padding-top-15 {
   padding-top: 15px;
 }
+
+a {
+  color: $gray;
+&:hover {
+    color: $blue;
+    text-decoration: none;
+  }
+}
