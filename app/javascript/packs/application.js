@@ -3,6 +3,13 @@ import { initChart } from '../components/chart';
 import { initPie } from '../components/pie';
 import { initBar } from '../components/bar';
 
+import Chartkick from "chartkick";
+window.Chartkick = Chartkick;
+
+// for Chart.js
+import Chart from "chart.js";
+Chartkick.addAdapter(Chart);
+
 const showChart = document.getElementById("myChart");
   if (showChart) {
     initChart();

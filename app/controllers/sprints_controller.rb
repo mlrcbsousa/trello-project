@@ -13,6 +13,20 @@ class SprintsController < ApplicationController
   end
 
   def show
+    # cards per size
+    @cards_per_size = @sprint.cards.group(:size).count
+
+    # cards per member
+    @cards_per_member = @sprint.cards.group(:member).count
+                               .transform_keys do |key|
+                                 key.respond_to?(:full_name) ? key.full_name : 'Unassigned'
+                               end
+
+    # total story points
+    sprint.cards.sizes.merge(sprint.cards.group(:size).count){|key, oldval, newval| newval * oldval}
+    # story points per member
+    # story points per size
+
   end
 
   def trello
