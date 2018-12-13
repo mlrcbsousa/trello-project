@@ -1,4 +1,4 @@
-
+Sprint details
 <%= @sprint.name %>
 <br>
 <%= @sprint.man_hours %>-hours
@@ -10,8 +10,22 @@
 <%= @sprint.total_days %>-days
 
 <div class="container">
+  cards per size
+  <%= pie_chart @cards_per_size %>
+
+  cards per member
+  <%= pie_chart @cards_per_member %>
+
+
+
   <div class="burndown">
     <h1>Current sprint burndown</h1>
+
+
+    <!-- total story points -->
+
+    <!-- story points per member -->
+
     <%= render 'shared/burndown' %>
   </div>
   <div class="row">
@@ -32,3 +46,4 @@
   </div>
 </div>
 </div>
+

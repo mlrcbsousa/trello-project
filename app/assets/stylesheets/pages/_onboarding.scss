@@ -1,0 +1,31 @@
+.right-side {
+  background-color: $trello-blue;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0px;
+  .illustration {
+    height: 55vh;
+    width: 65vh;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.24)
+  }
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .btn {
+    width: 100%;
+  }
+}
+
+
+.header {
+  line-height: 1.7em;
+  margin-bottom: 20px;
+}

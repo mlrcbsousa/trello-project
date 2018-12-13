@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   get 'sprints/pick', to: 'sprints#pick', as: 'pick'
-  get 'sprints/new/:trello_ext_id/:name', to: 'sprints#new'
+  post 'sprints/new', to: 'sprints#new', as: 'new'
 
   resources :sprints, only: %i[create show index] do
     get 'members/contribute', to: 'members#contribute', as: 'contribute'

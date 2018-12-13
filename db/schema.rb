@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_192731) do
+ActiveRecord::Schema.define(version: 2018_12_13_143818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,13 +20,14 @@ ActiveRecord::Schema.define(version: 2018_12_11_192731) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "trello_url"
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
   create_table "cards", force: :cascade do |t|
     t.string "trello_ext_id", null: false
     t.bigint "list_id"
-    t.integer "size", default: 0, null: false
+    t.integer "size", default: 2, null: false
     t.bigint "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,9 +46,9 @@ ActiveRecord::Schema.define(version: 2018_12_11_192731) do
   create_table "members", force: :cascade do |t|
     t.string "trello_ext_id", null: false
     t.bigint "sprint_id"
-    t.boolean "contributor", default: true
+    t.boolean "contributor", default: true, null: false
     t.integer "days_per_sprint"
-    t.integer "total_hours", default: 0, null: false
+    t.integer "total_hours", null: false
     t.integer "hours_per_day", default: 8, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

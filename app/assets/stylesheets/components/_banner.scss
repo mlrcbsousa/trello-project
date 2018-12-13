@@ -1,18 +1,13 @@
-// ----- BANNER HOMEPAGE -----
-.home-box {
-  height: 50vh;
-}
-
 .banner {
-  background-color: $trello-blue;
-  color: $mine-shaft;
-  position: relative;
-  height: 70vh;
+  color: white;
+  text-align: center;
+  height: 50vh;
   /* if you have a 70px navbar => height: calc(100vh - 70px); */
   background-size: cover !important;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.02), 0 1px 1px -2px rgba(0,0,0,0.2);
 }
 
 .banner h1 {
@@ -22,18 +17,8 @@
 }
 .banner p {
   font-size: 25px;
+  font-weight: lighter;
   color: rgb(255, 255, 255);
-  opacity: 0.8;
+  opacity: 0.6;
   margin-bottom: 30px;
-}
-
-.loginbutton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  opacity: 1 !important;
-   a:hover {
-      text-decoration: none;
-    }
-
 }

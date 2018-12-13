@@ -9,21 +9,54 @@ class SprintsController < ApplicationController
   def new
     @name = params[:name]
     @trello_ext_id = params[:trello_ext_id]
+    @trello_url = params[:trello_url]
     @sprint = Sprint.new
   end
 
   def show
+    # total man hours
+    @man_hours = @sprint.man_hours
+
+    # total cards
+    @total_cards = @sprint.cards.count
+
+    # cards per size
+    @cards_per_size = @sprint.cards.group(:size).count
+
+    # cards per member
+    assigned = @sprint.cards.group(:member).count
+                      .select { |key, _value| key.contributor if key.respond_to?(:contributor) }
+                      .transform_keys(&:full_name)
+    @cards_per_member = assigned.merge!('Unassigned' => (@sprint.cards.count - assigned.values.sum))
+
+    # total story points
+    @total_story_points = @sprint.cards.pluck(:size).map { |size| Card.sizes[size] }.sum
+
+    # story points per member
+    assigned = @sprint.members.where(contributor: true)
+                      .map { |member| [member.full_name, member.cards.pluck(:size).map { |size| Card.sizes[size] }.sum] }
+                      .to_h
+    @story_points_per_member = assigned.merge!('Unassigned' => (@total_story_points - assigned.values.sum))
+
+    # story points per size
+    @story_points_per_size = sprint.cards.group(:size).count
+                                   .each_with_object({}) { |(k, v), h| h[k] = v * Card.sizes[k] }
+                                   .except('o')
+
+    # progress
   end
 
   def trello
   end
 
   def pick
-    board_ids = current_user.boards.pluck(:trello_ext_id)
-    @boards = board_ids.map do |board_id|
+    trello_board_ids = current_user.boards.pluck(:trello_ext_id)
+    @boards = trello_board_ids.map do |trello_board_id|
+      ext_board = current_user.client.find(:boards, trello_board_id)
       {
-        name: current_user.client.find(:boards, board_id).name,
-        trello_ext_id: board_id
+        name: ext_board.name,
+        trello_ext_id: trello_board_id,
+        trello_url: ext_board.url
       }
     end
   end
@@ -33,7 +66,6 @@ class SprintsController < ApplicationController
     @sprint.user = current_user
     # board request using client
     ext_board = current_user.client.find(:boards, @sprint.trello_ext_id)
-    @sprint.trello_url = ext_board.url
 
     if @sprint.save
       TrelloService.new(@sprint, ext_board).onboard

@@ -1,10 +1,29 @@
-Select which trello board
+<div>
+  <p>Select which trello board</p>
+  <div style="overflow: scroll;">
+    <div class="row">
+      <% @boards.each do |board| %>
+        <div class="col-xs-12 col-sm-6">
 
-<% @boards.each do |board| %>
-  <%= link_to "/sprints/new/#{board[:trello_ext_id]}/#{board[:name]}" do %>
+          <blockquote class="trello-board-compact">
+            <a href="<%= board[:trello_url] %>"><%= board[:name] %></a>
+          </blockquote>
 
-    <p><%= board[:name] %></p>
+          <%= form_tag new_path, method: :post do %>
+            <%= hidden_field_tag :name, board[:name] %>
+            <%= hidden_field_tag :trello_ext_id, board[:trello_ext_id] %>
+            <%= hidden_field_tag :trello_url, board[:trello_url] %>
+            <%= submit_tag 'Pick this board' %>
+          <% end %>
 
-  <% end %>
-<% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script src="https://p.trellocdn.com/embed.min.js"></script>
+
+
+
 
