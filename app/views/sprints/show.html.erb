@@ -1,29 +1,20 @@
-Sprint details
-<%= @sprint.name %>
-<br>
-<%= @sprint.man_hours %>-hours
-<br>
-<%= @sprint.start_date %>
-<br>
-<%= @sprint.end_date %>
-<br>
-<%= @sprint.total_days %>-days
 
-DATA to display
 
-@man_hours
 
-@total_cards
+<div class="container">
+  <div class="sprint-dahsboard">
+    <div class="sprint-dashboard-title">
+      <h1 class="text-center">Dashboard</h1>
+      <h4 class="text-center"><%= @sprint.name %></h4>
+    </div>
+    <div class="sprint-dashboard-overview">
+      <h1></h1>
+    </div>
+    <div class="sprint-dashboard-Statistics"></div>
+    <div class="sprint-dashboard-global-team-perforance"></div>
+  </div>
+</div>
 
-@cards_per_size
-
-@cards_per_member
-
-@total_story_points
-
-@story_points_per_member
-
-@story_points_per_size
 
 <div class="container">
   cards per size
@@ -60,4 +51,31 @@ DATA to display
   </div>
 </div>
 </div>
+
+Sprint details
+<%= @sprint.name %>
+<br>
+<%= @sprint.man_hours %>-hours
+<br>
+<%= @sprint.start_date %>
+<br>
+<%= @sprint.end_date %>
+<br>
+<%= @sprint.total_days %>-days
+
+DATA to display
+
+@man_hours
+
+@total_cards
+
+@cards_per_size
+
+@cards_per_member
+
+@total_story_points
+
+@story_points_per_member
+
+@story_points_per_size
 

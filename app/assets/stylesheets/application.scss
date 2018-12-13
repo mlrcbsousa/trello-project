@@ -13,6 +13,7 @@
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+@import "sprints/index";
 
 /*base*/
 html {
@@ -31,9 +32,9 @@ body {
     font-size: 32px;
   }
 }
-// div {
-//   border: 0.5px solid $light-gray;
-// }
+div {
+  border: 1px solid $black;
+}
 .circle {
   border-radius: 50%;
   border: 1px solid $light-gray;
