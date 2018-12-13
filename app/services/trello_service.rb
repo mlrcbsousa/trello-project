@@ -24,8 +24,10 @@ class TrelloService
   end
 
   def create_lists
-    @lists.each do |list|
+    @lists.each_with_index do |list, i|
       List.create!(
+        # discounts first 2 rows for progress
+        rank: (i.positive? ? i - 1 : 0),
         trello_ext_id: list.id,
         sprint: @sprint
       )

@@ -39,11 +39,12 @@ class SprintsController < ApplicationController
     @story_points_per_member = assigned.merge!('Unassigned' => (@total_story_points - assigned.values.sum))
 
     # story points per size
-    @story_points_per_size = sprint.cards.group(:size).count
-                                   .each_with_object({}) { |(k, v), h| h[k] = v * Card.sizes[k] }
-                                   .except('o')
+    @story_points_per_size = @sprint.cards.group(:size).count
+                                    .each_with_object({}) { |(k, v), h| h[k] = v * Card.sizes[k] }
+                                    .except('o')
 
     # progress
+    @sprint.cards.map(&:progress).sum / @sprint.cards.count
   end
 
   def trello
