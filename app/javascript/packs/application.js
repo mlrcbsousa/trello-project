@@ -3,6 +3,10 @@ import { initChart } from '../components/chart';
 import { initPie } from '../components/pie';
 import { initBar } from '../components/bar';
 
+import 'flatpickr/dist/flatpickr.css';
+import { SprintDatepickers } from '../components/datepicker';
+SprintDatepickers();
+
 import Chartkick from "chartkick";
 window.Chartkick = Chartkick;
 

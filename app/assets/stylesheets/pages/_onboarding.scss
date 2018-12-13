@@ -17,13 +17,15 @@
 
 .left-side {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  .header {
-    bottom-margin: 20px;
-  }
   .btn {
     width: 100%;
   }
 }
 
+
+.header {
+  line-height: 1.7em;
+  margin-bottom: 20px;
+}
