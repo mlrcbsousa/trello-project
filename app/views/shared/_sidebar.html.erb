@@ -1,15 +1,15 @@
 <!-- sidebar -->
 <div id="sidebar" class="iron">
   <div class="logo">
-    <%= image_tag "SAlogo-v.png", width: 50 %>
-  </div>
-
+    <a href="/">
+      <%= image_tag "SAlogo-v.png", width: 50 %>
+    </div>
+  </a>
   <div id="sidebar-nav" class="sidebar-link">
-    <a href=""><i class="fas fa-signal"></i></a>
-    <a href=""><i class="fas fa-users"></i></a>
-    <a href=""><i class="fas fa-user-circle"></i></a>
+    <a href="/"><i class="fas fa-signal"></i></a>
+    <a href="/"><i class="fas fa-users"></i></a>
+    <a href="/"><i class="fas fa-user-circle"></i></a>
   </div>
-
   <div class="sidebar-link-trello">
     <%= link_to sprints_path do %>
       <i class="fab fa-trello"></i>
