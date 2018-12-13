@@ -9,6 +9,7 @@ class SprintsController < ApplicationController
   def new
     @name = params[:name]
     @trello_ext_id = params[:trello_ext_id]
+    @trello_url = params[:trello_url]
     @sprint = Sprint.new
   end
 
@@ -35,9 +36,11 @@ class SprintsController < ApplicationController
   def pick
     trello_board_ids = current_user.boards.pluck(:trello_ext_id)
     @boards = trello_board_ids.map do |trello_board_id|
+      ext_board = current_user.client.find(:boards, trello_board_id)
       {
-        name: current_user.client.find(:boards, trello_board_id).name,
-        trello_ext_id: trello_board_id
+        name: ext_board.name,
+        trello_ext_id: trello_board_id,
+        trello_url: ext_board.url
       }
     end
   end
@@ -47,7 +50,6 @@ class SprintsController < ApplicationController
     @sprint.user = current_user
     # board request using client
     ext_board = current_user.client.find(:boards, @sprint.trello_ext_id)
-    @sprint.trello_url = ext_board.url
 
     if @sprint.save
       TrelloService.new(@sprint, ext_board).onboard
