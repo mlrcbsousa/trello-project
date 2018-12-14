@@ -3,7 +3,6 @@ class Member < ApplicationRecord
   has_many :cards
 
   validates :trello_ext_id, :hours_per_day, presence: true
-  validates :trello_ext_id
   validates :full_name, format: { with: /\A[a-zA-Z ]+\z/, message: "only allows letters" }
 
   validates :hours_per_day, numericality: true, inclusion: { in: (0..24) }
