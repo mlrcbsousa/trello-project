@@ -1,35 +1,30 @@
-<div class="wrapper">
-  <div class="container">
+<div class="container">
+  <div class="wrapper">
     <div class="row home-content">
       <div class="col-sm-12 col-md-6">
-          <div class="home-boxes usp">
-            <div class="title-home">
-              <h1>Tech product owner.</h1>
-              <h1>See your burndown chart</h1>
-            </div>
-
-            <div class="title-home">
-              <p>Sprint Awesome helps Product Owners organizing their sprints on Trello visualize their sprint progress</p>
-            </div>
-            <div class="title-home">
-              <%= link_to 'Start', pick_path, class: "roboto btn btn-primary" %>
-            </div>
+        <div class="home-boxes usp">
+          <div class="title-home">
+            <h1>Tech product owner.</h1>
+            <h1>See your burndown chart</h1>
           </div>
+          <div class="title-home">
+            <p>Sprint Awesome helps Product Owners organizing their sprints on Trello visualize their sprint progress</p>
+          </div>
+          <div class="title-home">
+            <%= link_to 'Start', pick_path, class: "roboto btn btn-primary" %>
+          </div>
+        </div>
       </div>
       <div class="col-sm-12 col-md-6">
-          <div class="home-boxes">
-            <div class="illustration">
-                <p><%= render 'shared/burndown' %></p>
-            </div>
+        <div class="home-boxes">
+          <div class="illustration">
+            <p><%= render 'shared/burndown' %></p>
           </div>
+        </div>
       </div>
     </div>
   </div>
-
-<div class="wrapper">
-
-</div>
-  <div class="container container-2">
+  <div class="wrapper">
     <div class="col-sm-12 col-md-4">
       <div class="product-description">
         <div class="product-description-icon color-green">
@@ -39,88 +34,84 @@
           <h3>Your sprint at a glance</h3>
         </div>
         <div class="product-description-content">
-          <p>This will give you in a sec if your team is on track to meet your objectives</p>
+          <p>Giving you an instant overview of your teams progress to meet your objectives</p>
         </div>
       </div>
     </div>
-
-    <div class="container">
     <div class="col-sm-12 col-md-4">
       <div class="product-description">
         <div class="product-description-icon color-yellow">
           <h2><i class="fas fa-chart-pie"></i></h2>
         </div>
         <div class="product-description-title">
-          <h3>Look at your statistics</h3>
+          <h3>Track statistics</h3>
         </div>
         <div class="product-description-content">
-          <p>Follow the most important statistics like your total sprint weight, the total numbers of user stories, the total hours planned, etc ...</p>
+          <p>Follow the most important statistics like total sprint weight, number of user stories, planned hours, etc.</p>
         </div>
       </div>
     </div>
-
-    <div class="container">
-      <div class="col-sm-12 col-md-4">
-        <div class="product-description">
-          <div class="product-description-icon color-red">
-            <h2><i class="fas fa-walking"></i></h2>
-          </div>
-          <div class="product-description-title">
-            <h3>Follow your team performance</h3>
-          </div>
-          <div class="product-description-content">
-            <p>Congratulate and encourage your best contributors and help take actions to support the one falling behind.</p>
-          </div>
+    <div class="col-sm-12 col-md-4">
+      <div class="product-description">
+        <div class="product-description-icon color-red">
+          <h2><i class="fas fa-walking"></i></h2>
         </div>
+        <div class="product-description-title">
+          <h3>Measure team performance</h3>
+        </div>
+        <div class="product-description-content">
+          <p>Congratulate and encourage your best contributors and help take actions to support the one falling behind.</p>
+        </div>
+      </div>
     </div>
-
-      <%= link_to 'Start', pick_path, class: "roboto btn btn-primary" %>
   </div>
-
-<div class="banner" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url('https://images.unsplash.com/photo-1427751840561-9852520f8ce8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80');">
-  <div class="banner-content">
-    <h1></h1>
-    <p></p>
+  <div class="container banner" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url('https://images.unsplash.com/photo-1427751840561-9852520f8ce8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80');">
+    <div class="banner-content">
+      <h1></h1>
+      <p></p>
+    </div>
   </div>
-</div>
-
-
-<!-- Progress line -->
-<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" /> -->
-<div class="container">
-  <div class="progressline">
-    <h3 class="text-center">Visualize your product sprint in no time</h3>
-    <div class="row line">
+  <!-- Progress line -->
+  <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" /> -->
+  <div class="container">
+    <div class="progressline">
+      <h3 class="text-center">Visualize your product sprint in no time</h3>
+      <div class="row line">
         <div class="col-xs-4 stepText1">
           <h3><i class="fab fa-trello"></i></h3>
-          <p>Select your Trello Board</p>
+          <p>Select</p>
         </div>
         <div class="col-xs-4 stepText2">
           <h3><i class="fas fa-sliders-h"></i></h3>
-          <p>Configure your Sprint</p>
+          <p>Configure</p>
         </div>
         <div class="col-xs-4 stepText3">
-        <h3><i class="fas fa-chart-area"></i></h3>
-        <p>Vizualise your Sprint</p>
+          <h3><i class="fas fa-chart-area"></i></h3>
+          <p>Vizualise</p>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-4"><div class="step step1 active"></div></div>
-        <div class="col-xs-4"><div class="step step2"></div></div>
-        <div class="col-xs-4"><div class="step step3"></div></div>
-    </div>
-    <!-- PREV & NEXT STEP BUTTONS
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="step step1 active"></div>
+        </div>
+        <div class="col-xs-4">
+          <div class="step step2"></div>
+        </div>
+        <div class="col-xs-4">
+          <div class="step step3"></div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="text-center">
+        <%= link_to 'Get Started', pick_path, class: "roboto btn btn-primary btn-lg" %>
+      </div>
+      <!-- PREV & NEXT STEP BUTTONS
     <div class="autoCenter">
        <div id="prev">PREV STEP</div>
        <div id="next">NEXT STEP</div>
      </div> -->
+    </div>
   </div>
 </div>
-
-
-
-
-</div>
-</div>
-
 <%= render 'shared/footer' %>

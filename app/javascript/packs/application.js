@@ -5,10 +5,14 @@ import { initBar } from '../components/bar';
 
 import 'flatpickr/dist/flatpickr.css';
 import { SprintDatepickers } from '../components/datepicker';
-SprintDatepickers();
 
 import Chartkick from "chartkick";
 window.Chartkick = Chartkick;
+
+const initPicker = document.getElementById("dates");
+  if (initPicker) {
+    SprintDatepickers();
+};
 
 // for Chart.js
 import Chart from "chart.js";
