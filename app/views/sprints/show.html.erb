@@ -1,5 +1,84 @@
+<div class="container">
+  <div class="sprint-dashboard">
+    <div class="header">
+      <div class="sprint-dashboard-main-title text-center">
+        <h1>Sprint Analytics</h1>
+        <h4><%= @sprint.name %></h4>
+      </div>
+      <div class="sprint-status text-center">
+        <p>Your sprint started <strong><%= @sprint.total_days_from_start %> day(s) ago</strong> and your have reached <%= @sprint.progress %> % of your backlog objectives. You still have another <strong><%= @sprint.total_days_to_end %> day(s) left.</strong></p>
+      </div>
+    </div>
+    <div class="sprint-dashboard-overview">
+      <div class="sub-title">
+        <h3>Your Sprint at a glance</h3>
+      </div>
+      <div class="burndow-graph col-xs-12 col-md-12">
+        <%= render 'shared/burndown' %>
+      </div>
+      <div class="burndown-comment">
+        <p>This burndown chart shows your total work accomplishment regarding your sprint duration. You have already accomplished <%= @sprint.progress %> % of your total backlog.</p>
+      </div>
+    </div>
+    <div class="sprint-dashboard-statistics">
+      <div class="sub-title">
+        <h3>Your sprint statistics</h3>
+      </div>
+      <div class="summary">
+        <p>Discover your <strong><%= @sprint.total_days %> days</strong>
+ sprint statistics</p>      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-12">
+          <div class="stats">
+            <div class="card text-center">
+              <div><h1><%= @sprint.total_cards %></h1></div>
+              <div><p>Total number of cards</p></div>
+            </div>
+            <div class="card text-center">
+              <div><h1><%= @sprint.total_cards %></h1></div>
+              <div><p>Total number of cards</p></div>
+            </div>
+            <div class="card text-center">
+              <div><h1><%= @sprint.total_cards %></h1></div>
+              <div><p>Total number of cards</p></div>
+            </div>
+            <div class="card text-center">
+              <div><h1><%= @sprint.total_cards %></h1></div>
+              <div><p>Total number of cards</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="stat-card text-center">
+              <%= render 'shared/pie' %>
+              <h4>Team breakdown</h4>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="stat-card text-center">
+              <%= render 'shared/bar' %>
+              <h4>Individual progress</h4>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="sprint-dashboard-team-performance"></div>
+      <div class="sub-title">
+        <h3>Your Team performance</h3>
+      </div>
+  </div>
+</div>
+
+
+
+
 Sprint details
-<%= @sprint.name %>
+
+
 <br>
 <%= @sprint.man_hours %>-hours
 <br>
@@ -30,8 +109,7 @@ ready made DATA to display
   <%= pie_chart @sprint.cards_per_size %>
   <%= pie_chart @sprint.cards_per_contributor %>
   <div class="burndown">
-    <h1>Current sprint burndown</h1>
-    <%= render 'shared/burndown' %>
+
   </div>
   <div class="row">
     <div class="col-sm-6">

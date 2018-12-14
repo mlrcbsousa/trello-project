@@ -1,12 +1,12 @@
 // _chart.scss
 .chart {
   margin: 5px;
-  border-radius: 6px;
-  border: 5px solid #DCDEE0; /*iron*/
+  border-radius: 3px;
+  border: 2px solid $athens-gray; /*iron*/
 }
 .chart-lg {
   width: 900px;
 }
 .chart-md {
-  width: 500px;
+  width: 450px;
 }
