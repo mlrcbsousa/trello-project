@@ -1,4 +1,5 @@
 class Sprint < ApplicationRecord
+  require 'trello'
   belongs_to :user
   has_many :members, dependent: :destroy
   has_many :lists, dependent: :destroy

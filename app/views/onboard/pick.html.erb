@@ -13,7 +13,9 @@
             <%= hidden_field_tag :name, board[:name] %>
             <%= hidden_field_tag :trello_ext_id, board[:trello_ext_id] %>
             <%= hidden_field_tag :trello_url, board[:trello_url] %>
-            <%= submit_tag 'Pick this board' %>
+            <div class="pick">
+              <%= submit_tag 'Pick this board' %>
+            </div>
           <% end %>
 
         </div>
