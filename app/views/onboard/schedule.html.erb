@@ -8,7 +8,7 @@
       <h3>Contributor schedules</h3>
       <span>days/sprint</span>-
       <span>hours/day</span>
-      <%= form_tag sprint_onboard_path(@sprint), method: :patch do %>
+      <%= form_tag complete_path(@sprint), method: :patch do %>
 
         <% @members.each do |member| %>
 

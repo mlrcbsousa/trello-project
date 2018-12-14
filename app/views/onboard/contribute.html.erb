@@ -6,7 +6,7 @@
   <h3>Select observers</h3>
   <div class="row">
     <div class="col-xs-6 col-xs-offset-3" style="text-align: left;">
-      <%= form_tag sprint_labour_path(@sprint), method: :patch do %>
+      <%= form_tag schedule_path(@sprint), method: :patch do %>
         <% @members.each do |member| %>
           <div class="form-group">
             <%= check_box_tag :"contribute-#{member.id}" %>

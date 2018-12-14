@@ -1,17 +1,13 @@
 # app/controllers/pages_controller.rb
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :knowledge, :pricing, :about]
-  layout 'home', only: [:home, :knowledge, :pricing, :about]
+  skip_before_action :authenticate_user!
+  layout 'home'
 
-  def home
-  end
+  def home; end
 
-  def knowledge
-  end
+  def knowledge; end
 
-  def pricing
-  end
+  def pricing; end
 
-  def about
-  end
+  def about; end
 end
