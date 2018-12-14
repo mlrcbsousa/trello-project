@@ -29,7 +29,7 @@ class Sprint < ApplicationRecord
         callbackURL: "#{ENV['BASE_URL']}webhooks",
         idModel: trello_ext_id
       },
-      headers: { "Content-Type" => "application/x-www-form-urlencoded" }
+      headers: { "Content-Type" => "application/json" }
     )
   end
 

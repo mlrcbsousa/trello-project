@@ -1,9 +1,13 @@
 # app/controllers/webhooks_controller.rb
 class WebhooksController < ActionController::Base
-  def show
+  # skip_before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
+
+  def complete
+    return head :ok
   end
 
-  def create
+  def receive
   end
 
   # def update_card(payload)

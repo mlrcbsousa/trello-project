@@ -1,6 +1,7 @@
 require_relative 'boot'
 
 require 'rails/all'
+require_relative '../lib/middlewares/trello_payload_handler.rb'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -20,5 +21,14 @@ module TrelloProject
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.web_console.whitelisted_ips = [
+      '107.23.104.115',
+      '54.152.166.250',
+      '107.23.149.70',
+      '54.164.77.56',
+      '54.209.149.230'
+    ]
+    config.middleware.use TrelloPayloadHandler
   end
 end
