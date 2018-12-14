@@ -21,7 +21,7 @@ class Sprint < ApplicationRecord
   end
 
   def total_days_to_end
-     (end_date - Date.today).to_i
+    (end_date - Date.today).to_i
   end
 
   def update_man_hours
