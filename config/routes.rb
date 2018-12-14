@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about', as: 'about'
 
   # Onboarding
-  get 'onboard/pick/', to: 'onboard#pick', as: 'pick'
+  get 'onboard/pick', to: 'onboard#pick', as: 'pick'
   post 'sprints/new', to: 'sprints#new', as: 'new'
   get 'onboard/contribute/:id', to: 'onboard#contribute', as: 'contribute'
   patch 'onboard/schedule/:id', to: 'onboard#schedule', as: 'schedule'
@@ -21,5 +21,7 @@ Rails.application.routes.draw do
   end
 
   # Webhooks
-  resource :trello_webhooks, only: %i[show create], defaults: { formats: :json }
+  get "/webhooks", to: "webhooks#complete"
+  post "/webhooks", to: "webhooks#receive"
+  # resource :webhooks, only: %i[show create], defaults: { formats: :json }
 end
