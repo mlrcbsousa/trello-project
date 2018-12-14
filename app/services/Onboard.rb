@@ -1,4 +1,4 @@
-class TrelloService
+class Onboard
   def initialize(sprint, ext_board)
     @sprint = sprint
     @cards = ext_board.cards
@@ -7,23 +7,23 @@ class TrelloService
   end
 
   def onboard
-    create_members
-    create_lists
-    create_cards
+    members
+    lists
+    cards
   end
 
-  def create_members
+  def members
     @members.each do |member|
       Member.create!(
         trello_ext_id: member.id,
         sprint: @sprint,
         full_name: member.full_name,
-        trello_avatar_url: 'placeholder'
+        trello_avatar_url: @sprint.user.client.find(:member, member.id).avatar_url
       )
     end
   end
 
-  def create_lists
+  def lists
     @lists.each_with_index do |list, i|
       List.create!(
         # discounts first 2 rows for progress
@@ -34,7 +34,7 @@ class TrelloService
     end
   end
 
-  def create_cards
+  def cards
     @cards.each do |card|
       last = card.name.split(/\b/)[-1].downcase
       size = %w[xs s m l xl xxl].include?(last) ? :"#{last}" : :o
@@ -45,5 +45,13 @@ class TrelloService
         member: Member.find_by(trello_ext_id: card.member_ids.first)
       )
     end
+  end
+
+  def webhook
+    confirmation = @sprint.webhook_post
+    webhook_params = confirmation.symbolize_keys!.slice(:description, :active)
+    webhook_params[:trello_ext_id] = confirmation[:id]
+    webhook_params[:callback_url] = confirmation[:callbackURL]
+    @sprint.webhook.create!(webhook_params)
   end
 end

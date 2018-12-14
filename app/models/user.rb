@@ -29,7 +29,7 @@ class User < ApplicationRecord
     user_params = auth.slice(:provider, :uid)
     raw_info = auth.extra.raw_info
     user_params.merge! raw_info.slice(:email, :username)
-    user_params[:trello_avatar_url] = raw_info.avatarUrl
+    user_params[:trello_avatar_url] = "https://trello-avatars.s3.amazonaws.com/{raw_info.avatarHash}/170.png"
     user_params[:full_name] = raw_info.fullName
     user_params.merge! auth.credentials.slice(:token, :secret)
     user_params = user_params.to_h
