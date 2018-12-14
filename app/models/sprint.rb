@@ -21,15 +21,27 @@ class Sprint < ApplicationRecord
     update(man_hours: total_hours.sum)
   end
 
-  def webhook
-    @webhook ||= Trello::Webhook.new(
-      description: "Sprint webhook",
-      id_model: trello_ext_id,
-      # BASE_URL is your website's url. Use ngrok in dev.
-      callback_url: "#{ENV['BASE_URL']}trello_webhooks"
+  def create_webhook
+    HTTParty.post(
+      "https://api.trello.com/1/tokens/#{user.token}/webhooks/?key=#{ENV['TRELLO_KEY']}",
+      query: {
+        description: "Sprint webhook test",
+        callbackURL: "#{ENV['BASE_URL']}webhooks",
+        idModel: trello_ext_id
+      },
+      headers: { "Content-Type" => "application/x-www-form-urlencoded" }
     )
-    @webhook.save
   end
+
+  # def webhook
+  #   @webhook ||= Trello::Webhook.new(
+  #     description: "Sprint webhook",
+  #     id_model: trello_ext_id,
+  #     # BASE_URL is your website's url. Use ngrok in dev.
+  #     callback_url: "#{ENV['BASE_URL']}trello_webhooks"
+  #   )
+  #   @webhook.save
+  # end
 
   # statistics
   def contributors

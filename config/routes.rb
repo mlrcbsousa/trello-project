@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   end
 
   # Webhooks
-  resource :trello_webhooks, only: %i[show create], defaults: { formats: :json }
+  resource :webhooks, only: %i[show create], defaults: { formats: :json }
 end
