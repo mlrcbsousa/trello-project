@@ -6,11 +6,6 @@ class TrelloWebhooksController < ActionController::Base
     # TODO: handle updateCard webhook payload
   end
 
-  # Thread.new do
-  #   @client_bob.find(:members, "bobtester")
-  #   @client_bob.find(:boards, "bobs_board_id")
-  # end
-
   def webhook_secret
     ENV['TRELLO_SECRET'] # From https://trello.com/app-key
   end

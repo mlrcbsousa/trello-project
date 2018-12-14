@@ -1,20 +1,25 @@
 Rails.application.routes.draw do
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  # General
   root to: 'pages#home'
-
-  get 'sprints/pick', to: 'sprints#pick', as: 'pick'
-  post 'sprints/new', to: 'sprints#new', as: 'new'
-
-  resources :sprints, only: %i[create show index] do
-    get 'members/contribute', to: 'members#contribute', as: 'contribute'
-    patch 'members/labour', to: 'members#labour', as: 'labour'
-    patch 'members/onboard', to: 'members#onboard', as: 'onboard'
-  end
-  get 'trello/:id', to: 'sprints#trello', as: 'trello'
   get 'knowledge', to: 'pages#knowledge', as: 'knowledge'
   get 'pricing', to: 'pages#pricing', as: 'pricing'
   get 'about', to: 'pages#about', as: 'about'
 
+  # Onboarding
+  get 'onboard/pick/', to: 'onboard#pick', as: 'pick'
+  post 'sprints/new', to: 'sprints#new', as: 'new'
+  get 'onboard/contribute/:id', to: 'onboard#contribute', as: 'contribute'
+  patch 'onboard/schedule/:id', to: 'onboard#schedule', as: 'schedule'
+  patch 'onboard/complete/:id', to: 'onboard#complete', as: 'complete'
+
+  # Main
+  resources :sprints, only: %i[create show index] do
+    resources :members, only: %i[index show]
+  end
+
+  # Webhooks
   resource :trello_webhooks, only: %i[show create], defaults: { formats: :json }
 end

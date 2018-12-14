@@ -29,4 +29,33 @@ class Member < ApplicationRecord
   def set_total_hours
     self.total_hours = hours_per_day * days_per_sprint
   end
+
+  # statistics
+  def total_cards
+    cards.count
+  end
+
+  def weighted_cards
+    cards.where.not(size: :o)
+  end
+
+  def weighted_cards_count
+    cards.where.not(size: :o).count
+  end
+
+  def cards_per_size
+    cards.group(:size).count
+  end
+
+  def total_story_points
+    cards.pluck(:size).map { |size| Card.sizes[size] }.sum
+  end
+
+  def progress
+    (weighted_cards.map(&:progress).sum / weighted_cards_count).round(2)
+  end
+
+  def story_points_progress
+    (progress * total_story_points).round(2)
+  end
 end
