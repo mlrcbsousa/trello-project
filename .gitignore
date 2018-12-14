@@ -13,6 +13,9 @@ node_modules
 yarn-error.log
 .byebug_history
 .env*
-manel-json-response-from-trello.json
 .env*
 ngrok
+ruby_trello_board_response.rb
+manel-json-response-from-trello.json
+member_search_response.rb
+sandbox.rb
