@@ -1,6 +1,5 @@
-# app/controllers/trello_webhooks_controller.rb
-class TrelloWebhooksController < ActionController::Base
-  include TrelloWebhook::Processor
+# app/controllers/webhooks_controller.rb
+class WebhooksController < ActionController::Base
 
   def update_card(payload)
     # TODO: handle updateCard webhook payload

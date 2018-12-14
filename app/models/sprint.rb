@@ -21,14 +21,14 @@ class Sprint < ApplicationRecord
     update(man_hours: total_hours.sum)
   end
 
-  def create_webhook
-    webhook = Trello::Webhook.new(
+  def webhook
+    @webhook ||= Trello::Webhook.new(
       description: "Sprint webhook",
       id_model: trello_ext_id,
       # BASE_URL is your website's url. Use ngrok in dev.
       callback_url: "#{ENV['BASE_URL']}trello_webhooks"
     )
-    webhook.save
+    @webhook.save
   end
 
   # statistics
