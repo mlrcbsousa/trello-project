@@ -25,23 +25,13 @@ class Sprint < ApplicationRecord
     HTTParty.post(
       "https://api.trello.com/1/tokens/#{user.token}/webhooks/?key=#{ENV['TRELLO_KEY']}",
       query: {
-        description: "Sprint webhook test",
+        description: "Sprint webhook user#{user.id}",
         callbackURL: "#{ENV['BASE_URL']}webhooks",
         idModel: trello_ext_id
       },
       headers: { "Content-Type" => "application/json" }
     )
   end
-
-  # def webhook
-  #   @webhook ||= Trello::Webhook.new(
-  #     description: "Sprint webhook",
-  #     id_model: trello_ext_id,
-  #     # BASE_URL is your website's url. Use ngrok in dev.
-  #     callback_url: "#{ENV['BASE_URL']}trello_webhooks"
-  #   )
-  #   @webhook.save
-  # end
 
   # statistics
   def contributors
