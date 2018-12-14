@@ -22,5 +22,5 @@ Rails.application.routes.draw do
 
   # Webhooks
   get "/webhooks", to: "webhooks#complete"
-  post "/webhooks", to: "webhooks#receive" # , defaults: { formats: :json }
+  post "/webhooks", to: "webhooks#receive"
 end

@@ -6,7 +6,7 @@ Trello.configure do |config|
   config.oauth_token = User.first.token
   config.oauth_token_secret = User.first.secret
 end
-
+"https://api.trello.com/1/members/#{member.trello_ext_id}?fields=name,url&key=#{ENV['TRELLO_KEY']}&token=#{user.token}"
 # toget all the classes in a module
 # Trello.constants.select { |c| Trello.const_get(c).is_a? Class }
 

@@ -8,13 +8,12 @@ class WebhooksController < ActionController::Base
   end
 
   def receive
+    # identify webhook
+    # parse information to act on
+    byebug
   end
 
-  # def update_card(payload)
-  #   # TODO: handle updateCard webhook payload
-  # end
-
-  # def webhook_secret
-  #   ENV['TRELLO_SECRET'] # From https://trello.com/app-key
-  # end
+  def webhook_params
+    params.permit("model", "event", "controller", "action", "webhook")
+  end
 end
