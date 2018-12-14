@@ -11,24 +11,24 @@ Sprint details
 <br>
 ready made DATA to display
 # statistics methods that can be called on a sprint instance
-@sprint.contributors
-@sprint.lists_count
-@sprint.total_cards
-@sprint.weighted_cards
-@sprint.weighted_cards_count
-@sprint.cards_per_size
-@sprint.weighted_cards_per_size
-@sprint.total_story_points
-# only weighted cards, only contributing members
-@sprint.cards_per_contributor
-@sprint.story_points_per_contributor
-@sprint.story_points_per_size
-@sprint.progress
+@sprint.contributors <br>
+@sprint.lists_count<br>
+@sprint.total_cards<br>
+@sprint.weighted_cards<br>
+@sprint.weighted_cards_count<br>
+@sprint.cards_per_size<br>
+@sprint.weighted_cards_per_size<br>
+@sprint.total_story_points<br>
+# only weighted cards, only contributing members<br>
+@sprint.cards_per_contributor<br>
+@sprint.story_points_per_contributor<br>
+@sprint.story_points_per_size<br>
+@sprint.progress<br>
 @sprint.story_points_progress
 <br>
 <div class="container">
   <%= pie_chart @sprint.cards_per_size %>
-  <%= pie_chart @sprint.cards_per_member %>
+  <%= pie_chart @sprint.cards_per_contributor %>
   <div class="burndown">
     <h1>Current sprint burndown</h1>
     <%= render 'shared/burndown' %>
