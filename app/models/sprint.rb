@@ -16,6 +16,14 @@ class Sprint < ApplicationRecord
     (end_date - start_date).to_i
   end
 
+  def total_days_from_start
+    (Date.today - start_date).to_i
+  end
+
+  def total_days_to_end
+     (end_date - Date.today).to_i
+  end
+
   def update_man_hours
     total_hours = members.where(contributor: true).pluck(:total_hours)
     update(man_hours: total_hours.sum)
