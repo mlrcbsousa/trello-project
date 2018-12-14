@@ -10,10 +10,20 @@ class WebhooksController < ActionController::Base
   def receive
     # identify webhook
     # parse information to act on
-    byebug
+  end
+
+  private
+
+  def event_params
+    params.require(:event).permit(:id, :idMemberCreator, :data, :type, :date, :limits, :display, :memberCreator)
+  end
+
+  def model_params
+    params.require(:model).permit(:id, :name, :desc, :descData, :closed, :idOrganization, :pinned, :url, :shortUrl, :prefs, :labelNames)
   end
 
   def webhook_params
-    params.permit("model", "event", "controller", "action", "webhook")
+    params.require(:webhook).permit(:model, :event)
   end
 end
+

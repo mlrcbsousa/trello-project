@@ -22,7 +22,7 @@ class SprintsController < ApplicationController
     ext_board = current_user.client.find(:boards, @sprint.trello_ext_id)
 
     if @sprint.save
-      TrelloService.new(@sprint, ext_board).onboard
+      Onboard.new(@sprint, ext_board)
       redirect_to contribute_path(@sprint)
     else
       render :new, alert: 'Unable to create your sprint!'

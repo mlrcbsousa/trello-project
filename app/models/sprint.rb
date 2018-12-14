@@ -29,7 +29,7 @@ class Sprint < ApplicationRecord
     update(man_hours: total_hours.sum)
   end
 
-  def create_webhook
+  def webhook_post
     HTTParty.post(
       "https://api.trello.com/1/tokens/#{user.token}/webhooks/?key=#{ENV['TRELLO_KEY']}",
       query: {

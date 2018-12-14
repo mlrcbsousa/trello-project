@@ -17,8 +17,6 @@ class Member < ApplicationRecord
   #   self.status ||= 'P' # note self.status = 'P' if self.status.nil? might be safer (per @frontendbeauty)
   # end
 
-
-
   def days_per_sprint_less_than_total
     errors.add(:member, "can't participate more days than the sprint total") if days_per_sprint > sprint.total_days
   end
