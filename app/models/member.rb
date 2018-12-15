@@ -43,8 +43,8 @@ class Member < ApplicationRecord
     cards.where.not(size: :o).count
   end
 
-  def cards_per_size
-    cards.group(:size).count
+  def weighted_cards_per_size
+    weighted_cards.group(:size).count
   end
 
   def total_story_points

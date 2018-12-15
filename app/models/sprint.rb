@@ -22,8 +22,20 @@ class Sprint < ApplicationRecord
     # cards.destroy_all
   end
 
+  def weighted_cards
+    cards.where.not(size: :o)
+  end
+
+  def contributors
+    members.where(contributor: true)
+  end
+
+  def ranks
+    lists.where.not(rank: 0)
+  end
+
   def update_man_hours
-    total_hours = members.where(contributor: true).pluck(:total_hours)
+    total_hours = contributors.pluck(:total_hours)
     update(man_hours: total_hours.sum)
   end
 
@@ -39,80 +51,150 @@ class Sprint < ApplicationRecord
     )
   end
 
-  # statistics
+  # STATISTICS
+  # integer
+  def total_contributors
+    contributors.count
+  end
+
+  # integer
   def total_days
     (end_date - start_date).to_i
   end
 
+  # integer
   def total_days_from_start
     (Date.today - start_date).to_i
   end
 
+  # integer
   def total_days_to_end
     (end_date - Date.today).to_i
   end
 
-  def contributors
-    members.where(contributor: true)
+  # integer
+  def total_ranks
+    lists.where.not(rank: 0).count
   end
 
-  def lists_count
-    lists.count
-  end
-
+  # integer
   def total_cards
     cards.count
   end
 
-  def weighted_cards
-    cards.where.not(size: :o)
-  end
-
-  def weighted_cards_count
-    cards.where.not(size: :o).count
-  end
-
+  # hash
   def cards_per_size
     cards.group(:size).count
   end
 
+  # integer
+  def total_weighted_cards
+    cards.where.not(size: :o).count
+  end
+
+  # hash
   def weighted_cards_per_size
     weighted_cards.group(:size).count
   end
 
-  def cards_per_rank
-    cards.group(:rank).count
+  # hash
+  def weighted_cards_per_rank
+    weighted_cards.group(:rank).count
   end
 
+  # integer
   def total_story_points
     cards.pluck(:size).map { |size| Card.sizes[size] }.sum
   end
 
   # only weighted cards, only contributing members
-  def cards_per_contributor
-    assigned = weighted_cards.group(:member).count
-                             .select { |key, _value| key.contributor if key.respond_to?(:contributor) }
-                             .transform_keys(&:full_name)
-    assigned.merge!('Unassigned' => (weighted_cards_count - assigned.values.sum))
+  # hash
+  def weighted_cards_per_contributor
+    @assigned = weighted_cards.group(:member).count
+                              .select { |key, _value| key.contributor if key.respond_to?(:contributor) }
+                              .transform_keys(&:full_name)
+    @assigned.merge!('Unassigned' => (weighted_cards_count - @assigned.values.sum))
   end
 
   # only contributing members
+  # hash
   def story_points_per_contributor
     assigned = contributors.map { |member| [member.full_name, member.total_story_points] }.to_h
     assigned.merge!('Unassigned' => (total_story_points - assigned.values.sum))
   end
 
+  # hash
   def story_points_per_size
     cards.group(:size).count
          .each_with_object({}) { |(key, value), hash| hash[key] = value * Card.sizes[key] }
          .except('o')
   end
 
+  # hash
+  def conversion_per_size
+    cards_per_size.each_with_object({}) { |(key, value), hash| hash[key] = value * conversion.send(key) }
+  end
+
+  # integer
+  def total_conversion
+    conversion_per_size.values.sum
+  end
+
+  # hash of hashes
+  def conversion_per_size_per_contributor
+    cards_per_size_per_contributor.each_with_object({}) do |(key, value), hash|
+      hash[key] = value.each_with_object({}) do |(key2, value2), hash2|
+        hash2[key2] = value2 * conversion.send(key2)
+      end
+    end
+  end
+
+  # hash of hashes
+  def weighted_cards_per_size_per_contributor
+    contributors.each_with_object({}) do |contributor, hash|
+      hash[contributor.full_name] = contributor.weighted_cards_per_size
+    end
+  end
+
+  def conversion_per_contributor
+    weighted_cards_per_size_per_contributor.each_with_object({}) do |(key, value), hash|
+      hash[key] = value.values.sum
+    end
+  end
+
+  # hash of hashes
+  def weighted_cards_per_size_per_rank
+    ranks.each_with_object({}) { |rank, hash| hash[rank.rank] = rank.weighted_cards_per_size }
+  end
+
+  # hash of hashes
+  def conversion_per_size_per_rank
+    weighted_cards_per_size_per_rank.each_with_object({}) do |(key, value), hash|
+      hash[key] = value.each_with_object({}) do |(key2, value2), hash2|
+        hash2[key2] = value2 * conversion.send(key2)
+      end
+    end
+  end
+
+  # hash of hashes
+  def conversion_per_rank
+    weighted_cards_per_size_per_rank.each_with_object({}) do |(key, value), hash|
+      hash[key] = value.values.sum
+    end
+  end
+
+  # decimal (percentage)
   def progress
     (weighted_cards.map(&:progress).sum / weighted_cards_count).round(2)
   end
 
+  # integer
   def story_points_progress
     (progress * total_story_points).round(2)
   end
+
+  # # integer (hours)
+  # def total_conversion
+  #   conversion_per_rank.values.sum
+  # end
 end

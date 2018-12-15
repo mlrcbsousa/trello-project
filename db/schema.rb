@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_15_105440) do
+ActiveRecord::Schema.define(version: 2018_12_15_111253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,12 +37,12 @@ ActiveRecord::Schema.define(version: 2018_12_15_105440) do
 
   create_table "conversions", force: :cascade do |t|
     t.bigint "sprint_id"
-    t.integer "xs", default: 1
-    t.integer "s", default: 2
-    t.integer "m", default: 4
-    t.integer "l", default: 8
-    t.integer "xl", default: 16
-    t.integer "xxl", default: 32
+    t.integer "xs"
+    t.integer "s"
+    t.integer "m"
+    t.integer "l"
+    t.integer "xl"
+    t.integer "xxl"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sprint_id"], name: "index_conversions_on_sprint_id"
