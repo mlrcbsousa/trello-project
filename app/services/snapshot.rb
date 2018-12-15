@@ -1,6 +1,7 @@
 class Snapshot
   def initialize(sprint)
     @sprint = sprint
+    @timestamp = Time.now
     sprint_stats
     member_stats
   end
@@ -39,12 +40,14 @@ class Snapshot
 
   def sprint_stats
     attrs = SPRINT_STATS.each_with_object({}) { |method, hash| hash[method] = @sprint.send method }
+    attrs[:timestamp] = @timestamp
     @sprint.sprint_stats.create!(attrs)
   end
 
   def member_stats
     @sprint.members.each do |member|
       attrs = MEMBER_STATS.each_with_object({}) { |method, hash| hash[method] = member.send method }
+      attrs[:timestamp] = @timestamp
       member.member_stats.create!(attrs)
     end
   end

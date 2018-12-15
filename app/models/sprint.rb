@@ -15,6 +15,13 @@ class Sprint < ApplicationRecord
   validates_date :end_date, on_or_after: :start_date
   # after_create :create_webhook
 
+  # Callbacks
+  before_destroy :destroy_cards
+
+  def destroy_cards
+    # cards.destroy_all
+  end
+
   def update_man_hours
     total_hours = members.where(contributor: true).pluck(:total_hours)
     update(man_hours: total_hours.sum)
