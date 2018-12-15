@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # Onboarding
   get 'onboard/pick', to: 'onboard#pick', as: 'pick'
   post 'sprints/new', to: 'sprints#new', as: 'new'
+  get 'conversions/new/:id', to: 'conversions#new', as: 'new_conversion'
+  post 'conversions/:id', to: 'conversions#create'
   get 'onboard/contribute/:id', to: 'onboard#contribute', as: 'contribute'
   patch 'onboard/schedule/:id', to: 'onboard#schedule', as: 'schedule'
   patch 'onboard/complete/:id', to: 'onboard#complete', as: 'complete'

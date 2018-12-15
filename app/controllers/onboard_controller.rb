@@ -1,5 +1,5 @@
 class OnboardController < ApplicationController
-  layout 'onboarding', only: %i[pick contribute schedule complete]
+  layout 'onboarding' # , only: %i[pick contribute schedule complete]
   before_action :set_sprint, except: :pick
 
   def pick
@@ -10,7 +10,8 @@ class OnboardController < ApplicationController
       {
         name: ext_board.name,
         trello_ext_id: trello_board_id,
-        trello_url: ext_board.url
+        trello_url: ext_board.url,
+        background_url: 'placeholder'
       }
     end
   end
@@ -34,7 +35,7 @@ class OnboardController < ApplicationController
       )
     end
     # update man hours everytime you change labour hours
-    @sprint.update_man_hours
+    @sprint.update_available_man_hours
     redirect_to sprint_path(@sprint), notice: "Successfully created your sprint"
   end
 

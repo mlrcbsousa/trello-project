@@ -34,9 +34,10 @@ class Sprint < ApplicationRecord
     lists.where.not(rank: 0)
   end
 
-  def update_man_hours
+  # call this method after changing any member child schedule
+  def update_available_man_hours
     total_hours = contributors.pluck(:total_hours)
-    update(man_hours: total_hours.sum)
+    update(available_man_hours: total_hours.sum)
   end
 
   def webhook_post
@@ -164,7 +165,7 @@ class Sprint < ApplicationRecord
 
   # hash of hashes
   def weighted_cards_per_size_per_rank
-    ranks.each_with_object({}) { |rank, hash| hash[rank.rank] = rank.weighted_cards_per_size }
+    ranks.each_with_object({}) { |rank, hash| hash[rank.name] = rank.weighted_cards_per_size }
   end
 
   # hash of hashes

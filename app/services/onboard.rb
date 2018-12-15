@@ -33,6 +33,7 @@ class Onboard
       List.create!(
         # discounts first 2 rows for progress
         rank: (i.positive? ? i - 1 : 0),
+        name: 'placeholder',
         trello_ext_id: list.id,
         sprint: @sprint
       )

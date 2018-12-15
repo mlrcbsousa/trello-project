@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_111253) do
   create_table "boards", force: :cascade do |t|
     t.string "trello_ext_id"
     t.bigint "user_id"
+    t.string "background_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "trello_url"
@@ -27,7 +28,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_111253) do
   create_table "cards", force: :cascade do |t|
     t.string "trello_ext_id", null: false
     t.bigint "list_id"
-    t.integer "size", default: 2, null: false
+    t.integer "size", default: 0, null: false
     t.bigint "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,12 +38,12 @@ ActiveRecord::Schema.define(version: 2018_12_15_111253) do
 
   create_table "conversions", force: :cascade do |t|
     t.bigint "sprint_id"
-    t.integer "xs"
-    t.integer "s"
-    t.integer "m"
-    t.integer "l"
-    t.integer "xl"
-    t.integer "xxl"
+    t.integer "xs", default: 1, null: false
+    t.integer "s", default: 2, null: false
+    t.integer "m", default: 4, null: false
+    t.integer "l", default: 8, null: false
+    t.integer "xl", default: 16, null: false
+    t.integer "xxl", default: 32, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sprint_id"], name: "index_conversions_on_sprint_id"
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_111253) do
 
   create_table "lists", force: :cascade do |t|
     t.string "trello_ext_id", null: false
+    t.string "name"
     t.bigint "sprint_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -91,7 +93,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_111253) do
     t.date "end_date", null: false
     t.integer "man_hours", default: 0
     t.bigint "user_id"
-    t.string "trello_url", null: false
+    t.string "trello_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"

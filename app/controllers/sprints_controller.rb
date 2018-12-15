@@ -24,7 +24,7 @@ class SprintsController < ApplicationController
     if @sprint.save
       # service class
       Onboard.new(@sprint, ext_board)
-      redirect_to contribute_path(@sprint)
+      redirect_to new_conversion_path(@sprint)
     else
       render :new, alert: 'Unable to create your sprint!'
     end
