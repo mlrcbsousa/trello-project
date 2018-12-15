@@ -3,17 +3,7 @@ class OnboardController < ApplicationController
   before_action :set_sprint, except: :pick
 
   def pick
-    trello_board_ids = current_user.boards.pluck(:trello_ext_id)
-                                   .delete_if { |id| current_user.sprints.pluck(:trello_ext_id).include?(id) }
-    @boards = trello_board_ids.map do |trello_board_id|
-      ext_board = current_user.client.find(:boards, trello_board_id)
-      {
-        name: ext_board.name,
-        trello_ext_id: trello_board_id,
-        trello_url: ext_board.url,
-        background_url: 'placeholder'
-      }
-    end
+    @boards = current_user.boards.where.not(trello_ext_id: current_user.sprints.trello_ext_id)
   end
 
   def contribute

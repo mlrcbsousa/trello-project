@@ -24,16 +24,19 @@ class User < ApplicationRecord
   validates :full_name, allow_blank: false, format: { with: /\A([a-z \'\.']+)\z/i }
   validates :provider, :uid, :token, :secret, presence: true
 
-  # login with trello
-  def self.from_trello_omniauth(auth)
+  def self.user_params(auth)
     user_params = auth.slice(:provider, :uid)
     raw_info = auth.extra.raw_info
     user_params.merge! raw_info.slice(:email, :username)
-    user_params[:trello_avatar_url] = "https://trello-avatars.s3.amazonaws.com/{raw_info.avatarHash}/170.png"
+    user_params[:trello_avatar_url] = "https://trello-avatars.s3.amazonaws.com/#{raw_info.avatarHash}/170.png"
     user_params[:full_name] = raw_info.fullName
     user_params.merge! auth.credentials.slice(:token, :secret)
-    user_params = user_params.to_h
+    user_params.to_h
+  end
 
+  # login with trello
+  def self.from_trello_omniauth(auth)
+    user_params = user_params(auth)
     user = User.find_by(provider: auth.provider, uid: auth.uid)
     # user ||= User.find_by(email: auth.info.email) # User did a regular sign up in the past.
     if user
@@ -43,13 +46,21 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20] # Fake password for validation
       user.save
     end
-
-    # creates Board instances with idBoards from omniauth response
-    raw_info.slice(:idBoards)[:idBoards].each do |board_id|
-      user.boards.create(trello_ext_id: board_id)
-    end
+    boards(auth.extra.raw_info, user)
 
     return user
+  end
+
+  def self.boards(raw_info, user)
+    # creates Board instances with idBoards from omniauth response
+    raw_info.slice(:idBoards)[:idBoards].each do |board_id|
+      ext_board = user.client.find(:boards, board_id)
+      user.boards.create!(
+        trello_ext_id: ext_board.id,
+        name: ext_board.name,
+        trello_url: ext_board.url
+      )
+    end
   end
 
   # create a client with ruby-trello gem to make requests to trello api

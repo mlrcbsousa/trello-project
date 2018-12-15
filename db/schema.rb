@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_144206) do
   create_table "boards", force: :cascade do |t|
     t.string "trello_ext_id"
     t.bigint "user_id"
-    t.string "background_url"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "trello_url"
