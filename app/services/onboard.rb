@@ -1,15 +1,12 @@
 class Onboard
+  ONBOARD = %i[webhook members lists cards]
+
   def initialize(sprint, ext_board)
     @sprint = sprint
     @cards = ext_board.cards
     @lists = ext_board.lists
     @members = ext_board.members
-  end
-
-  def onboard
-    members
-    lists
-    cards
+    ONBOARD.each { |method| send method }
   end
 
   def members
@@ -21,6 +18,14 @@ class Onboard
         trello_avatar_url: @sprint.user.client.find(:member, member.id).avatar_url
       )
     end
+  end
+
+  def webhook
+    confirmation = @sprint.webhook_post
+    webhook_params = confirmation.symbolize_keys!.slice(:description, :active)
+    webhook_params[:trello_ext_id] = confirmation[:id]
+    webhook_params[:callback_url] = confirmation[:callbackURL]
+    @sprint.webhook.create!(webhook_params)
   end
 
   def lists
@@ -45,13 +50,5 @@ class Onboard
         member: Member.find_by(trello_ext_id: card.member_ids.first)
       )
     end
-  end
-
-  def webhook
-    confirmation = @sprint.webhook_post
-    webhook_params = confirmation.symbolize_keys!.slice(:description, :active)
-    webhook_params[:trello_ext_id] = confirmation[:id]
-    webhook_params[:callback_url] = confirmation[:callbackURL]
-    @sprint.webhook.create!(webhook_params)
   end
 end
