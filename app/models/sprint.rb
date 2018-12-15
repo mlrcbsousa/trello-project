@@ -6,6 +6,7 @@ class Sprint < ApplicationRecord
   has_many :cards, through: :lists, dependent: :destroy
   has_one :webhook
   has_many :sprint_stats
+  has_one :conversion
 
   # Validations
   validates :start_date, :end_date, :trello_ext_id, :name, presence: true
