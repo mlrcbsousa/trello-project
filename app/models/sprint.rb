@@ -4,6 +4,8 @@ class Sprint < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :cards, through: :lists, dependent: :destroy
+  has_one :webhook
+  has_many :sprint_stats
 
   # Validations
   validates :start_date, :end_date, :trello_ext_id, :name, presence: true
@@ -11,18 +13,6 @@ class Sprint < ApplicationRecord
   # rails generate validates_timeliness:install
   validates_date :end_date, on_or_after: :start_date
   # after_create :create_webhook
-
-  def total_days
-    (end_date - start_date).to_i
-  end
-
-  def total_days_from_start
-    (Date.today - start_date).to_i
-  end
-
-  def total_days_to_end
-    (end_date - Date.today).to_i
-  end
 
   def update_man_hours
     total_hours = members.where(contributor: true).pluck(:total_hours)
@@ -42,6 +32,18 @@ class Sprint < ApplicationRecord
   end
 
   # statistics
+  def total_days
+    (end_date - start_date).to_i
+  end
+
+  def total_days_from_start
+    (Date.today - start_date).to_i
+  end
+
+  def total_days_to_end
+    (end_date - Date.today).to_i
+  end
+
   def contributors
     members.where(contributor: true)
   end
@@ -68,6 +70,10 @@ class Sprint < ApplicationRecord
 
   def weighted_cards_per_size
     weighted_cards.group(:size).count
+  end
+
+  def cards_per_rank
+    cards.group(:rank).count
   end
 
   def total_story_points

@@ -22,6 +22,7 @@ class SprintsController < ApplicationController
     ext_board = current_user.client.find(:boards, @sprint.trello_ext_id)
 
     if @sprint.save
+      # service class
       Onboard.new(@sprint, ext_board)
       redirect_to contribute_path(@sprint)
     else

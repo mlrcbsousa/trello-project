@@ -1,6 +1,7 @@
 class Member < ApplicationRecord
   belongs_to :sprint
   has_many :cards
+  has_many :member_stats
 
   validates :trello_ext_id, :hours_per_day, presence: true
   validates :full_name, format: { with: /\A[a-zA-Z ]+\z/, message: "only allows letters" }
