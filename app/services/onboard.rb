@@ -22,10 +22,16 @@ class Onboard
 
   def webhook
     confirmation = @sprint.webhook_post
-    webhook_params = confirmation.symbolize_keys!.slice(:description, :active)
-    webhook_params[:trello_ext_id] = confirmation[:id]
-    webhook_params[:callback_url] = confirmation[:callbackURL]
-    @sprint.webhook.create!(webhook_params)
+    # create an save a Webhook record to our own database
+    # using the info describing our new Trello Webhook!
+    # this part isnt working, not saving anything
+    Webhook.create!(
+      description: confirmation["description"],
+      active: true,
+      callback_url: confirmation["callbackURL"],
+      trello_ext_id: confirmation["id"],
+      sprint: @sprint
+    )
   end
 
   def lists
@@ -33,6 +39,7 @@ class Onboard
       List.create!(
         # discounts first 2 rows for progress
         rank: (i.positive? ? i - 1 : 0),
+        name: list.name,
         trello_ext_id: list.id,
         sprint: @sprint
       )

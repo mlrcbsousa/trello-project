@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_15_105440) do
+ActiveRecord::Schema.define(version: 2018_12_16_103524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_105440) do
   create_table "boards", force: :cascade do |t|
     t.string "trello_ext_id"
     t.bigint "user_id"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "trello_url"
@@ -27,7 +28,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_105440) do
   create_table "cards", force: :cascade do |t|
     t.string "trello_ext_id", null: false
     t.bigint "list_id"
-    t.integer "size", default: 2, null: false
+    t.integer "size", default: 0, null: false
     t.bigint "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,12 +38,12 @@ ActiveRecord::Schema.define(version: 2018_12_15_105440) do
 
   create_table "conversions", force: :cascade do |t|
     t.bigint "sprint_id"
-    t.integer "xs", default: 1
-    t.integer "s", default: 2
-    t.integer "m", default: 4
-    t.integer "l", default: 8
-    t.integer "xl", default: 16
-    t.integer "xxl", default: 32
+    t.integer "xs", default: 1, null: false
+    t.integer "s", default: 2, null: false
+    t.integer "m", default: 4, null: false
+    t.integer "l", default: 8, null: false
+    t.integer "xl", default: 16, null: false
+    t.integer "xxl", default: 32, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sprint_id"], name: "index_conversions_on_sprint_id"
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_105440) do
 
   create_table "lists", force: :cascade do |t|
     t.string "trello_ext_id", null: false
+    t.string "name"
     t.bigint "sprint_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,6 +63,16 @@ ActiveRecord::Schema.define(version: 2018_12_15_105440) do
     t.bigint "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "datetime_at_post"
+    t.integer "available_hours"
+    t.integer "total_cards"
+    t.integer "weighted_cards_count"
+    t.jsonb "weighted_cards_per_size"
+    t.jsonb "conversion_per_size"
+    t.jsonb "conversion_per_rank"
+    t.integer "total_story_points"
+    t.float "progress"
+    t.integer "story_points_progress"
     t.index ["member_id"], name: "index_member_stats_on_member_id"
   end
 
@@ -69,7 +81,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_105440) do
     t.bigint "sprint_id"
     t.boolean "contributor", default: true
     t.integer "days_per_sprint"
-    t.integer "total_hours", default: 0, null: false
+    t.integer "available_hours", default: 0, null: false
     t.integer "hours_per_day", default: 8, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,6 +94,35 @@ ActiveRecord::Schema.define(version: 2018_12_15_105440) do
     t.bigint "sprint_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "datetime_at_post"
+    t.integer "available_man_hours"
+    t.integer "total_contributors"
+    t.integer "total_days"
+    t.integer "total_days_from_start"
+    t.integer "total_days_to_end"
+    t.integer "total_ranks"
+    t.integer "total_cards"
+    t.jsonb "cards_per_size"
+    t.integer "total_weighted_cards"
+    t.jsonb "weighted_cards_per_size"
+    t.jsonb "weighted_cards_per_rank"
+    t.integer "total_story_points"
+    t.jsonb "weighted_cards_per_contributor"
+    t.jsonb "story_points_per_contributor"
+    t.jsonb "story_points_per_size"
+    t.jsonb "conversion_per_size"
+    t.integer "total_conversion"
+    t.jsonb "conversion_per_size_per_contributor"
+    t.jsonb "weighted_cards_per_size_per_contributor"
+    t.jsonb "conversion_per_contributor"
+    t.jsonb "weighted_cards_per_size_per_rank"
+    t.jsonb "conversion_per_size_per_rank"
+    t.jsonb "conversion_per_rank"
+    t.float "progress"
+    t.integer "story_points_progress"
+    t.jsonb "available_hours_per_contributor"
+    t.jsonb "progress_conversion_per_rank"
+    t.integer "progress_conversion"
     t.index ["sprint_id"], name: "index_sprint_stats_on_sprint_id"
   end
 
@@ -89,9 +130,9 @@ ActiveRecord::Schema.define(version: 2018_12_15_105440) do
     t.string "trello_ext_id", null: false
     t.date "start_date", null: false
     t.date "end_date", null: false
-    t.integer "man_hours", default: 0
+    t.integer "available_man_hours", default: 0
     t.bigint "user_id"
-    t.string "trello_url", null: false
+    t.string "trello_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"

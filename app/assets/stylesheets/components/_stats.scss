@@ -1,6 +1,6 @@
 // _stats.scss
 .stat-card {
-  width: auto;
+  width: 350px;
   height: auto;
 
   padding: 0 10px;
@@ -21,17 +21,20 @@
   background-color: #DCDEE0; /*iron*/
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-}
-.stat-main h1 {
-  font-size: 100px;
-  font-weight: 700;
-  color: $blue;
-}
-.stat-main.danger h1 {
-  color: $orange;
-}
-.stat-main.success h1 {
-  color: $green; /*meadow*/
+  h1 {
+    font-size: 100px;
+    font-weight: 700;
+    color: $blue;
+    .stat-unit {
+      font-size: 50px;
+    }
+  }
+  &.danger h1 {
+    color: $orange;
+  }
+  &.success h1 {
+    color: $green; /*meadow*/
+  }
 }
 
 /*description section*/

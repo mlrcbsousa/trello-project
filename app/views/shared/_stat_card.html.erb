@@ -1,0 +1,12 @@
+<!-- _stat_card.html.erb -->
+<div class="stat-card montserrat">
+  <div class="stat-main">
+    <h1>
+      <%= stat[:value] %>
+      <span class="stat-unit"><%= stat[:unit] if stat[:unit] %></span>
+    </h1>
+  </div>
+  <div class="stat-description">
+    <h2><%= stat[:name] %></h2>
+  </div>
+</div>

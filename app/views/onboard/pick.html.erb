@@ -6,13 +6,13 @@
         <div class="col-xs-12 col-sm-6">
 
           <blockquote class="trello-board-compact">
-            <a href="<%= board[:trello_url] %>"><%= board[:name] %></a>
+            <a href="<%= board.trello_url %>"><%= board.name %></a>
           </blockquote>
 
           <%= form_tag new_path, method: :post do %>
-            <%= hidden_field_tag :name, board[:name] %>
-            <%= hidden_field_tag :trello_ext_id, board[:trello_ext_id] %>
-            <%= hidden_field_tag :trello_url, board[:trello_url] %>
+            <%= hidden_field_tag :name, board.name %>
+            <%= hidden_field_tag :trello_ext_id, board.trello_ext_id %>
+            <%= hidden_field_tag :trello_url, board.trello_url %>
             <div class="pick">
               <%= submit_tag 'Pick this board' %>
             </div>

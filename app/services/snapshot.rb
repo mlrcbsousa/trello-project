@@ -1,31 +1,41 @@
 class Snapshot
   def initialize(sprint)
     @sprint = sprint
-    @timestamp = Time.now
+    @datetime_at_post = Time.now
     sprint_stats
-    member_stats
+    # member_stats
   end
 
-  # TODO: persist all stats at current time
+
   SPRINT_STATS = %i[
-    total_story_points
+    available_man_hours
+    total_contributors
+    total_days
     total_days_from_start
     total_days_to_end
-    total_days
-    contributors
-    lists_count
+    total_ranks
     total_cards
-    weighted_cards
-    weighted_cards_count
     cards_per_size
+    total_weighted_cards
     weighted_cards_per_size
-    cards_per_rank
+    weighted_cards_per_rank
     total_story_points
-    cards_per_contributor
+    weighted_cards_per_contributor
     story_points_per_contributor
     story_points_per_size
+    conversion_per_size
+    total_conversion
+    available_hours_per_contributor
+    conversion_per_size_per_contributor
+    weighted_cards_per_size_per_contributor
+    conversion_per_contributor
+    weighted_cards_per_size_per_rank
+    conversion_per_size_per_rank
+    conversion_per_rank
     progress
     story_points_progress
+    progress_conversion_per_rank
+    progress_conversion
   ]
 
   MEMBER_STATS = %i[
@@ -40,14 +50,14 @@ class Snapshot
 
   def sprint_stats
     attrs = SPRINT_STATS.each_with_object({}) { |method, hash| hash[method] = @sprint.send method }
-    attrs[:timestamp] = @timestamp
+    attrs[:datetime_at_post] = @datetime_at_post
     @sprint.sprint_stats.create!(attrs)
   end
 
   def member_stats
     @sprint.members.each do |member|
       attrs = MEMBER_STATS.each_with_object({}) { |method, hash| hash[method] = member.send method }
-      attrs[:timestamp] = @timestamp
+      attrs[:datetime_at_post] = @datetime_at_post
       member.member_stats.create!(attrs)
     end
   end

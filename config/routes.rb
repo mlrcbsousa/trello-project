@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # Onboarding
   get 'onboard/pick', to: 'onboard#pick', as: 'pick'
   post 'sprints/new', to: 'sprints#new', as: 'new'
+  get 'conversions/new/:id', to: 'conversions#new', as: 'new_conversion'
+  post 'conversions/:id', to: 'conversions#create', as: 'conversions'
   get 'onboard/contribute/:id', to: 'onboard#contribute', as: 'contribute'
   patch 'onboard/schedule/:id', to: 'onboard#schedule', as: 'schedule'
   patch 'onboard/complete/:id', to: 'onboard#complete', as: 'complete'
@@ -21,6 +23,9 @@ Rails.application.routes.draw do
   end
 
   # Webhooks
-  get "/webhooks", to: "webhooks#complete"
-  post "/webhooks", to: "webhooks#receive"
+  get 'webhooks', to: 'webhooks#complete'
+  post 'webhooks', to: 'webhooks#receive'
+
+  # Dev testing routes
+  get 'components', to: 'pages#components'
 end

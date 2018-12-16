@@ -1,0 +1,20 @@
+<!-- new.html.erb -->
+<div class="col-xs-12 text-center">
+  <h1>
+    <%= @sprint.name %>
+  </h1>
+  <h3>Customize your Size to Hours conversion</h3>
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3" style="text-align: left;">
+      <%= simple_form_for(@conversion) do |f| %>
+        <%= f.input :xs %>
+        <%= f.input :s %>
+        <%= f.input :m %>
+        <%= f.input :l %>
+        <%= f.input :xl %>
+        <%= f.input :xxl %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+</div>
