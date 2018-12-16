@@ -224,7 +224,7 @@ class Sprint < ApplicationRecord
   end
 
   def progress_conversion
-    progress_conversion_per_rank.values.sum
+    progress_conversion_per_rank.values.sum.to_i
   end
 
   # decimal (percentage)

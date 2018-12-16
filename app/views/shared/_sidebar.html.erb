@@ -1,20 +1,50 @@
 <!-- sidebar -->
+<!-- ATTENTION: -->
+<!-- This sidebar requires an instance of Sprint to be active  -->
+<!-- and saved in the @sprint instance variable -->
+
+
 <div id="sidebar" class="iron">
   <div class="logo">
-    <a href="/">
+    <%= link_to root_path do %>
       <%= image_tag "SAlogo-v.png", width: 50 %>
-    </a>
+    <% end %>
   </div>
   <div class="links">
-     <div id="sidebar-nav" class="sidebar-link">
-      <a href="/"><i class="fas fa-signal"></i></a>
-      <a href="/"><i class="fas fa-users"></i></a>
-      <a href="/"><i class="fas fa-user-circle"></i></a>
-    </div>
-    <div class="sidebar-link-trello text-center">
-      <%= link_to sprints_path do %>
-        <i class="fab fa-trello"></i>
-      <% end %>
+    <div class="tabs">
+      <div id="sidebar-nav" class="sidebar-link">
+
+        <% if current_page?(sprints_path) %>
+
+          <!-- MY SPRINTS (sprints/index)-->
+          <%= link_to 'My Sprints', sprints_path %>
+
+          <!-- SPRINT STATS (sprints/show partial: _sprint_stats)-->
+          <%= link_to '#', class: "tab active", id: "sprint-stats" do %>
+            <i class="fas fa-signal"></i>
+          <% end %>
+
+          <!-- TEAM STATS (sprints/show partial: _team_stats)-->
+          <%= link_to '#', class: "tab", id: "team-stats" do %>
+            <i class="fas fa-users"></i>
+          <% end %>
+
+          <!-- MEMBER STATS (sprints/show partial: _member_stats)-->
+          <%= link_to '#', class: "tab", id: "member-stats" do %>
+            <i class="fas fa-user-circle"></i>
+          <% end %>
+
+          <!-- TRELLO BOARD -->
+          <% link_to @sprint.trello_url, target: "_blank" do %>
+            <i class="fab fa-trello"></i>
+          <% end %>
+
+        <% else %>
+          <%= link_to pick_path %>
+
+        <% end %>
+
+      </div>
     </div>
   </div>
 </div>

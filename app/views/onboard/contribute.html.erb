@@ -8,6 +8,7 @@
     <div class="col-xs-6 col-xs-offset-3" style="text-align: left;">
       <%= form_tag schedule_path(@sprint), method: :patch do %>
         <% @members.each do |member| %>
+          <%= image_tag member.trello_avatar_url, class: "avatar avatar-md" %>
           <div class="form-group">
             <%= check_box_tag :"contribute-#{member.id}" %>
             <%= label_tag :"full_name-#{member.id}", member.full_name, class: "control-label" %>
