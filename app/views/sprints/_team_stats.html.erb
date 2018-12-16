@@ -1,0 +1,28 @@
+<!-- _team_stats.html.erb -->
+# team page
+<br>
+@sprint.total_contributors
+    <div class="col-xs-12 col-sm-3">
+      Weighted cards per contributor
+      <%= pie_chart @sprint.weighted_cards_per_contributor %>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      Hours per size per contributor
+      <%= column_chart @sprint.conversion_per_size_per_contributor_ck %>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      Weighted cards per size per contributor
+      <%= line_chart @sprint.weighted_cards_per_size_per_contributor_ck %>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      Hours per contributor
+      <%= pie_chart @sprint.conversion_per_contributor %>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      Weighted cards per contributor
+      <%= pie_chart @sprint.weighted_cards_per_contributor %>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      Story points per contributor
+      <%= pie_chart @sprint.story_points_per_contributor %>
+    </div>

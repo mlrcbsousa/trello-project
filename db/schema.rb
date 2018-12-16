@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_15_144206) do
+ActiveRecord::Schema.define(version: 2018_12_16_103524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,9 @@ ActiveRecord::Schema.define(version: 2018_12_15_144206) do
     t.jsonb "conversion_per_rank"
     t.float "progress"
     t.integer "story_points_progress"
+    t.jsonb "available_hours_per_contributor"
+    t.jsonb "progress_conversion_per_rank"
+    t.integer "progress_conversion"
     t.index ["sprint_id"], name: "index_sprint_stats_on_sprint_id"
   end
 

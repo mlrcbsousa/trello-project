@@ -36,8 +36,7 @@ class Sprint < ApplicationRecord
 
   # call this method after changing any member child schedule
   def update_available_man_hours
-    total_hours = contributors.pluck(:total_hours)
-    update(available_man_hours: total_hours.sum)
+    update(available_man_hours: contributors.pluck(:available_hours).sum)
   end
 
   def webhook_post
@@ -51,6 +50,18 @@ class Sprint < ApplicationRecord
       headers: { "Content-Type" => "application/json" }
     )
   end
+
+  # def webhook_delete
+  #   HTTParty.delete(
+  #     "https://api.trello.com/1/tokens/#{user.token}/webhooks/?key=#{ENV['TRELLO_KEY']}",
+  #     query: {
+  #       description: "Sprint webhook user#{user.id}",
+  #       callbackURL: "#{ENV['BASE_URL']}webhooks",
+  #       idModel: trello_ext_id
+  #     },
+  #     headers: { "Content-Type" => "application/json" }
+  #   )
+  # end
 
   # STATISTICS
   # integer
@@ -100,7 +111,7 @@ class Sprint < ApplicationRecord
 
   # hash
   def weighted_cards_per_rank
-    weighted_cards.group(:rank).count
+    weighted_cards.group(:name).count
   end
 
   # integer
@@ -114,13 +125,13 @@ class Sprint < ApplicationRecord
     @assigned = weighted_cards.group(:member).count
                               .select { |key, _value| key.contributor if key.respond_to?(:contributor) }
                               .transform_keys(&:full_name)
-    @assigned.merge!('Unassigned' => (weighted_cards_count - @assigned.values.sum))
+    @assigned.merge!('Unassigned' => (total_weighted_cards - @assigned.values.sum))
   end
 
   # only contributing members
   # hash
   def story_points_per_contributor
-    assigned = contributors.map { |member| [member.full_name, member.total_story_points] }.to_h
+    assigned = contributors.map { |c| [c.full_name, c.total_story_points] }.to_h
     assigned.merge!('Unassigned' => (total_story_points - assigned.values.sum))
   end
 
@@ -133,7 +144,7 @@ class Sprint < ApplicationRecord
 
   # hash
   def conversion_per_size
-    cards_per_size.each_with_object({}) { |(key, value), hash| hash[key] = value * conversion.send(key) }
+    weighted_cards_per_size.each_with_object({}) { |(key, value), hash| hash[key] = value * conversion.send(key) }
   end
 
   # integer
@@ -141,13 +152,22 @@ class Sprint < ApplicationRecord
     conversion_per_size.values.sum
   end
 
+  def available_hours_per_contributor
+    contributors.map { |c| { c.full_name => c.available_hours } }
+  end
+
   # hash of hashes
   def conversion_per_size_per_contributor
-    cards_per_size_per_contributor.each_with_object({}) do |(key, value), hash|
+    weighted_cards_per_size_per_contributor.each_with_object({}) do |(key, value), hash|
       hash[key] = value.each_with_object({}) do |(key2, value2), hash2|
         hash2[key2] = value2 * conversion.send(key2)
       end
     end
+  end
+
+  # for Chartkick
+  def conversion_per_size_per_contributor_ck
+    conversion_per_size_per_contributor.map { |k, v| { name: k, data: v } }
   end
 
   # hash of hashes
@@ -155,6 +175,11 @@ class Sprint < ApplicationRecord
     contributors.each_with_object({}) do |contributor, hash|
       hash[contributor.full_name] = contributor.weighted_cards_per_size
     end
+  end
+
+  # for Chartkick
+  def weighted_cards_per_size_per_contributor_ck
+    weighted_cards_per_size_per_contributor.map { |k, v| { name: k, data: v } }
   end
 
   def conversion_per_contributor
@@ -168,6 +193,11 @@ class Sprint < ApplicationRecord
     ranks.each_with_object({}) { |rank, hash| hash[rank.name] = rank.weighted_cards_per_size }
   end
 
+  # for Chartkick
+  def weighted_cards_per_size_per_rank_ck
+    weighted_cards_per_size_per_rank.map { |k, v| { name: k, data: v } }
+  end
+
   # hash of hashes
   def conversion_per_size_per_rank
     weighted_cards_per_size_per_rank.each_with_object({}) do |(key, value), hash|
@@ -177,16 +207,29 @@ class Sprint < ApplicationRecord
     end
   end
 
+  # for Chartkick
+  def conversion_per_size_per_rank_ck
+    conversion_per_size_per_rank.map { |k, v| { name: k, data: v } }
+  end
+
   # hash of hashes
   def conversion_per_rank
-    weighted_cards_per_size_per_rank.each_with_object({}) do |(key, value), hash|
-      hash[key] = value.values.sum
+    conversion_per_size_per_rank.each_with_object({}) { |(k, v), h| h[k] = v.values.sum }
+  end
+
+  def progress_conversion_per_rank
+    conversion_per_rank.each_with_object({}) do |(k, v), h|
+      h[k] = (v * lists.find_by(name: k).progress_rank).round(2)
     end
+  end
+
+  def progress_conversion
+    progress_conversion_per_rank.values.sum
   end
 
   # decimal (percentage)
   def progress
-    (weighted_cards.map(&:progress).sum / weighted_cards_count).round(2)
+    (weighted_cards.map(&:progress).sum / total_weighted_cards).round(2)
   end
 
   # integer

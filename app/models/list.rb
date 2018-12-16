@@ -1,4 +1,5 @@
 class List < ApplicationRecord
+  PROMPT = 'List is a backlog or otherwise unranked.'
   belongs_to :sprint
   has_many :cards, dependent: :destroy
 
@@ -10,5 +11,9 @@ class List < ApplicationRecord
 
   def weighted_cards_per_size
     weighted_cards.group(:size).count
+  end
+
+  def progress_rank
+    rank.zero? ? PROMPT : (rank / sprint.total_ranks.to_f).round(2)
   end
 end

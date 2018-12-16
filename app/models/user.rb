@@ -1,7 +1,5 @@
 class User < ApplicationRecord
   require 'trello'
-  # include Trello
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -24,16 +22,6 @@ class User < ApplicationRecord
   validates :full_name, allow_blank: false, format: { with: /\A([a-z \'\.']+)\z/i }
   validates :provider, :uid, :token, :secret, presence: true
 
-  def self.user_params(auth)
-    user_params = auth.slice(:provider, :uid)
-    raw_info = auth.extra.raw_info
-    user_params.merge! raw_info.slice(:email, :username)
-    user_params[:trello_avatar_url] = "https://trello-avatars.s3.amazonaws.com/#{raw_info.avatarHash}/170.png"
-    user_params[:full_name] = raw_info.fullName
-    user_params.merge! auth.credentials.slice(:token, :secret)
-    user_params.to_h
-  end
-
   # login with trello
   def self.from_trello_omniauth(auth)
     user_params = user_params(auth)
@@ -47,8 +35,18 @@ class User < ApplicationRecord
       user.save
     end
     boards(auth.extra.raw_info, user)
-
     return user
+  end
+
+  # build user_params from omniauth response
+  def self.user_params(auth)
+    user_params = auth.slice(:provider, :uid)
+    raw_info = auth.extra.raw_info
+    user_params.merge! raw_info.slice(:email, :username)
+    user_params[:trello_avatar_url] = "https://trello-avatars.s3.amazonaws.com/#{raw_info.avatarHash}/170.png"
+    user_params[:full_name] = raw_info.fullName
+    user_params.merge! auth.credentials.slice(:token, :secret)
+    user_params.to_h
   end
 
   def self.boards(raw_info, user)

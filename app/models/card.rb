@@ -13,7 +13,7 @@ class Card < ApplicationRecord
   end
 
   def progress
-    size == 'o' ? PROMPT : (list.rank / list.sprint.lists_count.to_f).round(2)
+    size == 'o' ? PROMPT : list.progress_rank
   end
 
   # def weighted_progress

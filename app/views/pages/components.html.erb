@@ -1,4 +1,3 @@
-<%= render 'shared/sidebar' %>
 <!-- this will probably live in the main aplication.html.erb file -->
 <!-- unless the current page is the configuration flow -->
 <div class="margin-sidebar components">
@@ -7,23 +6,6 @@
     <hr>
     <hr>
 
-    <%= link_to 'begin onboarding', pick_path %>
-
-    <!-- font sizes -->
-    <h3>Font Sizes</h3>
-    <div class="section-flex justify-center align-center">
-      <h1 class="montserrat weight-700">Header 1</h1>
-      <h2 class="montserrat weight-700">Header 2</h2>
-      <h3 class="montserrat">Header 3</h3>
-      <h4 class="roboto weight-300">Header 4</h4>
-      <h5 class="roboto weight-400">Header 5</h5>
-      <p class="roboto weight-400">text</p>
-      <p class="roboto weight-300">thin</p>
-      <p class="roboto weight-700">bold</p>
-      <p class="code-snippet roboto-mono">code snippet</p>
-      <a class="roboto" href="#">link</a>
-    </div>
-    <hr>
     <!-- avatar -->
     <h3>Avatars</h3>
     <div class="section-flex text-center">
@@ -58,18 +40,17 @@
     <a href="#" class="roboto btn btn-dark mine-shaft">Mine Shaft</a>
     <hr>
     <h3>Sidebar</h3>
-    <p><-</p>
-        <hr>
-        <h3>Percentage bars</h3>
-        <%= render 'shared/percentage' %>
-        <hr>
-        <h3>Stats</h3>
-        <%= render 'shared/stats' %>
-        <hr>
-        <h3>Burndown chart</h3>
-        <div id="burndown">
-          <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
-        </div>
-        <hr>
-      </div>
+    <hr>
+    <h3>Percentage bars</h3>
+      <%= render 'shared/percentage' %>
+    <hr>
+    <h3>Stats</h3>
+      <%= render 'shared/stats' %>
+    <hr>
+    <h3>Burndown chart</h3>
+    <div id="burndown">
+      <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
     </div>
+    <hr>
+  </div>
+</div>

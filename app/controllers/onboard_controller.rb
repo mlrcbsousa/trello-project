@@ -3,7 +3,8 @@ class OnboardController < ApplicationController
   before_action :set_sprint, except: :pick
 
   def pick
-    @boards = current_user.boards.where.not(trello_ext_id: current_user.sprints.trello_ext_id)
+    sprints = current_user.sprints.pluck(:trello_ext_id)
+    @boards = current_user.boards.where.not(trello_ext_id: sprints)
   end
 
   def contribute
