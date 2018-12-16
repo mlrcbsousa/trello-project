@@ -1,18 +1,16 @@
 <div class="container">
-
-  <%= @sprint.name %>
-
-  <!-- MY SPRINTS (sprints/index)-->
-  <%= render sprints_path %>
-
-  <!-- SPRINT STATS (sprints/show) partial: _sprint_stats -->
-  <%= render 'sprint_stats', sprint: @sprint %>
-
-  <!-- TEAM STATS (sprints/show) partial: _team_stats -->
-  <%= render 'team_stats', sprint: @sprint %>
-
-  <!-- MEMBER STATS (sprints/show) partial: _member_stats -->
-  <%= render 'member_stats', sprint: @sprint %>
-
+  <h1><%= @sprint.name %></h1>
+  <div class="row">
+    <!-- SPRINT STATS (sprints/show) partial: _sprint_stats -->
+    <%= render 'sprint_stats', sprint: @sprint %>
+  </div>
+  <div class="row hidden">
+    <!-- TEAM STATS (sprints/show) partial: _team_stats -->
+    <%= render 'team_stats', sprint: @sprint %>
+  </div>
+  <div class="row hidden">
+    <!-- MEMBER STATS (sprints/show) partial: _member_stats -->
+    <%= render 'member_stats', sprint: @sprint %>
+  </div>
 </div>
 

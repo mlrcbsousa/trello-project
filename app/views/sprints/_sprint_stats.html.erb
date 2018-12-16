@@ -1,77 +1,83 @@
 <!-- _sprint_stats.html.erb -->
-<div class="row">
-  <p>This burndown chart shows your total work accomplishment regarding your sprint duration. You have already accomplished <%= @sprint.progress %> % of your total backlog.</p>
-  <div class="summary">
-    <p>Discover your <strong><%= @sprint.total_days %> days</strong> sprint statistics</p>
-  </div>
+<div class="col-xs-12">
+  <div class="row">
 
-  <%= render 'shared/stat_card', stat: { value: @sprint.progress_conversion, unit: "hrs", name: "Work Done" } %>
-  <%= render 'shared/stat_card', stat: { value: @sprint.total_conversion, unit: "hrs", name: "Total work" } %>
+    <div class="col-sm-2">
+      <%= render 'shared/stat_card', stat: { value: @sprint.progress_conversion, unit: "hrs", name: "Work Done" } %>
+      <%= render 'shared/stat_card', stat: { value: @sprint.total_conversion, unit: "hrs", name: "Total work" } %>
+      <%= render 'shared/stat_card', stat: { value: @sprint.available_man_hours, unit: "hrs", name: "Total Labour" } %>
+      <%= render 'shared/stat_card', stat: { value: @sprint.total_days, unit: "days", name: "Sprint duration" } %>
+      <%= render 'shared/stat_card', stat: { value: @sprint.total_days_from_start, name: "Days from start" } %>
+      <%= render 'shared/stat_card', stat: { value: @sprint.total_days_to_end, name: "Days to end" } %>
+      <%= render 'shared/stat_card', stat: { value: @sprint.total_cards, name: "Total cards" } %>
+      <%= render 'shared/stat_card', stat: { value: @sprint.total_weighted_cards, name: "Weighted cards" } %>
+      <%= render 'shared/stat_card', stat: { value: @sprint.total_story_points, unit: "pts", name: "Total Story points" } %>
+      <%= render 'shared/stat_card', stat: { value: (@sprint.progress * 100).to_i, unit: "%", name: "Sprint progress" } %>
+      <%= render 'shared/stat_card', stat: { value: @sprint.story_points_progress.to_i, unit: "pts", name: "Points progress" } %>
+    </div>
 
-  <%= render 'shared/stat_card', stat: { value: @sprint.available_man_hours, unit: "hrs", name: "Total Labour" } %>
+    <div class="col-sm-10">
+      <div class="row">
+        <div class="col-sm-5">
 
-  <%= render 'shared/stat_card', stat: { value: @sprint.total_days, unit: "days", name: "Sprint duration" } %>
-
-  <%= render 'shared/stat_card', stat: { value: @sprint.total_days_from_start, name: "Days from start" } %>
-
-  <%= render 'shared/stat_card', stat: { value: @sprint.total_days_to_end, name: "Days to end" } %>
-
-  <%= render 'shared/stat_card', stat: { value: @sprint.total_ranks, name: "Total ranks" } %>
-
-  <%= render 'shared/stat_card', stat: { value: @sprint.total_cards, name: "Total cards" } %>
-
-  <%= render 'shared/stat_card', stat: { value: @sprint.total_weighted_cards, name: "Weighted cards" } %>
-
-  <%= render 'shared/stat_card', stat: { value: @sprint.total_story_points, unit: "pts", name: "Total Story points" } %>
-
-  <%= render 'shared/stat_card', stat: { value: (@sprint.progress * 100).to_i, unit: "%", name: "Sprint progress" } %>
-
-  <%= render 'shared/stat_card', stat: { value: @sprint.story_points_progress.to_i, unit: "pts", name: "Points progress" } %>
-
-        <div class="row">
-          <div class="col-xs-12 col-sm-3">
-            Progress conversion per rank
-            <%= bar_chart @sprint.progress_conversion_per_rank %>
+          <div class="graph-section">
+            <div>
+              Weighted cards per size per rank
+              <%= column_chart @sprint.weighted_cards_per_size_per_rank_ck, stacked: true, legend: "bottom" %>
+            </div>
+            <div>
+              Hours per size per rank
+              <%= column_chart @sprint.conversion_per_size_per_rank_ck, stacked: true, legend: false %>
+            </div>
           </div>
-          <div class="col-xs-12 col-sm-3">
-            Story points per size
-            <%= bar_chart @sprint.story_points_per_size %>
+
+        </div>
+
+        <div class="col-sm-5">
+
+          <div class="graph-section">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                Progress per rank
+                <%= bar_chart @sprint.progress_conversion_per_rank, xtitle: "Hours" %>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                Work per rank
+                <%= bar_chart @sprint.conversion_per_rank_ck, xtitle: "Hours" %>
+              </div>
+            </div>
           </div>
-          <div class="col-xs-12 col-sm-3">
-            Hours per size
-            <%= column_chart @sprint.conversion_per_size %>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="graph-section">
+                  Story points per size
+                  <%= column_chart @sprint.story_points_per_size %>
+                  Hours of work per size
+                  <%= column_chart @sprint.conversion_per_size %>
+                </div>
+              </div>
           </div>
-          <div class="col-xs-12 col-sm-3">
-            Weighted cards per size per rank
-            <%= bar_chart @sprint.weighted_cards_per_size_per_rank_ck %>
-          </div>
-          <div class="col-xs-12 col-sm-3">
-            Hours per size per rank
-            <%= bar_chart @sprint.conversion_per_size_per_rank_ck %>
-          </div>
-          <div class="col-xs-12 col-sm-3">
-            Hours per rank
-            <%= column_chart @sprint.conversion_per_rank %>
-          </div>
-          <div class="col-xs-12 col-sm-3">
-            Cards per size
-            <%= pie_chart @sprint.cards_per_size, donut: true %>
-          </div>
-          <div class="col-xs-12 col-sm-3">
+
+        </div>
+
+        <div class="col-sm-2">
+          <div class="graph-section">
             Weighted cards per size
-            <%= pie_chart @sprint.weighted_cards_per_size %>
-          </div>
-          <div class="col-xs-12 col-sm-3">
+            <%= pie_chart @sprint.weighted_cards_per_size, height: "300px", donut: true, legend: "bottom" %>
             Weighted cards per rank
-            <%= pie_chart @sprint.weighted_cards_per_rank %>
-          </div>
-          <div class="col-xs-12 col-sm-3">
-            Cards per size
-            <%= pie_chart @sprint.cards_per_size %>
+            <%= pie_chart @sprint.weighted_cards_per_rank, height: "300px", donut: true, legend: "bottom" %>
           </div>
         </div>
-    <div class="col-xs-12">
 
+      </div>
     </div>
+
+  </div>
 </div>
+
+
+
+
+
 

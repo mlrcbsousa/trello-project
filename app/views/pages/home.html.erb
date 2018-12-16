@@ -1,27 +1,30 @@
 <div class="container">
   <div class="wrapper">
-    <div class="row home-content">
-      <div class="col-sm-12 col-md-6">
-        <div class="home-boxes usp">
-          <div class="title-home">
-            <h1>Tech product owner.</h1>
-            <h1>See your burndown chart</h1>
-          </div>
-          <div class="title-home">
-            <p>Sprint Awesome helps Product Owners organizing their sprints on Trello visualize their sprint progress</p>
-          </div>
-          <div class="title-home">
-            <%= link_to 'Start', pick_path, class: "roboto btn btn-primary" %>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-6">
-        <div class="home-boxes">
-          <div class="illustration">
-            <p><%= render 'shared/burndown' %></p>
+    <div class="row">
+      <div class="home-content">
+
+        <div class="col-sm-12 col-md-6">
+          <div class="home-boxes usp">
+            <div class="title-home">
+              <h1>Tech product owner.</h1>
+              <h1>See your burndown chart</h1>
+            </div>
+            <div class="title-home">
+              <p>Sprint Awesome helps Product Owners organizing their sprints on Trello visualize their sprint progress</p>
+            </div>
+            <div class="title-home">
+              <%= link_to 'Start', pick_path, class: "roboto btn btn-primary" %>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="col-sm-12 col-md-6">
+          <div class="home-boxes">
+            <div class="illustration">
+              <p><%= render 'shared/burndown' %></p>
+            </div>
+          </div>
+        </div>
+
     </div>
   </div>
   <div class="wrapper">
@@ -65,10 +68,12 @@
       </div>
     </div>
   </div>
-  <div class="container banner" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url('https://images.unsplash.com/photo-1427751840561-9852520f8ce8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80');">
-    <div class="banner-content">
-      <h1></h1>
-      <p></p>
+  <div class="container">
+    <div class="banner" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url('https://images.unsplash.com/photo-1427751840561-9852520f8ce8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80');">
+      <div class="banner-content">
+        <h1></h1>
+        <p></p>
+      </div>
     </div>
   </div>
   <!-- Progress line -->

@@ -217,6 +217,11 @@ class Sprint < ApplicationRecord
     conversion_per_size_per_rank.each_with_object({}) { |(k, v), h| h[k] = v.values.sum }
   end
 
+  # for Chartkick
+  def conversion_per_rank_ck
+    conversion_per_rank.transform_keys { |k| List.find_by(name: k).rank }
+  end
+
   def progress_conversion_per_rank
     conversion_per_rank.each_with_object({}) do |(k, v), h|
       h[k] = (v * lists.find_by(name: k).progress_rank).round(2)

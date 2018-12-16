@@ -1,23 +1,33 @@
-/*base*/
-html {
-  font-size: 14px;
-}
-h1, h2, h3, h4, h5, p {
-  margin: 0;
-  padding: 0;
-}
-body {
-  background-color: $athens-gray;
-  margin: 0;
-  line-height: 1.5;
-  h1 {
-    font-weight: 600;
-    font-size: 32px;
+// layouts/onboarding.scss
+.right-side {
+  background-color: $trello-blue;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0px;
+  .illustration {
+    height: 55vh;
+    width: 65vh;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.24)
   }
 }
-// div {
-//   border: 0.5px solid $light-gray;
-// }
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .btn {
+    width: 100%;
+  }
+}
+.header {
+  line-height: 1.7em;
+  margin-bottom: 20px;
+}
 .circle {
   border-radius: 50%;
   border: 1px solid $light-gray;

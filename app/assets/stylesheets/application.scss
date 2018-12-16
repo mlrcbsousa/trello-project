@@ -12,73 +12,33 @@
 // Your CSS partials
 @import "layouts/index";
 @import "components/index";
-@import "pages/index";
-
 @import "sprints/index";
+
+// for development
+div {
+  // border: 0.5px solid $green;
+}
 
 /*base*/
 html {
-  font-size: 14px;
-}
-h1, h2, h3, h4, h5, p {
-  margin: 0;
-  padding: 0;
-}
-body {
-  background-color: $athens-gray;
+  font-size: 16px;
   margin: 0;
   line-height: 1.5;
+  h1, h2, h3, h4, h5, p {
+    margin: 0;
+    padding: 0;
+  }
   h1 {
     font-weight: 600;
-    font-size: 32px;
-  }
-}
-div {
-  border: 0.5px solid $green;
-}
-.circle {
-  border-radius: 50%;
-  border: 1px solid $light-gray;
-  width: 3rem;
-  height: 3rem;
-}
-.circle-lg {
-  width: 5rem;
-  height: 5rem;
-}
-.section-flex {
-  display: flex;
-}
-.justify-center {
-  justify-content: center;
-}
-.align-center {
-  align-items: center;
-}
-.components {
-  width: 1000px;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 10px 40px;
-}
-.index-title {
-  align-items: flex-end;
-  display: flex;
-  p {
-    margin-left: 20px;
+    font-size: 2rem;
   }
 }
 .margin-left-80 {
   margin-left: 80px;
 }
-
-.padding-top-15 {
-  padding-top: 15px;
-}
-
 a {
   color: $gray;
-&:hover {
+  &:hover {
     color: $blue;
     text-decoration: none;
   }

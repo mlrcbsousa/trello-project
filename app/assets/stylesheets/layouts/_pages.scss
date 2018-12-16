@@ -1,7 +1,4 @@
 // Specific CSS for your home-page
-body {
-  background-color: white !important;
-}
 .home-content {
   margin-top: 20px;
   padding: 0px 30px;
@@ -48,8 +45,9 @@ body {
   //display:flex
   background-color: white;
   padding: 10px;
-  box-shadow: 0 1px 0.5px 1px rgba(0,0,0,0.14);
+  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
+  border-radius: 2px;
   height: auto;
   min-height: 310px;
   h2 {

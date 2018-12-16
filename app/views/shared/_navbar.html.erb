@@ -1,30 +1,25 @@
 <div class="wrapper-navbar">
-  <div class="navbar-wagon">
+  <div class="navbar-pages">
     <!-- Logo -->
-    <div class="navbar-wagon-brand" id="logo">
-      <%= link_to root_path, class: "navbar-wagon-brand" do %>
-        <%= image_tag "SAlogo.png", height: 50 %>
-      <% end %>
-    </div>
+    <%= link_to root_path, id: "logo" do %>
+      <%= image_tag "SAlogo.png", height: 50 %>
+    <% end %>
     <!-- Right Navigation -->
-    <div class="navbar-wagon-right hidden-xs hidden-sm">
+    <div class="navbar-right">
+      <%= link_to "Knowledge", "/knowledge", class: "navbar-item navbar-link" %>
+      <%= link_to "Pricing", "/pricing", class: "navbar-item navbar-link" %>
+      <%= link_to "About", "/about", class: "navbar-item navbar-link" %>
+
       <% if user_signed_in? %>
         <!-- Links when logged in -->
-        <%= link_to 'My Sprints', sprints_path, class: "navbar-wagon-item navbar-wagon-link signup-btn" %>
-        <%= link_to "Knowledge", "/knowledge", class: "navbar-wagon-item navbar-wagon-link" %>
-        <%= link_to "Pricing", "/pricing", class: "navbar-wagon-item navbar-wagon-link" %>
-        <%= link_to "About", "/about", class: "navbar-wagon-item navbar-wagon-link" %>
-        <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "navbar-wagon-item navbar-wagon-link" %>
-        <!-- Avatar with dropdown menu -->
-      </div>
-    <% else %>
-      <!-- Login link (when logged out) -->
-      <%= link_to "Knowledge", "/knowledge", class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Pricing", "/pricing", class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "About", "/about", class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to 'Sign Up', new_user_registration_path, class: "navbar-wagon-item navbar-wagon-link signup-btn" %>
-      <%= link_to 'Log In', new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-    <% end %>
+        <%= link_to 'My Sprints', sprints_path, class: "navbar-item navbar-link signup-btn" %>
+        <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "navbar-item navbar-link" %>
+      <% else %>
+        <!-- Login link (when logged out) -->
+        <%= link_to 'Sign Up', new_user_registration_path, class: "navbar-item navbar-link signup-btn" %>
+        <%= link_to 'Log In', new_user_session_path, class: "navbar-item navbar-link" %>
+      <% end %>
+    </div>
+
   </div>
-</div>
 </div>

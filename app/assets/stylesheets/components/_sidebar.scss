@@ -1,65 +1,58 @@
 // _sidebar.scss
 #sidebar {
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
   background: white;
   transition: all 0.3s ease;
   width: 70px;
-  padding: 0px 30px;
-  position: relative;
   position: fixed;
-  top: 0;
-  left: 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  .logo{
-    padding: 2rem;
-  }
-}
-.margin-sidebar {
-  /*width of the sidebar CANT SEEM TO MAKE THIS WORK*/
-  margin-left: 120px;
-}
-#sidebar-nav {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.links{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 300vh;
-}
-
-.sidebar-link a {
-  color: #555555;
-  opacity: 0.5;
-  text-decoration: none;
-  font-size: 1.5rem;
-  padding: 1rem;
-  &:hover {
-    opacity: 1;
-    color: $mine-shaft; /*mine-shaft*/
-    .trello-link {
-      color: $trello-blue;
-    }
-  }
-}
-
-.sidebar-link-trello {
-  margin-bottom: 10px;
-  color: #555555;
-  opacity: 0.5;
-  text-decoration: none;
-  font-size: 1.5rem;
-  padding: 0rem;
+  justify-content: space-between;
+  a {
+    color: $gray;
+    text-decoration: none;
+    font-size: 1.5rem;
+    opacity: 0.5;
+    padding: 5px;
     &:hover {
+      transition: all 0.3s ease;
+      font-size: 2rem;
       opacity: 1;
-      color: $trello-blue; /*mine-shaft*/
     }
+  }
+  .sidebar-top {
+    .sidebar-logo {
+      img {
+        padding: 10px 0;
+        margin-bottom: 10px;
+      }
+    }
+    .sidebar-nav {
+      text-align: center;
+      #sidebar-tabs_js {
+        display: flex;
+        flex-direction: column;
+        .tab-active_js {
+          font-size: 2rem;
+          opacity: 1;
+        }
+      }
+      .sidebar-link-trello {
+        &:hover {
+          opacity: 1;
+          color: $trello-blue;
+        }
+      }
+    }
+  }
+  .sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
+
+
 
