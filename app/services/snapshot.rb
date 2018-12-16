@@ -1,11 +1,9 @@
 class Snapshot
-  def initialize(sprint)
+  def initialize(sprint, method, datetime_at_post = Time.now)
     @sprint = sprint
-    @datetime_at_post = Time.now
-    sprint_stats
-    # member_stats
+    @datetime_at_post = datetime_at_post
+    send method
   end
-
 
   SPRINT_STATS = %i[
     available_man_hours

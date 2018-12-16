@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'webhooks', to: 'webhooks#complete'
   post 'webhooks', to: 'webhooks#receive'
 
-  # Dev testing routes
-  get 'components', to: 'pages#components'
+  # FRONT END TESTING ENVIRONMENT
+  # will use 'testing' layout unless otherwise specified in the pages#coontroller
+  get 'testing', to: 'pages#testing'
 end

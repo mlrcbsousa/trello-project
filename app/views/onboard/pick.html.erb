@@ -5,9 +5,7 @@
       <% @boards.each do |board| %>
         <div class="col-xs-12 col-sm-6">
 
-          <blockquote class="trello-board-compact">
-            <a href="<%= board.trello_url %>"><%= board.name %></a>
-          </blockquote>
+          <%= render 'shared/trello_card', type: board %>
 
           <%= form_tag new_path, method: :post do %>
             <%= hidden_field_tag :name, board.name %>
@@ -24,6 +22,7 @@
   </div>
 </div>
 
+<!-- required for the trello card -->
 <script src="https://p.trellocdn.com/embed.min.js"></script>
 
 

@@ -1,21 +1,29 @@
 <!-- views/sprints/index -->
 <div class="container">
-  <p>Choose which sprint to visualize</p>
+  <h1>Choose which sprint to visualize</h1>
   <div class="row">
 
     <% @sprints.each do |sprint| %>
       <div class="col-xs-12 col-sm-6">
+        <%= render 'shared/trello_card', type: sprint %>
+        <div>
 
-        <blockquote class="trello-board-compact">
-          <a href="<%= sprint.trello_url %>"><%= sprint.name %></a>
-        </blockquote>
+          <%= link_to sprint_path(sprint) do %>
+            <i class="fas fa-search"></i>
+          <% end %>
 
-        <%= link_to 'Visualise your sprint', sprint_path(sprint) %></li>
+          <%= link_to sprint.trello_url do %>
+            <i class="fab fa-trello"></i>
+          <% end %>
+
+        </div>
       </div>
     <% end %>
 
   </div>
 </div>
 
+<!-- required for the trello card -->
 <script src="https://p.trellocdn.com/embed.min.js"></script>
+
 

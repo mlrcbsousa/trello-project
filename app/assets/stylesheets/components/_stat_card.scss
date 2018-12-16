@@ -1,0 +1,49 @@
+// _stats.scss
+.stat-card {
+  // EM measures are based on this font-size value
+  font-size: 16px;
+
+  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  width: 100%;
+  height: 6em;
+  margin: 10px 0;
+  /*main card stat*/
+  .stat-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    background-color: white;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: $blue;
+    .danger {
+      color: $orange;
+    }
+    .success {
+      color: $green;
+    }
+    .stat-value {
+      font-size: 3em;
+    }
+    .stat-unit {
+      padding-left: 5px;
+      padding-top: 5px;
+      font-size: 1em;
+    }
+  }
+  /*description section*/
+  .stat-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 5px 0;
+    border-top: 0.5px solid $light-gray;
+  }
+}
+
+

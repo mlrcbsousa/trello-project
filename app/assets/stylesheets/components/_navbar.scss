@@ -1,12 +1,9 @@
 /* Main navbar */
 .wrapper-navbar {
   background-color: white;
-  box-shadow: 0px 0.5px 0.5px rgba(0,0,0,0.1);
+  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
 }
-
-.navbar-wagon {
-  //box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
-  background: white;
+.navbar-pages {
   transition: all 0.3s ease;
   height: 70px;
   width: 1140px;
@@ -15,42 +12,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* User Avatar */
-  .avatar {
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
+  /* Logo */
+  img {
+    height: 50px;
   }
-}
-/* Logo */
-.navbar-wagon-brand img {
-  height: 50px;
-}
-/* Right section */
-.navbar-wagon-right {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-/* Basic navbar item */
-.navbar-wagon-item {
-  cursor: pointer;
-  padding: 0 20px;
-}
-/* Navbar link */
-.navbar-wagon-link {
-  color: $gray;
-  font-size: 14px;
-  &:hover {
-    color: $blue;
-    text-decoration: none;
-  }
-}
-.signup-btn {
-  padding: 4px 15px;
-  border-radius: 2px;
-  border: 1px solid $gray;
-  &:hover {
-    border: 1px solid $blue;
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    .navbar-item {
+      cursor: pointer;
+      padding: 0 20px;
+    }
+    .navbar-link {
+      color: $gray;
+      font-size: 14px;
+      &:hover {
+        color: $blue;
+        text-decoration: none;
+      }
+      &.signup-btn {
+        padding: 4px 15px;
+        border-radius: 2px;
+        border: 1px solid $gray;
+        &:hover {
+          border: 1px solid $blue;
+        }
+      }
+    }
   }
 }

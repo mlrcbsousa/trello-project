@@ -1,115 +1,16 @@
 <div class="container">
-  <div class="sprint-dashboard">
-    <div class="header">
-      <div class="sprint-dashboard-main-title text-center">
-        <h1>Sprint Analytics</h1>
-        <h4><%= @sprint.name %></h4>
-      </div>
-      <div class="sprint-status text-center">
-        <p>Your sprint started <strong><%= @sprint.total_days_from_start %> day(s) ago</strong> and your have reached <%= @sprint.progress * 100 %> % of your backlog objectives. You still have another <strong><%= @sprint.total_days_to_end %> day(s) left.</strong></p>
-      </div>
-
-
-      progress_conversion_per_rank
-    progress_conversion
-
-      <div class="row">
-        <div class="col-xs-12 col-sm-3">
-          Story points per size
-          <%= bar_chart @sprint.story_points_per_size %>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          Hours per size
-          <%= column_chart @sprint.conversion_per_size %>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          Weighted cards per size per rank
-          <%= bar_chart @sprint.weighted_cards_per_size_per_rank_ck %>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          Hours per size per rank
-          <%= bar_chart @sprint.conversion_per_size_per_rank_ck %>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          Hours per rank
-          <%= column_chart @sprint.conversion_per_rank %>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          Cards per size
-          <%= pie_chart @sprint.cards_per_size, donut: true %>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          Weighted cards per size
-          <%= pie_chart @sprint.weighted_cards_per_size %>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          Weighted cards per rank
-          <%= pie_chart @sprint.weighted_cards_per_rank %>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          Cards per size
-          <%= pie_chart @sprint.cards_per_size %>
-        </div>
-      </div>
-
-</div>
-
-
-    <div class="sprint-dashboard-overview">
-      <div class="sub-title">
-        <h3>Your Sprint at a glance</h3>
-      </div>
-
-    <div class="sprint-dashboard-statistics">
-      <div class="sub-title">
-        <h3>Your sprint statistics</h3>
-      </div>
-
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="stats">
-            <div class="card text-center">
-              <div><h1><%= @sprint.total_cards %></h1></div>
-              <div><p>Total number of cards</p></div>
-            </div>
-            <div class="card text-center">
-              <div><h1><%= @sprint.total_cards %></h1></div>
-              <div><p>Total number of cards</p></div>
-            </div>
-            <div class="card text-center">
-              <div><h1><%= @sprint.total_cards %></h1></div>
-              <div><p>Total number of cards</p></div>
-            </div>
-            <div class="card text-center">
-              <div><h1><%= @sprint.total_cards %></h1></div>
-              <div><p>Total number of cards</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+  <h1><%= @sprint.name %></h1>
+  <div class="row">
+    <!-- SPRINT STATS (sprints/show) partial: _sprint_stats -->
+    <%= render 'sprint_stats', sprint: @sprint %>
+  </div>
+  <div class="row hidden">
+    <!-- TEAM STATS (sprints/show) partial: _team_stats -->
+    <%= render 'team_stats', sprint: @sprint %>
+  </div>
+  <div class="row hidden">
+    <!-- MEMBER STATS (sprints/show) partial: _member_stats -->
+    <%= render 'member_stats', sprint: @sprint %>
   </div>
 </div>
-<%= render 'shared/stat_card', stat: { value: @sprint.total_conversion, unit: "hrs", name: "Total work" } %>
 
-<%= render 'shared/stat_card', stat: { value: @sprint.available_man_hours, unit: "hrs", name: "Total Labour" } %>
-
-<%= render 'shared/stat_card', stat: { value: @sprint.total_days, unit: "days", name: "Sprint duration" } %>
-
-<%= render 'shared/stat_card', stat: { value: @sprint.total_days_from_start, name: "Days from start" } %>
-
-<%= render 'shared/stat_card', stat: { value: @sprint.total_days_to_end, name: "Days to end" } %>
-
-<%= render 'shared/stat_card', stat: { value: @sprint.total_ranks, name: "Total ranks" } %>
-
-<%= render 'shared/stat_card', stat: { value: @sprint.total_cards, name: "Total cards" } %>
-
-<%= render 'shared/stat_card', stat: { value: @sprint.total_weighted_cards, name: "Weighted cards" } %>
-
-<%= render 'shared/stat_card', stat: { value: @sprint.total_story_points, unit: "pts", name: "Total Story points" } %>
-
-<%= render 'shared/stat_card', stat: { value: (@sprint.progress * 100).to_i, unit: "%", name: "Sprint progress" } %>
-
-<%= render 'shared/stat_card', stat: { value: @sprint.story_points_progress.to_i, unit: "pts", name: "Points progress" } %>

@@ -1,7 +1,7 @@
 # app/controllers/pages_controller.rb
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!
-  layout 'home'
+  layout 'pages'
 
   def home; end
 
@@ -11,5 +11,5 @@ class PagesController < ApplicationController
 
   def about; end
 
-  def components; end
+  def testing; end
 end

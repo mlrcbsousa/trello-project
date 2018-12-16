@@ -1,20 +1,73 @@
 <!-- sidebar -->
-<div id="sidebar" class="iron">
-  <div class="logo">
-    <a href="/">
-      <%= image_tag "SAlogo-v.png", width: 50 %>
-    </a>
-  </div>
-  <div class="links">
-     <div id="sidebar-nav" class="sidebar-link">
-      <a href="/"><i class="fas fa-signal"></i></a>
-      <a href="/"><i class="fas fa-users"></i></a>
-      <a href="/"><i class="fas fa-user-circle"></i></a>
-    </div>
-    <div class="sidebar-link-trello text-center">
-      <%= link_to sprints_path do %>
-        <i class="fab fa-trello"></i>
+<!-- ATTENTION: -->
+<!-- This sidebar requires an instance of Sprint to be active  -->
+<!-- and saved in the @sprint instance variable -->
+<!-- or not and therefore the buttons will be diferent -->
+<!-- logic here is tricky so please dnt mess around too much with CSS classes -->
+<!-- _js used for javascript id pointing -->
+<div id="sidebar">
+  <div class="sidebar-top">
+    <div class="sidebar-logo">
+      <%= link_to root_path do %>
+        <%= image_tag "SAlogo-v.png", width: 50 %>
       <% end %>
     </div>
+    <div class="sidebar-nav">
+
+      <!-- if sprints index page -->
+      <% if current_page?(sprints_path) %>
+
+        <%= link_to pick_path do %>
+          <i class="fas fa-plus"></i>
+        <% end %>
+
+      <!-- if not sprints index page -->
+      <% else %>
+
+        <%= link_to sprints_path do %>
+          <i class="fas fa-list"></i>
+        <% end %>
+
+        <div id="sidebar-tabs_js">
+          <!-- SPRINT STATS (sprints/show partial: _sprint_stats)-->
+          <%= link_to '#', class: "tab_js tab-active_js", id: "sprint-stats" do %>
+            <i class="fas fa-signal"></i>
+          <% end %>
+
+          <!-- TEAM STATS (sprints/show partial: _team_stats)-->
+          <%= link_to '#', class: "tab_js", id: "team-stats" do %>
+            <i class="fas fa-users"></i>
+          <% end %>
+
+          <!-- MEMBER STATS (sprints/show partial: _member_stats)-->
+          <%= link_to '#', class: "tab_js", id: "member-stats" do %>
+            <i class="fas fa-user-circle"></i>
+          <% end %>
+        </div>
+
+        <!-- TRELLO BOARD -->
+        <%= link_to @sprint.trello_url, target: "_blank", class: "sidebar-link-trello" do %>
+          <i class="fab fa-trello"></i>
+        <% end %>
+
+      <% end %>
+
+    </div>
+  </div>
+  <!-- links to the home pages -->
+  <div class="sidebar-bottom">
+
+    <%= link_to "/knowledge" do %>
+      <i class="fas fa-book"></i>
+    <% end %>
+    <%= link_to "/pricing" do %>
+      <i class="fas fa-dollar-sign"></i>
+    <% end %>
+    <%= link_to "/about" do %>
+      <i class="fas fa-question"></i>
+    <% end %>
+    <%= link_to destroy_user_session_path, method: :delete do %>
+      <i class="fas fa-sign-out-alt"></i>
+    <% end %>
   </div>
 </div>
