@@ -1,0 +1,17 @@
+<div class="member-card">
+
+  <%= image_tag member.trello_avatar_url, class: "avatar avatar-sm" %>
+
+  <div class="member-card-description">
+    <strong class="text-primary"><%= member.total_story_points %> pts</strong>
+    <%= member.full_name %>
+    <div class="progress">
+      <% value = (member.progress * 100).to_i %>
+      <div class="progress-bar" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= value %>%;">
+        <%= value %>%
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,28 +1,40 @@
 <!-- _team_stats.html.erb -->
-# team page
-<br>
-@sprint.total_contributors
-    <div class="col-xs-12 col-sm-3">
-      Weighted cards per contributor
-      <%= pie_chart @sprint.weighted_cards_per_contributor %>
+<div class="col-sm-8">
+  <div class="graph-section">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="graph-section-title">
+          <h1>Team</h1>
+        </div>
+        <%= render 'shared/stat_card', stat: { value: @sprint.total_contributors, name: "Members" } %>
+        <%= render 'shared/stat_card', stat: { value: @sprint.total_conversion, unit: "hrs", name: "Total work" } %>
+        <div class="graph-section-piechart">
+          <p>Cards /member</p>
+          <%= pie_chart @sprint.weighted_cards_per_contributor, legend: false, height: "200px" %>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Allocated & Available hrs /member</p>
+            <%= bar_chart @sprint.merged_conversion_per_contributor, height: "150px", legend: false %>
+          </div>
+
+          <div class="col-sm-6">
+            <p>Weighted cards /size /member</p>
+            <%= line_chart @sprint.weighted_cards_per_size_per_contributor_ck, height: "150px", legend: false %>
+          </div>
+        </div>
+        <p>Allocated work /size /member</p>
+        <%= column_chart @sprint.conversion_per_size_per_contributor_ck, height: "300px" %>
+      </div>
     </div>
-    <div class="col-xs-12 col-sm-3">
-      Hours per size per contributor
-      <%= column_chart @sprint.conversion_per_size_per_contributor_ck %>
-    </div>
-    <div class="col-xs-12 col-sm-3">
-      Weighted cards per size per contributor
-      <%= line_chart @sprint.weighted_cards_per_size_per_contributor_ck %>
-    </div>
-    <div class="col-xs-12 col-sm-3">
-      Hours per contributor
-      <%= pie_chart @sprint.conversion_per_contributor %>
-    </div>
-    <div class="col-xs-12 col-sm-3">
-      Weighted cards per contributor
-      <%= pie_chart @sprint.weighted_cards_per_contributor %>
-    </div>
-    <div class="col-xs-12 col-sm-3">
-      Story points per contributor
-      <%= pie_chart @sprint.story_points_per_contributor %>
-    </div>
+  </div>
+</div>
+<div class="col-sm-4">
+  <div class="graph-section team-members">
+    <%= render @sprint.contributors %>
+  </div>
+</div>
+
+

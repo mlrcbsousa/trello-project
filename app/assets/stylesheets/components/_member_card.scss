@@ -1,0 +1,22 @@
+.member-card {
+  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 10px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .member-card-description {
+    width: 100%;
+    padding-right: 10px;
+    margin-top: 5px;
+    .progress {
+      margin-bottom: 10px;
+    }
+  }
+  img {
+    margin: 5px;
+  }
+}
+.member-card:hover {
+  background-color: $light-gray;
+}
