@@ -1,6 +1,6 @@
 // layouts/onboarding.scss
-.onboarding {
-}
+
+// ALL ONBOARDING
 .right-side {
   height: 100vh;
   background-color: $trello-blue;
@@ -9,8 +9,9 @@
   justify-content: flex-end;
   margin: 0px;
   .illustration {
-    height: 55vh;
-    width: 65vh;
+    margin-top: 40px;
+    height: 70vh;
+    width: 78vh;
     background-color: white;
     background-repeat: no-repeat;
     background-position: left;
@@ -27,11 +28,77 @@
   .btn {
     width: 100%;
   }
-}
-.header {
+  .header {
   line-height: 1.7em;
-  margin-bottom: 20px;
+  margin: 50px 0px;
+  padding: 0px 40px;
+  }
+  .header-description {
+    margin-top: 20px;
+  }
 }
+
+
+// STEP 1 : PICK BOARD
+.pickboard {
+  background-color: $trello-blue;
+}
+
+
+// STEP 2 : SELECT DURATION
+.duration {
+  background-color: $yellow;
+}
+
+// STEP 3 : VALIDATE CONVERSION
+.conversion {
+  background-color: $gray;
+}
+
+// STEP 4 : SELECT OBSERVERS
+.contributors {
+  background-color: $green;
+}
+td {
+  height: 7vh;
+}
+
+.observer-list {
+  display: flex;
+  flex-flow: row-wrap;
+  justify-content: space-around;
+  vertical-align: center;
+  .avatar-md {
+  display: block;
+  }
+  .btn {
+    width: 50px;
+  }
+}
+
+// STEP 5 : CONFIGURE TEAM SCHEDULE
+.schedules {
+  background-color: $red;
+}
+
+.schedule-bth {
+  margin-top: 30px;
+}
+
+
+
+.pick-up-boards {
+  height: 60vh;
+  margin-left: 70px;
+  .pick-one-board {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+}
+
+// OTHER CSS
 .circle {
   border-radius: 50%;
   border: 1px solid $light-gray;

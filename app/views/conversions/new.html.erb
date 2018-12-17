@@ -1,23 +1,35 @@
 <!-- new.html.erb -->
 <div class="col-xs-12 col-sm-6">
   <div class="left-side text-center">
-    <h1><%= @sprint.name %></h1>
-    <h3>Customize your Size to Hours conversion</h3>
+    <div class="header text-center">
+      <h2><%= @sprint.name %></h2>
+      <div class="header-description text-center">
+        <p>Customize the size to Hours conversion</p>
+      </div>
+    </div>
     <div class="row">
-      <div class="col-xs-6 col-xs-offset-3" style="text-align: left;">
+      <div class="col-xs-3 col-xs-offset-3" style="text-align: left;">
         <%= simple_form_for(@conversion) do |f| %>
           <%= f.input :xs %>
           <%= f.input :s %>
           <%= f.input :m %>
+      </div>
+      <div class="col-xs-3 col-xs-offset" style="text-align: left;">
           <%= f.input :l %>
           <%= f.input :xl %>
           <%= f.input :xxl %>
-          <%= f.submit %>
-        <% end %>
       </div>
+      <div class="col-xs-6 col-xs-offset-3 btn-default" style="text-align: center;">
+          <%= f.submit 'Continue >', class: "btn btn-primary"%>
+        <% end %>
+        </div>
     </div>
   </div>
 </div>
+
 <div class="col-xs-12 col-sm-6">
-  <div class="right-side" style="background-image: url(<%= image_path('calendar-full.png') %>);"></div>
-</div>
+  <div class="right-side conversion">
+      <div class="illustration" style="background-image: url(<%= image_path('size.png') %>);">
+      </div>
+  </div>
+<div>

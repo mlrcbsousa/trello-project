@@ -1,22 +1,27 @@
 <!-- contribute.html.erb -->
 <div class="col-xs-12 col-sm-6">
   <div class="left-side">
-    <h1>
-      <%= @sprint.name %>
-    </h1>
-    <h3>Select observers</h3>
+    <div class="header text-center">
+      <h2><%= @sprint.name %></h2>
+      <div class="header-description text-center">
+        <p>Select the members who are considered as observers and not contributors <br>(the actual working team).</p>
+      </div>
+    </div>
+
     <div class="row">
-      <div class="col-xs-6 col-xs-offset-3" style="text-align: left;">
+      <div class="col-xs-8 col-xs-offset-2">
         <%= form_tag schedule_path(@sprint), method: :patch do %>
+        <div class="observer-list">
           <% @members.each do |member| %>
-            <%= image_tag member.trello_avatar_url, class: "avatar avatar-md" %>
             <div class="form-group">
+              <%= image_tag member.trello_avatar_url, class: "avatar avatar-md" %>
               <%= check_box_tag :"contribute-#{member.id}" %>
-              <%= label_tag :"full_name-#{member.id}", member.full_name, class: "control-label" %>
+              <%= label_tag :"contribute-#{member.id}", member.full_name, class: "control-label" %>
             </div>
           <% end %>
+        </div>
           <span class="input-group-btn">
-            <%= submit_tag 'Next', class: "btn btn-default" %>
+            <%= submit_tag 'Next', class: "btn btn-primary" %>
           </span>
         <% end %>
       </div>
@@ -25,5 +30,8 @@
 </div>
 
 <div class="col-xs-12 col-sm-6">
-  <div class="right-side" style="background-image: url(<%= image_path('calendar-full.png') %>);"></div>
-</div>
+  <div class="right-side contributors">
+      <div class="illustration" style="background-image: url(<%= image_path('trelloteam.png') %>);">
+      </div>
+  </div>
+<div>

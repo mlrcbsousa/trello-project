@@ -1,34 +1,60 @@
 <!-- schedule.html.erb -->
+
+
 <div class="col-xs-12 col-sm-6">
   <div class="left-side">
+    <div class="header text-center">
+      <h2><%= @sprint.name %></h2>
+      <div class="header-description text-center">
+        <p>Select the total numbers of day per week and hours per day your team members work.</p>
+      </div>
+    </div>
+
     <div class="row">
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-        <h1><%= @sprint.name %></h1>
-        <h3>Contributor schedules</h3>
-        <span>days/sprint</span>-
-        <span>hours/day</span>
-        <%= form_tag complete_path(@sprint), method: :patch do %>
-
+      <div class="col-xs-8 col-xs-offset-2" style="text-align: center;">
+        <table width="100%">
+          <thead>
+            <tr>
+              <th style="text-align: center" width="50%"></th>
+              <th style="text-align: center" width="25%">days/week</th>
+              <th style="text-align: center" width="25%">hours/day</th>
+            </tr>
+          </thead>
+          <%= form_tag complete_path(@sprint), method: :patch do %>
           <% @members.each do |member| %>
-            <div class="form-group">
-              <%= number_field_tag :"days_per_sprint-#{member.id}", @sprint.total_days, in: 1..@sprint.total_days %>
-              <%= number_field_tag :"hours_per_day-#{member.id}", 8, in: 1..24 %>
-              <%= label_tag :"full_name-#{member.id}", member.full_name, class: "control-label" %>
+          <div class="form-group">
+            <tbody>
+              <tr>
+                <td style="text-align: left">
+                  <%= image_tag member.trello_avatar_url, class: "avatar avatar-sm" %>
+                  <%= label_tag :"full_name-#{member.id}", member.full_name, class: "control-label" %>
+                </td>
+                <td>
+                  <%= number_field_tag :"days_per_sprint-#{member.id}", @sprint.total_days, in: 1..@sprint.total_days %>
+                </td>
+                <td>
+                  <%= number_field_tag :"hours_per_day-#{member.id}", 8, in: 1..24 %>
+                </td>
+              </tr>
             </div>
-          <% end %>
+            <% end %>
+          </tbody>
+        </table>
 
-          <span class="input-group-btn">
-            <%= submit_tag 'Complete', class: "btn btn-default" %>
-          </span>
-
+        <div class="input-group-btn">
+          <%= submit_tag 'Complete', class: "btn btn-primary schedule-bth"%>
+        </div>
         <% end %>
       </div>
+
     </div>
   </div>
 </div>
 
 <div class="col-xs-12 col-sm-6">
-  <div class="right-side" style="background-image: url(<%= image_path('calendar-full.png') %>);"></div>
-</div>
-
+  <div class="right-side schedules">
+    <div class="illustration" style="background-image: url(<%= image_path('schedule.png') %>);">
+    </div>
+  </div>
+  <div>
 
