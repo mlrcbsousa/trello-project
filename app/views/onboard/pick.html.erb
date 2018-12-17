@@ -1,32 +1,39 @@
 <div class="col-xs-12 col-sm-6">
   <div class="left-side">
-    <p>Select which trello board</p>
-    <div style="overflow: scroll;">
-      <div class="row">
-
-        <% @boards.each do |board| %>
-          <div class="col-xs-12 col-sm-6">
-
-            <%= render 'shared/trello_card', type: board %>
-
-            <%= form_tag new_path, method: :post do %>
-              <%= hidden_field_tag :name, board.name %>
-              <%= hidden_field_tag :trello_ext_id, board.trello_ext_id %>
-              <%= hidden_field_tag :trello_url, board.trello_url %>
-              <div class="pick">
-                <%= submit_tag 'Pick this board' %>
-              </div>
-            <% end %>
-
-          </div>
-        <% end %>
-
+    <div class="header text-center">
+      <h2>Pick your sprint board</h2>
+      <div class="header-description text-center">
+        <p>Sprint Awesome connects you to your Trello Boards. <br>If you don't have any boards yet, you can copy our template board</p>
       </div>
     </div>
+
+    <div class="pick-up-boards" style="overflow: scroll;">
+        <div class="row">
+          <% @boards.each do |board| %>
+            <div class="col-xs-12 col-sm-6 pick-one-board">
+              <div class="trello-card">
+                <%= render 'shared/trello_card', type: board %>
+                <%= form_tag new_path, method: :post do %>
+                  <%= hidden_field_tag :name, board.name %>
+                  <%= hidden_field_tag :trello_ext_id, board.trello_ext_id %>
+                  <%= hidden_field_tag :trello_url, board.trello_url %>
+              <div class="pick">
+                    <%= submit_tag 'Pick this board' %>
+              </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+    </div>
+
   </div>
 </div>
 <div class="col-xs-12 col-sm-6">
-  <div class="right-side" style="background-image: url(<%= image_path('calendar-full.png') %>);"></div>
+  <div class="right-side pickboard">
+      <div class="illustration" style="background-image: url(<%= image_path('pickboard.png') %>);">
+      </div>
+  </div>
 <div>
 
 <!-- required for the trello card -->

@@ -244,7 +244,9 @@ class Sprint < ApplicationRecord
 
   # decimal (percentage)
   def progress
-    (weighted_cards.map(&:progress).sum / total_weighted_cards).round(2)
+    if total_weighted_cards != 0
+      (weighted_cards.map(&:progress).sum / total_weighted_cards).round(2)
+    else 0
   end
 
   # integer
@@ -256,4 +258,5 @@ class Sprint < ApplicationRecord
   # def total_conversion
   #   conversion_per_rank.values.sum
   # end
+end
 end
