@@ -1,7 +1,3 @@
-<!-- _member_stats.html.erb -->
-<div class="container">
-  <h1>show individuals stats</h1>
-</div>
 # statistics methods that you can call on member instances
 @member.total_cards<br>
 @member.weighted_cards<br>
@@ -10,3 +6,34 @@
 @member.total_story_points<br>
 @member.progress<br>
 @member.story_points_progress<br>
+<!-- _member_stats.html.erb -->
+<div class="member-section">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="member-section-title">
+        <h1><%= member.full_name %></h1>
+      </div>
+      <%= render 'shared/stat_card', stat: { value: @sprint.total_contributors, name: "Members" } %>
+      <%= render 'shared/stat_card', stat: { value: @sprint.total_conversion, unit: "hrs", name: "Total work" } %>
+      <div class="member-section-piechart">
+        <p>Cards /member</p>
+        <%= pie_chart @sprint.weighted_cards_per_contributor, legend: false, height: "200px" %>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="col-sm-6">
+          <p>Allocated & Available hrs /member</p>
+          <%= bar_chart @sprint.merged_conversion_per_contributor, height: "150px", legend: false %>
+        </div>
+
+        <div class="col-sm-6">
+          <p>Weighted cards /size /member</p>
+          <%= line_chart @sprint.weighted_cards_per_size_per_contributor_ck, height: "150px", legend: false %>
+        </div>
+      </div>
+      <p>Allocated work /size /member</p>
+      <%= column_chart @sprint.conversion_per_size_per_contributor_ck, height: "300px" %>
+    </div>
+  </div>
+</div>

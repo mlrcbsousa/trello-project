@@ -39,6 +39,8 @@ class Member < ApplicationRecord
     cards.count
   end
 
+  # ---- to show on member_stats view
+
   # integer
   def weighted_cards_count
     cards.where.not(size: :o).count
@@ -50,11 +52,33 @@ class Member < ApplicationRecord
   end
 
   # hash
+  def weighted_cards_per_rank
+    weighted_cards.joins(:list).group(:name).count
+  end
+
+  # hash of hashes
+  # def ranks
+  #   weighted_cards.joins(:list).where.not(rank: 0)
+  # end
+
+  # hash of hashes
+  def weighted_cards_per_size_per_rank
+    weighted_cards.map { |card| [card.list.name, card.size] }.to_h
+  end
+
+  # hash
   def conversion_per_size
+    weighted_cards_per_size.each_with_object({}) { |(k, v), h| h[k] = v * sprint.conversion.send(k) }
   end
 
   # hash
   def conversion_per_rank
+  end
+
+  # integer
+  # allocated work
+  def total_conversion
+    weighted_cards.pluck(:size).map { |size| sprint.conversion.send(size) }.sum
   end
 
   # integer
