@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row">
     <h1><%= @sprint.name %></h1>
+
+  </div>
+  <div class="row">
     <!-- SPRINT STATS (sprints/show) partial: _sprint_stats -->
     <%= render 'sprint_stats', sprint: @sprint %>
   </div>

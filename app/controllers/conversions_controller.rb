@@ -1,6 +1,6 @@
 class ConversionsController < ApplicationController
   before_action :set_sprint
-  layout 'onboarding'
+  layout 'onboarding', only: :new
 
   def new
     @conversion = Conversion.new

@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- flatpicker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
@@ -15,44 +14,9 @@
   </head>
   <body>
     <%= render 'shared/flashes' %>
-
     <div class="row">
-      <div class="onboarding" style="height: 100vh;">
-
-        <div class="col-xs-12 col-sm-6 left-side">
-          <div class="section-flex justify-center align-center" >
-            <div>
-              <%= yield %>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-6 right-side">
-
-          <% image = if current_page?(pick_path) %>
-                    <!-- 'onboard#pick' -->
-                    <% 'calendar-full.png' %>
-                  <% elsif current_page?(new_sprint_path) %>
-                    <!-- 'sprints#new' -->
-                    <% 'calendar-full.png' %>
-                  <% elsif current_page?(new_conversion) %>
-                    <!-- 'conversions#new' -->
-                    <% 'calendar-full.png' %>
-                  <% elsif current_page?(contribute_path) %>
-                    <!-- 'onboard#contribute'  -->
-                    <% 'calendar-full.png' %>
-                  <% elsif current_page?(schedule_path) %>
-                    <!-- 'onboard#schedule' -->
-                    <% 'calendar-full.png' %>
-                  <% end %>
-
-          <div class="right-side illustration" style="background-image: url(<%= image_path(image) %>);">
-          </div>
-        </div>
-
-      </div>
+      <%= yield %>
     </div>
-
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
   </body>
