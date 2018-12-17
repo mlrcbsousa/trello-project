@@ -1,27 +1,29 @@
 <!-- contribute.html.erb -->
-<div class="col-xs-12 text-center">
-  <h1>
-    <%= @sprint.name %>
-  </h1>
-  <h3>Select observers</h3>
-  <div class="row">
-    <div class="col-xs-6 col-xs-offset-3" style="text-align: left;">
-      <%= form_tag schedule_path(@sprint), method: :patch do %>
-        <% @members.each do |member| %>
-          <%= image_tag member.trello_avatar_url, class: "avatar avatar-md" %>
-          <div class="form-group">
-            <%= check_box_tag :"contribute-#{member.id}" %>
-            <%= label_tag :"full_name-#{member.id}", member.full_name, class: "control-label" %>
-          </div>
+<div class="col-xs-12 col-sm-6">
+  <div class="left-side">
+    <h1>
+      <%= @sprint.name %>
+    </h1>
+    <h3>Select observers</h3>
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3" style="text-align: left;">
+        <%= form_tag schedule_path(@sprint), method: :patch do %>
+          <% @members.each do |member| %>
+            <%= image_tag member.trello_avatar_url, class: "avatar avatar-md" %>
+            <div class="form-group">
+              <%= check_box_tag :"contribute-#{member.id}" %>
+              <%= label_tag :"full_name-#{member.id}", member.full_name, class: "control-label" %>
+            </div>
+          <% end %>
+          <span class="input-group-btn">
+            <%= submit_tag 'Next', class: "btn btn-default" %>
+          </span>
         <% end %>
-        <span class="input-group-btn">
-          <%= submit_tag 'Next', class: "btn btn-default" %>
-        </span>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
 
-
-
-
+<div class="col-xs-12 col-sm-6">
+  <div class="right-side" style="background-image: url(<%= image_path('calendar-full.png') %>);"></div>
+</div>

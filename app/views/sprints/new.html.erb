@@ -1,21 +1,27 @@
 <!-- app/views/sprints/new.html.erb -->
-<div class="col-xs-12 text-center">
-  <div class="header">
-    <h1>Sprint duration</h1>
-    <h5><%= @name %></h5>
-  </div>
-  <div id="dates">
-    <div class="row">
-      <div class="col-xs-12" style="text-align: left;">
-        <%= simple_form_for @sprint do |f| %>
-          <%= f.input :start_date, as: :string %>
-          <%= f.input :end_date, as: :string %>
-          <%= f.input :name, as: :hidden, input_html: { value: @name } %>
-          <%= f.input :trello_ext_id, as: :hidden, input_html: { value: @trello_ext_id } %>
-          <%= f.input :trello_url, as: :hidden, input_html: { value: @trello_url } %>
-          <%= f.button :submit, 'Select Observers', class: 'btn btn-primary' %>
-        <% end %>
+<div class="col-xs-12 col-sm-6">
+  <div class="left-side text-center">
+    <div class="header">
+      <h1>Sprint duration</h1>
+      <h5><%= @name %></h5>
+    </div>
+    <div id="dates">
+      <div class="row">
+        <div class="col-xs-12" style="text-align: left;">
+          <%= simple_form_for @sprint do |f| %>
+            <%= f.input :start_date, as: :string %>
+            <%= f.input :end_date, as: :string %>
+            <%= f.input :name, as: :hidden, input_html: { value: @name } %>
+            <%= f.input :trello_ext_id, as: :hidden, input_html: { value: @trello_ext_id } %>
+            <%= f.input :trello_url, as: :hidden, input_html: { value: @trello_url } %>
+            <%= f.button :submit, 'Select Observers', class: 'btn btn-primary' %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="col-xs-12 col-sm-6">
+  <div class="right-side" style="background-image: url(<%= image_path('calendar-full.png') %>);"></div>
 </div>
