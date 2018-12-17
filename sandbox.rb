@@ -12,6 +12,18 @@ end
 
 # all the classes from the command above, part of the Trello module in the ruby-trello gem
 
+image = if current_page?(pick_path)
+          0
+        elsif current_page?(new_sprint_path)
+          1
+        elsif current_page?(new_conversion)
+          2
+        elsif current_page?(contribute_path)
+          3
+        elsif current_page?(schedule_path)
+          3
+        end
+
 trello_module_classes = [
   :List,
   :Error,
