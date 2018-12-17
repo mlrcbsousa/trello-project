@@ -1,38 +1,50 @@
+.stats-header {
+  color: $gray;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 0.5px solid $light-gray;
+  p {
+    padding-bottom: 10px;
+  }
+  .stats-title {
+    .stats-title-description {
+      padding: 5px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .progress {
+    margin-bottom: 10px;
+  }
+}
 .graph-section {
   box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
-  border-radius: 2px;
+  border-radius: 3px;
   background-color: white;
   padding: 10px;
-}
-.sprint-dashboard {
-  margin-top: 40px;
-  margin-bottom: 30px;
-}
-.sub-title {
-  color: $gray;
-  padding-bottom: 10px;
-  margin: 20px 0px;
-  border-bottom: 1px solid $light-gray;
-}
-.summary {
-  margin-bottom: 5px;
-}
-.sprint-dashboard-main-title {
-  line-height: 2;
-}
-.sprint-status {
-    margin-top: 20px;
+  &.team-members {
+    height: 535px;
+    overflow: scroll;
   }
-.burndow-graph {
-  padding: 0 60px;
-}
-.burndown-comment{
-  margin-top: 10px;
-  margin-bottom: 20px;
-  padding: 20px;
+  .graph-section-title {
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+    background-color: $athens-gray;
+    margin-bottom: 30px;
+    h1 {
+      padding: 5px 0;
+      color: $gray;
+      text-align: center;
+    }
   }
-.stats {
-  display:flex;
-  justify-content: space-around;
-  padding: 10px;
+  .graph-section-piechart {
+    margin-top: 40px;
+  }
+  p {
+    font-weight: 600;
+    color: $gray;
+    border-top: 0.5px dashed $light-gray;
+    padding-top: 5px;
+    margin-bottom: 3px;
+  }
 }

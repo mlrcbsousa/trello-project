@@ -1,0 +1,27 @@
+// _member.scss
+.member-section {
+  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  background-color: white;
+  padding: 10px;
+  .member-section-title {
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+    background-color: $athens-gray;
+    margin-bottom: 30px;
+    h1 {
+      padding: 5px 0;
+      color: $gray;
+      text-align: center;
+    }
+  }
+  .member-section-piechart {
+    margin-top: 40px;
+  }
+  p {
+    font-weight: 600;
+    color: $gray;
+    border-top: 0.5px dashed $light-gray;
+    padding-top: 5px;
+    margin-bottom: 3px;
+  }
+}

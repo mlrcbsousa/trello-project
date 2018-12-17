@@ -2,12 +2,12 @@
 .stat-card {
   // EM measures are based on this font-size value
   font-size: 16px;
-
+  color: $gray;
   box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
   border-radius: 2px;
   width: 100%;
-  height: 6em;
-  margin: 10px 0;
+  height: 5em;
+  margin-bottom: 10px;
   /*main card stat*/
   .stat-main {
     display: flex;
@@ -18,12 +18,6 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     color: $blue;
-    .danger {
-      color: $orange;
-    }
-    .success {
-      color: $green;
-    }
     .stat-value {
       font-size: 3em;
     }
@@ -35,6 +29,7 @@
   }
   /*description section*/
   .stat-description {
+    background-color: $athens-gray;
     display: flex;
     justify-content: center;
     align-items: center;

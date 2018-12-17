@@ -1,13 +1,39 @@
 <div class="container">
-  <div class="row">
-    <h1><%= @sprint.name %></h1>
-
+  <div class="stats-header">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="stats-title">
+          <h1><%= @sprint.name %></h1>
+          <div class="stats-title-description">
+            <div class="stats-title-days">
+              <strong class="text-primary"><%= @sprint.total_days %></strong>&nbsp;total days
+              <strong class="success"><%= @sprint.total_days_from_start %></strong>&nbsp;from start
+              <strong class="danger"><%= @sprint.total_days_to_end %></strong>&nbsp;to the end
+            </div>
+            <div class="stats-title-labour">
+              <strong class="text-primary"><%= @sprint.available_man_hours %></strong>&nbsp;hrs of available labour
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 text-center">
+        <p>Progress by card rank out of
+          <strong class="text-primary"><%= @sprint.total_weighted_cards %></strong>&nbsp;weighted cards
+        </p>
+        <div class="progress">
+          <% value = (@sprint.progress * 100).to_i %>
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= value %>%;">
+            <%= value %>%
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="row">
+  <div class="row hidden">
     <!-- SPRINT STATS (sprints/show) partial: _sprint_stats -->
     <%= render 'sprint_stats', sprint: @sprint %>
   </div>
-  <div class="row hidden">
+  <div class="row">
     <!-- TEAM STATS (sprints/show) partial: _team_stats -->
     <%= render 'team_stats', sprint: @sprint %>
   </div>

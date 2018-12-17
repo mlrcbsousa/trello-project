@@ -11,7 +11,6 @@ class SprintsController < ApplicationController
     @trello_ext_id = params[:trello_ext_id]
     @trello_url = params[:trello_url]
     @sprint = Sprint.new
-
   end
 
   def show; end

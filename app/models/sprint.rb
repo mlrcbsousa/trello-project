@@ -152,10 +152,6 @@ class Sprint < ApplicationRecord
     conversion_per_size.values.sum
   end
 
-  def available_hours_per_contributor
-    contributors.map { |c| { c.full_name => c.available_hours } }
-  end
-
   # hash of hashes
   def conversion_per_size_per_contributor
     weighted_cards_per_size_per_contributor.each_with_object({}) do |(key, value), hash|
@@ -182,11 +178,27 @@ class Sprint < ApplicationRecord
     weighted_cards_per_size_per_contributor.map { |k, v| { name: k, data: v } }
   end
 
+  # ----------------
+  # hash
   def conversion_per_contributor
-    weighted_cards_per_size_per_contributor.each_with_object({}) do |(key, value), hash|
+    conversion_per_size_per_contributor.each_with_object({}) do |(key, value), hash|
       hash[key] = value.values.sum
     end
   end
+
+  # hash
+  def available_hours_per_contributor
+    contributors.map { |c| [c.full_name, c.available_hours] }.to_h
+  end
+
+  # merge for Chartkick
+  def merged_conversion_per_contributor
+    [
+      { name: 'Allocated', data: conversion_per_contributor },
+      { name: 'Available', data: available_hours_per_contributor }
+    ]
+  end
+  # ----------------
 
   # hash of hashes
   def weighted_cards_per_size_per_rank
@@ -216,11 +228,6 @@ class Sprint < ApplicationRecord
   # hash of hashes
   def conversion_per_rank
     conversion_per_size_per_rank.each_with_object({}) { |(k, v), h| h[k] = v.values.sum }
-  end
-
-  # removing labels of units for Chartkick
-  def conversion_per_rank_ck
-    conversion_per_rank.transform_keys { |k| List.find_by(name: k).rank }
   end
 
   def progress_conversion_per_rank
