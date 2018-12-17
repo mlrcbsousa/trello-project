@@ -1,18 +1,21 @@
 <!-- _sprint_stats.html.erb -->
 <div class="col-xs-12">
   <div class="row">
+    <div class="stats-details">
 
+    </div>
+  </div>
+  <div class="row">
     <div class="col-sm-2">
+      <%= render 'shared/stat_card', stat: { value: (@sprint.progress * 100).to_i, unit: "%", name: "Sprint progress" } %>
       <%= render 'shared/stat_card', stat: { value: @sprint.progress_conversion, unit: "hrs", name: "Work Done" } %>
       <%= render 'shared/stat_card', stat: { value: @sprint.total_conversion, unit: "hrs", name: "Total work" } %>
       <%= render 'shared/stat_card', stat: { value: @sprint.available_man_hours, unit: "hrs", name: "Total Labour" } %>
       <%= render 'shared/stat_card', stat: { value: @sprint.total_days, unit: "days", name: "Sprint duration" } %>
       <%= render 'shared/stat_card', stat: { value: @sprint.total_days_from_start, name: "Days from start" } %>
       <%= render 'shared/stat_card', stat: { value: @sprint.total_days_to_end, name: "Days to end" } %>
-      <%= render 'shared/stat_card', stat: { value: @sprint.total_cards, name: "Total cards" } %>
       <%= render 'shared/stat_card', stat: { value: @sprint.total_weighted_cards, name: "Weighted cards" } %>
       <%= render 'shared/stat_card', stat: { value: @sprint.total_story_points, unit: "pts", name: "Total Story points" } %>
-      <%= render 'shared/stat_card', stat: { value: (@sprint.progress * 100).to_i, unit: "%", name: "Sprint progress" } %>
       <%= render 'shared/stat_card', stat: { value: @sprint.story_points_progress.to_i, unit: "pts", name: "Points progress" } %>
     </div>
 
@@ -36,16 +39,8 @@
         <div class="col-sm-5">
 
           <div class="graph-section">
-            <div class="row">
-              <div class="col-xs-12 col-sm-6">
-                Progress per rank
-                <%= bar_chart @sprint.progress_conversion_per_rank, xtitle: "Hours" %>
-              </div>
-              <div class="col-xs-12 col-sm-6">
-                Work per rank
-                <%= bar_chart @sprint.conversion_per_rank_ck, xtitle: "Hours" %>
-              </div>
-            </div>
+            Progress and Work per rank
+            <%= bar_chart @sprint.merged_conversion_per_rank, xtitle: "Hours" %>
           </div>
 
             <div class="row">
@@ -72,12 +67,7 @@
 
       </div>
     </div>
-
   </div>
 </div>
-
-
-
-
 
 

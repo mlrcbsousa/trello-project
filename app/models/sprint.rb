@@ -4,9 +4,9 @@ class Sprint < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :cards, through: :lists, dependent: :destroy
-  has_one :webhook
-  has_many :sprint_stats
-  has_one :conversion
+  has_one :webhook, dependent: :destroy
+  has_many :sprint_stats, dependent: :destroy
+  has_one :conversion, dependent: :destroy
 
   # Validations
   validates :start_date, :end_date, :trello_ext_id, :name, presence: true
@@ -212,21 +212,31 @@ class Sprint < ApplicationRecord
     conversion_per_size_per_rank.map { |k, v| { name: k, data: v } }
   end
 
+  # ---------------
   # hash of hashes
   def conversion_per_rank
     conversion_per_size_per_rank.each_with_object({}) { |(k, v), h| h[k] = v.values.sum }
   end
 
-  # for Chartkick
+  # removing labels of units for Chartkick
   def conversion_per_rank_ck
     conversion_per_rank.transform_keys { |k| List.find_by(name: k).rank }
   end
 
   def progress_conversion_per_rank
     conversion_per_rank.each_with_object({}) do |(k, v), h|
-      h[k] = (v * lists.find_by(name: k).progress_rank).round(2)
+      h[k] = (v * lists.find_by(name: k).progress_rank).to_i
     end
   end
+
+  # merge for Chartkick
+  def merged_conversion_per_rank
+    [
+      { name: 'Work', data: conversion_per_rank },
+      { name: 'Progress', data: progress_conversion_per_rank }
+    ]
+  end
+  # ----------------
 
   def progress_conversion
     progress_conversion_per_rank.values.sum.to_i
