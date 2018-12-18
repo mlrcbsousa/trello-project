@@ -16,10 +16,10 @@ class Sprint < ApplicationRecord
   # after_create :create_webhook
 
   # Callbacks
-  before_destroy :destroy_cards
+  before_destroy :destroy_lists
 
-  def destroy_cards
-    # cards.destroy_all
+  def destroy_lists
+    lists.destroy_all
   end
 
   def weighted_cards
