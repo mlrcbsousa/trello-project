@@ -1,60 +1,39 @@
-require 'trello'
-
-Trello.configure do |config|
-  config.consumer_key = ENV['TRELLO_KEY']
-  config.consumer_secret = ENV['TRELLO_SECRET']
-  config.oauth_token = User.first.token
-  config.oauth_token_secret = User.first.secret
+class AddColumsToSprintStats < ActiveRecord::Migration[5.2]
+  def change
+    add_column :datetime_at_post, :datetime
+    add_column :sprint_stats, :available_man_hours, :integer
+    add_column :sprint_stats, :total_contributors, :integer
+    add_column :sprint_stats, :total_days, :integer
+    add_column :sprint_stats, :total_days_from_start, :integer
+    add_column :sprint_stats, :total_days_to_end, :integer
+    add_column :sprint_stats, :total_ranks, :integer
+    add_column :sprint_stats, :total_cards, :integer
+    add_column :sprint_stats, :cards_per_size, :jsonb
+    add_column :sprint_stats, :total_weighted_cards, :integer
+    add_column :sprint_stats, :weighted_cards_per_size, :jsonb
+    add_column :sprint_stats, :weighted_cards_per_rank, :jsonb
+    add_column :sprint_stats, :total_story_points, :integer
+    add_column :sprint_stats, :weighted_cards_per_contributor, :jsonb
+    add_column :sprint_stats, :story_points_per_contributor, :jsonb
+    add_column :sprint_stats, :story_points_per_size, :jsonb
+    add_column :sprint_stats, :conversion_per_size, :jsonb
+    add_column :sprint_stats, :total_conversion, :integer
+    add_column :sprint_stats, :conversion_per_size_per_contributor, :jsonb
+    add_column :sprint_stats, :conversion_per_size_per_contributor_ck, :jsonb
+    add_column :sprint_stats, :weighted_cards_per_size_per_contributor, :jsonb
+    add_column :sprint_stats, :weighted_cards_per_size_per_contributor_ck, :jsonb
+    add_column :sprint_stats, :conversion_per_contributor, :jsonb
+    add_column :sprint_stats, :available_hours_per_contributor, :jsonb
+    add_column :sprint_stats, :merged_conversion_per_contributor, :jsonb
+    add_column :sprint_stats, :weighted_cards_per_size_per_rank, :jsonb
+    add_column :sprint_stats, :weighted_cards_per_size_per_rank_ck, :jsonb
+    add_column :sprint_stats, :conversion_per_size_per_rank, :jsonb
+    add_column :sprint_stats, :conversion_per_size_per_rank_ck, :jsonb
+    add_column :sprint_stats, :conversion_per_rank, :jsonb
+    add_column :sprint_stats, :progress_conversion_per_rank, :jsonb
+    add_column :sprint_stats, :merged_conversion_per_rank, :jsonb
+    add_column :sprint_stats, :progress_conversion, :integer
+    add_column :sprint_stats, :progress, :float
+    add_column :sprint_stats, :story_points_progress, :integer
+  end
 end
-"https://api.trello.com/1/members/#{member.trello_ext_id}?fields=name,url&key=#{ENV['TRELLO_KEY']}&token=#{user.token}"
-# toget all the classes in a module
-# Trello.constants.select { |c| Trello.const_get(c).is_a? Class }
-
-# all the classes from the command above, part of the Trello module in the ruby-trello gem
-
-image = if current_page?(pick_path)
-          0
-        elsif current_page?(new_sprint_path)
-          1
-        elsif current_page?(new_conversion)
-          2
-        elsif current_page?(contribute_path)
-          3
-        elsif current_page?(schedule_path)
-          3
-        end
-
-trello_module_classes = [
-  :List,
-  :Error,
-  :Action,
-  :Request,
-  :ConfigurationError,
-  :Configuration,
-  :Label,
-  :Comment,
-  :Client,
-  :Token,
-  :Attachment,
-  :Association,
-  :AssociationProxy,
-  :CoverImage,
-  :BasicData,
-  :Board,
-  :Card,
-  :Checklist,
-  :CustomField,
-  :CustomFieldItem,
-  :CustomFieldOption,
-  :Item,
-  :CheckItemState,
-  :LabelName,
-  :Member,
-  :MultiAssociation,
-  :Notification,
-  :Organization,
-  :PluginDatum,
-  :TInternet,
-  :Webhook,
-  :InvalidAccessToken
-]

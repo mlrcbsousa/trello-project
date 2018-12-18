@@ -1,4 +1,4 @@
-class AddStatsToSprintStats < ActiveRecord::Migration[5.2]
+class AddColumnsToSprintStats < ActiveRecord::Migration[5.2]
   def change
     add_column :sprint_stats, :datetime_at_post, :datetime
     add_column :sprint_stats, :available_man_hours, :integer
@@ -19,11 +19,20 @@ class AddStatsToSprintStats < ActiveRecord::Migration[5.2]
     add_column :sprint_stats, :conversion_per_size, :jsonb
     add_column :sprint_stats, :total_conversion, :integer
     add_column :sprint_stats, :conversion_per_size_per_contributor, :jsonb
+    add_column :sprint_stats, :conversion_per_size_per_contributor_ck, :jsonb
     add_column :sprint_stats, :weighted_cards_per_size_per_contributor, :jsonb
+    add_column :sprint_stats, :weighted_cards_per_size_per_contributor_ck, :jsonb
     add_column :sprint_stats, :conversion_per_contributor, :jsonb
+    add_column :sprint_stats, :available_hours_per_contributor, :jsonb
+    add_column :sprint_stats, :merged_conversion_per_contributor, :jsonb
     add_column :sprint_stats, :weighted_cards_per_size_per_rank, :jsonb
+    add_column :sprint_stats, :weighted_cards_per_size_per_rank_ck, :jsonb
     add_column :sprint_stats, :conversion_per_size_per_rank, :jsonb
+    add_column :sprint_stats, :conversion_per_size_per_rank_ck, :jsonb
     add_column :sprint_stats, :conversion_per_rank, :jsonb
+    add_column :sprint_stats, :progress_conversion_per_rank, :jsonb
+    add_column :sprint_stats, :merged_conversion_per_rank, :jsonb
+    add_column :sprint_stats, :progress_conversion, :integer
     add_column :sprint_stats, :progress, :float
     add_column :sprint_stats, :story_points_progress, :integer
   end
