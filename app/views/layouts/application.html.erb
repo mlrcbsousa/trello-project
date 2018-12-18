@@ -3,25 +3,36 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:title" content="Sprint Awesome | Sprint visualisation tool for product owners using Trello">
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="logo.png">
-    <meta property="og:description" content="Visually track the progress of your sprints with key metrics: burndown chart, team productivity & individual contributions.">
-    <meta property="og:site_name" content="Sprint Awesome"/>
     <meta name="google-site-verification" content="xwlz7RH9y1GnoiKaKKvOk7mUbhIQi7XdaLACMmLnJW0" />
-    <title>Sprint Awesome | Sprint visualisation tool for product owners using Trello</title>
+    <title><%= meta_title %></title>
+    <meta name="description" content="<%= meta_description %>">
+    <!-- Facebook Open Graph data -->
+    <meta property="og:title" content="<%= meta_title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= meta_image %>" />
+    <meta property="og:description" content="<%= meta_description %>" />
+    <meta property="og:site_name" content="<%= meta_title %>" />
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="<%= DEFAULT_META["twitter_account"] %>">
+    <meta name="twitter:title" content="<%= meta_title %>">
+    <meta name="twitter:description" content="<%= meta_description %>">
+    <meta name="twitter:creator" content="<%= DEFAULT_META["twitter_account"] %>">
+    <meta name="twitter:image:src" content="<%= meta_image %>">
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= favicon_link_tag asset_path('favicon.ico'), :rel => 'icon', :type =>  'image/png' %>
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
     <%= render 'shared/flashes' %>
-    <% login = current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
-    <% unless login %>
+    <% hide_sidebar = current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
+    <% unless hide_sidebar %>
       <%= render 'shared/sidebar' %>
     <% end %>
-    <div class="<%= "margin-left-80" unless login %>">
+    <div class="<%= "margin-left-80" unless hide_sidebar %>">
       <%= yield %>
     </div>
     <%= javascript_include_tag 'application' %>

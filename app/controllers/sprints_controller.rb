@@ -1,6 +1,7 @@
 class SprintsController < ApplicationController
-  before_action :set_sprint, only: %i[show]
-  layout 'onboarding', only: :new
+  before_action :set_sprint, only: %i[show destroy edit update]
+  before_action :destroy_lists, only: [:destroy]
+  layout 'onboarding', only: %i[new edit]
 
   def index
     @sprints = current_user.sprints
@@ -30,7 +31,30 @@ class SprintsController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    @sprint.update(sprint_params)
+    if @sprint.save
+      redirect_to sprints_path, notice: 'Dates were successfully updated.'
+    else
+      render :edit, alert: 'Unable to update dates.'
+    end
+  end
+
+  def destroy
+    @sprint.destroy
+    respond_to do |format|
+      format.html { redirect_to sprints_path, notice: 'Sprint was successfully deleted.' }
+      format.js
+    end
+  end
+
   private
+
+  def destroy_lists
+    @sprint.lists.destroy_all
+  end
 
   def set_sprint
     @sprint = Sprint.find(params[:id])

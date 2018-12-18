@@ -1,5 +1,5 @@
 class OnboardController < ApplicationController
-  layout 'onboarding' # , only: %i[pick contribute schedule complete]
+  layout 'onboarding', only: %i[pick contribute schedule complete]
   before_action :set_sprint, except: :pick
 
   def pick

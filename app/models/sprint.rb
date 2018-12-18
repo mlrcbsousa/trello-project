@@ -15,13 +15,6 @@ class Sprint < ApplicationRecord
   validates_date :end_date, on_or_after: :start_date
   # after_create :create_webhook
 
-  # Callbacks
-  before_destroy :destroy_cards
-
-  def destroy_cards
-    # cards.destroy_all
-  end
-
   def weighted_cards
     cards.where.not(size: :o)
   end

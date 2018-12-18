@@ -54,7 +54,6 @@ const initTabs = () => {
       memberTab.classList.remove("hidden");
 
       memberCards.forEach((memberCard) => {
-        console.log(memberCard);
         const z = memberCard.lastElementChild.id.split("-");
         const memberSection = document.getElementById(`member-section_js-${z[2]}`);
         if (memberCardSelected === memberCard) {

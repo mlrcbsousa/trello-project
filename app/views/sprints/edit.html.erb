@@ -1,0 +1,11 @@
+<!-- edit.html.erb -->
+I WILL PUT THIS FORM IN A MODAL; DNT SPEND TOO MUCH TIME EDITING IT
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3" style="text-align: left;">
+      <%= simple_form_for @sprint do |f| %>
+        <%= f.input :start_date, as: :string %>
+        <%= f.input :end_date, as: :string %>
+        <%= f.button :submit, 'Edit my sprint duration', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>

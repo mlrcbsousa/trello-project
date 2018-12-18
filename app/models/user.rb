@@ -51,7 +51,8 @@ class User < ApplicationRecord
 
   def self.boards(raw_info, user)
     # creates Board instances with idBoards from omniauth response
-    raw_info.slice(:idBoards)[:idBoards].each do |board_id|
+    # Rails.logger.info "========>>>>> #{raw_info.inspect}"
+    raw_info[:idBoards].each do |board_id|
       ext_board = user.client.find(:boards, board_id)
       user.boards.create!(
         trello_ext_id: ext_board.id,
