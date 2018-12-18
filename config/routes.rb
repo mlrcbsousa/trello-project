@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   patch 'onboard/complete/:id', to: 'onboard#complete', as: 'complete'
 
   # Main
-  resources :sprints, only: %i[create show index] do
+  resources :sprints, only: %i[create show index destroy] do
     resources :members, only: %i[index show]
   end
 

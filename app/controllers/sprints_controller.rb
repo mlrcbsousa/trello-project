@@ -1,5 +1,5 @@
 class SprintsController < ApplicationController
-  before_action :set_sprint, only: %i[show]
+  before_action :set_sprint, only: %i[show destroy]
   layout 'onboarding', only: :new
 
   def index
@@ -27,6 +27,14 @@ class SprintsController < ApplicationController
       redirect_to new_conversion_path(@sprint)
     else
       render :new, alert: 'Unable to create your sprint!'
+    end
+  end
+
+  def destroy
+    @sprint.destroy
+    respond_to do |format|
+      format.html { redirect_to sprints_path, notice: 'Sprint was successfully deleted.' }
+      format.js
     end
   end
 
