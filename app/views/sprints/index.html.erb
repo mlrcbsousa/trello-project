@@ -9,30 +9,48 @@
   <div class="sprint-list">
     <div class="row">
       <% @sprints.each do |sprint| %>
-      
+
         <div class="col-xs-12 col-sm-4" data-sprint-id="<%= sprint.id %>">
           <div class="sprint-list-cards">
 
             <div class="sprint-list-cards-trello-board">
               <%= render 'shared/trello_card', type: sprint %>
             </div>
-            
+
             <div class="sprint-list-cards-description text-center">
-              
+
               <%= link_to sprint_path(sprint) do %>
                 <i class="fas fa-search"></i>
               <% end %>
-              
+
               <%= link_to sprint.trello_url do %>
                 <i class="fab fa-trello"></i>
               <% end %>
-              
+
               <%= link_to sprint_path(sprint),
                     remote: true,
                     method: :delete,
                     data: { confirm: "Are you sure?" } do %>
                       <i class="far fa-trash-alt"></i>
                     <% end %>
+
+              <%= link_to edit_sprint_conversion_path(sprint, sprint.conversion) do %>
+                <i class="fas fa-pencil-alt"></i>edit conversion
+              <% end %>
+
+              <%= link_to edit_sprint_path(sprint) do %>
+                <i class="fas fa-pencil-alt"></i>edit sprint dates
+              <% end %>
+
+              <%= link_to edit_contributors_path(sprint) do %>
+                <i class="fas fa-pencil-alt"></i>edit observers and schedule server side
+              <% end %>
+
+              <%= link_to sprint_members_path(sprint) do %>
+                <i class="fas fa-pencil-alt"></i>edit member schedule server side
+              <% end %>
+
+
             </div>
           </div>
         </div>

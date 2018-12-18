@@ -28,11 +28,11 @@
   </head>
   <body>
     <%= render 'shared/flashes' %>
-    <% login = current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
-    <% unless login %>
+    <% hide_sidebar = current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
+    <% unless hide_sidebar %>
       <%= render 'shared/sidebar' %>
     <% end %>
-    <div class="<%= "margin-left-80" unless login %>">
+    <div class="<%= "margin-left-80" unless hide_sidebar %>">
       <%= yield %>
     </div>
     <%= javascript_include_tag 'application' %>

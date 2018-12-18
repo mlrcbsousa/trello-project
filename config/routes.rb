@@ -17,9 +17,14 @@ Rails.application.routes.draw do
   patch 'onboard/schedule/:id', to: 'onboard#schedule', as: 'schedule'
   patch 'onboard/complete/:id', to: 'onboard#complete', as: 'complete'
 
+  # Server side editing contributors
+  get 'members/contribute/:id', to: 'members#contribute', as: 'edit_contributors'
+  patch 'members/contribute_patch/:id', to: 'members#contribute_patch', as: 'update_contributors'
+
   # Main
-  resources :sprints, only: %i[create show index destroy] do
-    resources :members, only: %i[index show]
+  resources :sprints, except: :new do
+    resources :conversions, only: %i[edit update]
+    resources :members, only: %i[index edit update]
   end
 
   # Webhooks

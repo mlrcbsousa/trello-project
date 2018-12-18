@@ -33,6 +33,7 @@
   </div>
 
   <div id="member-stats_js">
+    <!-- member sections -->
     <% @sprint.contributors.each do |member| %>
       <%= render 'member_stats', member: member %>
     <% end %>
@@ -41,6 +42,7 @@
 </div>
 <div class="col-sm-4">
   <div class="graph-section team-members">
+    <!-- member cards -->
     <%= render @sprint.contributors %>
   </div>
 </div>
