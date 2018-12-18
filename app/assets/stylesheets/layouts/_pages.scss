@@ -191,8 +191,15 @@
   }
 }
 
-//----- Teamplate ------
+//----- Template ------
 
+.link-to-board-template {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 25vh;
+  margin-bottom: 40px;
+}
 
 .template {
   display: flex;
@@ -205,13 +212,6 @@
   background-color: $trello-blue
 }
 
-.link-to-board-template {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 25vh;
-  margin-bottom: 40px;
-}
 
 .board-template {
   width: 160vh;
