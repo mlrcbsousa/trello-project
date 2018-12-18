@@ -1,7 +1,8 @@
 class MembersController < ApplicationController
-  before_action :set_sprint, only: %i[index edit update contribute contribute_patch]
+  before_action :set_sprint, only: %i[index edit update]
+  before_action :set_sprint_id, only: %i[contribute contribute_patch]
   before_action :set_member, only: %i[edit update]
-  layout 'sprint_edits', only: :contribute
+  layout 'onboarding', only: %i[index edit contribute schedule contribute_patch update]
 
   def index
     @members = @sprint.members.where(contributor: true)
@@ -44,6 +45,10 @@ class MembersController < ApplicationController
 
   def set_member
     @member = Member.find(params[:id])
+  end
+
+  def set_sprint_id
+    @sprint = Sprint.find(params[:id])
   end
 
   def set_sprint

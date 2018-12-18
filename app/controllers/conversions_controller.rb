@@ -2,8 +2,7 @@ class ConversionsController < ApplicationController
   before_action :set_sprint, only: %i[new create]
   before_action :set_sprint_id, only: %i[edit update]
   before_action :set_conversion, only: %i[edit update]
-  layout 'onboarding', only: :new
-  layout 'sprint_edits', only: :edit
+  layout 'onboarding', only: %i[new edit]
 
   def new
     @conversion = Conversion.new

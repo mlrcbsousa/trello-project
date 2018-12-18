@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
 
-      <%= form_tag "/sprints/#{@sprint.id}/members/contribute_patch", method: :patch do %>
+      <%= form_tag update_contributors_path(@sprint), method: :patch do %>
         <div class="observer-list">
           <% @members.each do |member| %>
             <div class="form-group">

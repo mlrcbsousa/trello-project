@@ -1,8 +1,7 @@
 class SprintsController < ApplicationController
   before_action :set_sprint, only: %i[show destroy edit update]
   before_action :destroy_lists, only: [:destroy]
-  layout 'onboarding', only: [:new]
-  layout 'sprint_edits', only: [:edit]
+  layout 'onboarding', only: %i[new edit]
 
   def index
     @sprints = current_user.sprints
