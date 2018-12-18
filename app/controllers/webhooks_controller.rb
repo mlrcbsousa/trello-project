@@ -8,6 +8,8 @@ class WebhooksController < ActionController::Base
   end
 
   def receive
+    # params[]
+    # model, event
     # identify webhook
     # parse information to act on
   end
@@ -26,4 +28,3 @@ class WebhooksController < ActionController::Base
     params.require(:webhook).permit(:model, :event)
   end
 end
-
