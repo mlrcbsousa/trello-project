@@ -1,5 +1,6 @@
 class SprintsController < ApplicationController
   before_action :set_sprint, only: %i[show destroy]
+  before_action :destroy_lists, only: :destroy
   layout 'onboarding', only: :new
 
   def index
@@ -39,6 +40,10 @@ class SprintsController < ApplicationController
   end
 
   private
+
+  def destroy_lists
+    @sprint.lists.destroy_all
+  end
 
   def set_sprint
     @sprint = Sprint.find(params[:id])
