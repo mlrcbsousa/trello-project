@@ -88,7 +88,7 @@ class Member < ApplicationRecord
 
   # float
   def progress
-    (weighted_cards.map(&:progress).sum / weighted_cards_count).round(2)
+    weighted_cards_count.zero? ? 0 : (weighted_cards.map(&:progress).sum / weighted_cards_count).round(2)
   end
 
   # integer

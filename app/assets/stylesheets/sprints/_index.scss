@@ -1,1 +1,39 @@
 @import "show";
+
+.sprint-list-title {
+  line-height: 1.7em;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  padding: 0px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sprint-list-title-description {
+    margin-top: 20px;
+  }
+
+.sprint-list {
+  // margin-left: 20px;
+}
+
+.sprint-list-cards {
+  display: flex;
+  background-color: $athens-gray;
+  flex-direction: column;
+  border-radius: 1%;
+  justify-content: flex-center;
+  margin-bottom: 25px;
+  padding-top: 15px;
+  height: auto;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
+  .sprint-list-cards-trello-board {
+    padding-left: 60px;
+    height: 85%;
+  }
+  .sprint-list-cards-description {
+    padding-top: 3px;
+    height: 15%;
+  }
+}
