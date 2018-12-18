@@ -1,24 +1,33 @@
-<div class="container">
-  <div class="pricing padding-top-15">
-    <h1>Pricing</h1>
-    <div class="product-description col-xs-12 col-sm-6 col-md-4">
-      <h2>Basic</h2>
-      <p>Personal / open source use</p>
-      <h3>Free</h3>
-    </div>
-    <div class="product-description col-xs-12 col-sm-6 col-md-4">
-      <h2>Standard</h2>
-      <p>Commercial use following our style guide</p>
-      <h3>€10 per user, monthly</h3>
-    </div>
-    <div class="product-description col-xs-12 col-sm-6 col-md-4">
-      <h2>Plus</h2>
-      <p>Use your own sprint planning format</p>
-      <h3>€20 per user, monthly</h3>
-    </div>
+<!-- <div class="container">
+  <div class="row">
+    <div class="pricing col-md-12">
+      <div class="pricing-title text-center">
+        <h2>Pricing</h2>
+      </div>
   </div>
-  <hr>
-  <div class="pricing padding-top-15">
-    <h3>Special offer: 12 months free access with promo code 'batch205' (valid until end of 2018)</h3>
+</div>
+ -->
+<div id="generic_price_table">
+<section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--PRICE HEADING START-->
+                    <div class="price-heading clearfix">
+                        <h2>Sprint Awesome Pricing Table</h2>
+                    </div>
+                    <!--//PRICE HEADING END-->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <%= render 'shared/pricing_packages' %>
+        </div>
+    </section>
+
+  <div class="special-offer text-center">
+    <p><strong>* Special offer:</strong> 12 months <strong>free</strong> access with promo code 'batch205' (valid until end of 2018)</p>
   </div>
+</div>
+
 </div>
