@@ -1,0 +1,8 @@
+<!-- index.html.erb -->
+select which member's schedule to edit
+<% @members.each do |member| %>
+  <%= link_to edit_sprint_member_path(member.sprint, member) do %>
+    <%= image_tag member.trello_avatar_url %>
+  <% end %>
+  <%= member.full_name %>
+<% end %>

@@ -1,0 +1,8 @@
+<!-- edit.html.erb -->
+<%= @member.full_name %>
+<%= image_tag @member.trello_avatar_url %>
+<%= simple_form_for [@sprint, @member] do |f| %>
+  <%= f.input :days_per_sprint %>
+  <%= f.input :hours_per_day %>
+  <%= f.submit %>
+<% end %>

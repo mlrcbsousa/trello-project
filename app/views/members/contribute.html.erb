@@ -1,0 +1,23 @@
+<!-- contribute.html.erb -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+
+      <%= form_tag "/sprints/#{@sprint.id}/members/contribute_patch", method: :patch do %>
+        <div class="observer-list">
+          <% @members.each do |member| %>
+            <div class="form-group">
+              <%= image_tag member.trello_avatar_url, class: "avatar avatar-md" %>
+              <%= check_box_tag :"contribute-#{member.id}" %>
+              <%= label_tag :"contribute-#{member.id}", member.full_name, class: "control-label" %>
+            </div>
+          <% end %>
+        </div>
+        <span class="input-group-btn">
+          <%= submit_tag 'Next', class: "btn btn-primary" %>
+        </span>
+      <% end %>
+
+    </div>
+  </div>
+</div>

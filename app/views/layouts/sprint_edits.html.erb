@@ -1,3 +1,4 @@
+<!-- sprint_edits.html.erb -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,15 +12,8 @@
   </head>
   <body>
     <%= render 'shared/flashes' %>
-    <% hide_sidebar = current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
-    <% unless hide_sidebar %>
-      <%= render 'shared/sidebar' %>
-    <% end %>
-    <div class="<%= "margin-left-80" unless hide_sidebar %>">
-      <%= yield %>
-    </div>
+    <%= yield %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
-    <%= yield :charts_js %>
   </body>
 </html>

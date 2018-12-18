@@ -1,0 +1,17 @@
+<!-- edit.html.erb -->
+Attention! Editing your conversion will reset all the Statistics for this board saved in the databse,
+because the relationship between the new data and the old will be lost once the conversion changes, then
+it is no longer relevant to keep the old statistics
+<br>
+
+I WILL PUT THIS FORM IN A MODAL; DNT SPEND TOO MUCH TIME EDITING IT
+
+<%= simple_form_for [@sprint, @conversion] do |f| %>
+  <%= f.input :xs %>
+  <%= f.input :s %>
+  <%= f.input :m %>
+  <%= f.input :l %>
+  <%= f.input :xl %>
+  <%= f.input :xxl %>
+  <%= f.submit class: "btn btn-primary"%>
+<% end %>
