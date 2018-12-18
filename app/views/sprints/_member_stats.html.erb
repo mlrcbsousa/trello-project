@@ -6,10 +6,11 @@
         <h1><%= member.full_name %></h1>
         <strong class="text-primary"><%= member.weighted_cards_count %></strong> cards
       </div>
-      <%= render 'shared/stat_card', stat: { value: "#{member.total_conversion}/#{member.available_hours}", unit: "hrs", name: "Allocated" } %>
+      <%= render 'shared/stat_card', stat: { value: member.total_conversion, unit: "hrs", name: "Allocated" } %>
+      <%= render 'shared/stat_card', stat: { value: member.available_hours, unit: "hrs", name: "Available" } %>
       <div class="member-section-piechart">
         <p>Cards /size</p>
-        <%= pie_chart member.weighted_cards_per_size, legend: false, height: "200px" %>
+        <%= pie_chart member.weighted_cards_per_size, legend: false, height: "150px" %>
       </div>
     </div>
     <div class="col-sm-9">
