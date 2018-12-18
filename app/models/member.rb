@@ -57,13 +57,27 @@ class Member < ApplicationRecord
   end
 
   # hash of hashes
-  # def ranks
-  #   weighted_cards.joins(:list).where.not(rank: 0)
-  # end
+  def weighted_cards_per_size_per_rank
+    weighted_cards.group_by(&:list).each_with_object({}) do |(k, v), h|
+      h[k.name] = v.group_by(&:size).each_with_object({}) { |(k2, v2), h2| h2[k2] = v2.count }
+    end
+  end
+
+  # for Chartkick
+  def weighted_cards_per_size_per_rank_ck
+    weighted_cards_per_size_per_rank.map { |k, v| { name: k, data: v } }
+  end
 
   # hash of hashes
-  def weighted_cards_per_size_per_rank
-    weighted_cards.map { |card| [card.list.name, card.size] }.to_h
+  def conversion_per_size_per_rank
+    weighted_cards_per_size_per_rank.each_with_object({}) do |(k, v), h|
+      h[k] = v.each_with_object({}) { |(k2, v2), h2| h2[k2] = v2 * sprint.conversion.send(k2) }
+    end
+  end
+
+  # for Chartkick
+  def conversion_per_size_per_rank_ck
+    conversion_per_size_per_rank.map { |k, v| { name: k, data: v } }
   end
 
   # hash
@@ -73,6 +87,7 @@ class Member < ApplicationRecord
 
   # hash
   def conversion_per_rank
+    conversion_per_size_per_rank.each_with_object({}) { |(k, v), h| h[k] = v.values.sum }
   end
 
   # integer
@@ -88,7 +103,7 @@ class Member < ApplicationRecord
 
   # float
   def progress
-    (weighted_cards.map(&:progress).sum / weighted_cards_count).round(2)
+    weighted_cards_count.zero? ? 0 : (weighted_cards.map(&:progress).sum / weighted_cards_count).round(2)
   end
 
   # integer

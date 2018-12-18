@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-sm-8">
         <p>Progress and Work /rank</p>
-        <%= bar_chart @sprint.merged_conversion_per_rank, xtitle: "Hours", height: "150px" %>
+        <%= bar_chart @sprint.merged_conversion_per_rank, height: "150px" %>
         <p>Hours /size /rank</p>
         <%= column_chart @sprint.conversion_per_size_per_rank_ck, stacked: true, height: "300px", legend: "bottom" %>
       </div>

@@ -1,39 +1,40 @@
-# statistics methods that you can call on member instances
-@member.total_cards<br>
-@member.weighted_cards<br>
-@member.weighted_cards_count<br>
-@member.cards_per_size<br>
-@member.total_story_points<br>
-@member.progress<br>
-@member.story_points_progress<br>
 <!-- _member_stats.html.erb -->
-<div class="member-section">
+<div class="member-section" id="member-section_js-<%= member.id%>">
   <div class="row">
     <div class="col-sm-3">
-      <div class="member-section-title">
+      <div class="member-section-title text-center">
         <h1><%= member.full_name %></h1>
+        <strong class="text-primary"><%= member.weighted_cards_count %></strong> cards
       </div>
-      <%= render 'shared/stat_card', stat: { value: @sprint.total_contributors, name: "Members" } %>
-      <%= render 'shared/stat_card', stat: { value: @sprint.total_conversion, unit: "hrs", name: "Total work" } %>
+      <%= render 'shared/stat_card', stat: { value: "#{member.total_conversion}/#{member.available_hours}", unit: "hrs", name: "Allocated" } %>
       <div class="member-section-piechart">
-        <p>Cards /member</p>
-        <%= pie_chart @sprint.weighted_cards_per_contributor, legend: false, height: "200px" %>
+        <p>Cards /size</p>
+        <%= pie_chart member.weighted_cards_per_size, legend: false, height: "200px" %>
       </div>
     </div>
     <div class="col-sm-9">
       <div class="row">
         <div class="col-sm-6">
-          <p>Allocated & Available hrs /member</p>
-          <%= bar_chart @sprint.merged_conversion_per_contributor, height: "150px", legend: false %>
+          <p>Allocated hours /rank</p>
+          <%= bar_chart member.conversion_per_rank, height: "150px", legend: false %>
         </div>
-
         <div class="col-sm-6">
-          <p>Weighted cards /size /member</p>
-          <%= line_chart @sprint.weighted_cards_per_size_per_contributor_ck, height: "150px", legend: false %>
+          <p>Allocated hours /size</p>
+          <%= column_chart member.conversion_per_size, height: "150px" %>
         </div>
       </div>
-      <p>Allocated work /size /member</p>
-      <%= column_chart @sprint.conversion_per_size_per_contributor_ck, height: "300px" %>
+      <div class="row">
+        <div class="col-sm-6">
+          <p>Cards /size /rank</p>
+          <%= bar_chart member.weighted_cards_per_size_per_rank_ck, height: "300px", legend: false %>
+        </div>
+        <div class="col-sm-6">
+          <p>Allocated work /size /rank</p>
+          <%= column_chart member.conversion_per_size_per_rank_ck, height: "300px", legend: false %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+

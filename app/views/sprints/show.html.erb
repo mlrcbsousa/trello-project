@@ -29,16 +29,13 @@
       </div>
     </div>
   </div>
-  <div class="row hidden">
+  <div class="row" id="sprint-stats_js">
     <!-- SPRINT STATS (sprints/show) partial: _sprint_stats -->
     <%= render 'sprint_stats', sprint: @sprint %>
   </div>
-  <div class="row">
+  <div class="row" id="team-stats_js">
     <!-- TEAM STATS (sprints/show) partial: _team_stats -->
     <%= render 'team_stats', sprint: @sprint %>
-  </div>
-  <div class="row hidden">
-    <!-- MEMBER STATS (sprints/show) partial: _member_stats -->
   </div>
 </div>
 

@@ -28,22 +28,18 @@
           <i class="fas fa-list"></i>
         <% end %>
 
+        <!-- javascript tabs -->
         <div id="sidebar-tabs_js">
           <!-- SPRINT STATS (sprints/show partial: _sprint_stats)-->
-          <%= link_to '#', class: "tab_js", id: "sprint-stats" do %>
+          <%= link_to '#', class: "sidebar-btn_js", id: "sprint-stats-btn_js" do %>
             <i class="fas fa-signal"></i>
           <% end %>
-
           <!-- TEAM STATS (sprints/show partial: _team_stats)-->
-          <%= link_to '#', class: "tab_js tab-active_js", id: "team-stats" do %>
+          <%= link_to '#', class: "sidebar-btn_js", id: "team-stats-btn_js" do %>
             <i class="fas fa-users"></i>
           <% end %>
-
-          <!-- MEMBER STATS (sprints/show partial: _member_stats)-->
-          <%= link_to '#', class: "tab_js", id: "member-stats" do %>
-            <i class="fas fa-user-circle"></i>
-          <% end %>
         </div>
+        <!-- --------------- end of javascript tabs -->
 
         <!-- TRELLO BOARD -->
         <%= link_to @sprint.trello_url, target: "_blank", class: "sidebar-link-trello" do %>

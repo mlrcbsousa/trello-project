@@ -1,6 +1,7 @@
 <!-- _team_stats.html.erb -->
 <div class="col-sm-8">
-  <div class="graph-section hidden">
+
+  <div class="graph-section" id="members-stats_js">
     <div class="row">
       <div class="col-sm-3">
         <div class="graph-section-title">
@@ -31,9 +32,11 @@
     </div>
   </div>
 
-  <% @sprint.contributors.each do |member| %>
-    <%= render 'member_stats', member: member %>
-  <% end %>
+  <div id="member-stats_js">
+    <% @sprint.contributors.each do |member| %>
+      <%= render 'member_stats', member: member %>
+    <% end %>
+  </div>
 
 </div>
 <div class="col-sm-4">

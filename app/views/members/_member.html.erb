@@ -1,18 +1,19 @@
-<%= link_to '#' do %>
-  <div class="member-card">
-
-    <%= image_tag member.trello_avatar_url, class: "avatar avatar-sm" %>
-
-    <div class="member-card-description">
-      <strong class="text-primary"><%= member.total_story_points %> pts</strong>
-      <%= member.full_name %>
-      <div class="progress">
-        <% value = (member.progress * 100).to_i %>
-        <div class="progress-bar" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= value %>%;">
-          <%= value %>%
-        </div>
+<div class="member-card members-cards_js">
+  <%= image_tag member.trello_avatar_url, class: "avatar avatar-sm" %>
+  <div class="member-card-description">
+    <div class="member-card-title">
+      <span><%= member.full_name %></span>
+      <span>
+        <strong class="text-primary"><%= member.story_points_progress.to_i %></strong>
+        /<%= member.total_story_points.to_i %> pts
+      </span>
+    </div>
+    <div class="progress">
+      <% value = (member.progress * 100).to_i %>
+      <div class="progress-bar" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= value %>%;">
+        <%= value %>%
       </div>
     </div>
-
   </div>
-<% end %>
+  <%= link_to "", "#", class: "member-card-link_js", id: "member-card_js-#{member.id}" %>
+</div>

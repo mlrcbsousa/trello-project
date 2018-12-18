@@ -1,10 +1,16 @@
+// ATENTION!!
+// These are NOT the styles for the member SECTION
+// they are the styles for the member CARDS
+
 .member-card {
+  color: $gray;
   box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
   margin-bottom: 10px;
   border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   .member-card-description {
     width: 100%;
     padding-right: 10px;
@@ -12,11 +18,33 @@
     .progress {
       margin-bottom: 10px;
     }
+    .member-card-title {
+      display: flex;
+      justify-content: space-between;
+    }
   }
   img {
     margin: 5px;
   }
+  .member-card-link_js {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    z-index: 2;
+    background: $light-gray;
+    opacity: 0;
+    border-radius: 3px;
+  }
+  .member-card-link_js:hover {
+  }
 }
 .member-card:hover {
   background-color: $light-gray;
+  color: $blue;
+}
+.member-card-active_js {
+  background-color: $light-gray;
+  color: $blue;
 }
