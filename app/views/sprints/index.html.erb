@@ -1,25 +1,35 @@
 <!-- views/sprints/index -->
 <div class="container">
-  <h1>Choose which sprint to visualize</h1>
-  <div class="row">
+  <div class="sprint-list-title text-center">
+    <h2>Discover all your Sprints</h2>
+  <div class="sprint-list-title-description text-center">
+    <p>Select the sprint you want to visualize and discover your stats and progress.</p>
+  </div>
+  </div>
+  <div class="sprint-list">
+    <div class="row">
+      <% @sprints.each do |sprint| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="sprint-list-cards">
+            <div class="sprint-list-cards-trello-board">
+              <%= render 'shared/trello_card', type: sprint %>
+            </div>
+            <div class="sprint-list-cards-description text-center">
+              <%= link_to sprint_path(sprint) do %>
+                <i class="fas fa-search"></i>
+              <% end %>
+              <%= link_to sprint.trello_url do %>
+                <i class="fab fa-trello"></i>
+            </div>
+          </div>
+            <% end %>
+          <div>
 
-    <% @sprints.each do |sprint| %>
-      <div class="col-xs-12 col-sm-6">
-        <%= render 'shared/trello_card', type: sprint %>
-        <div>
-
-          <%= link_to sprint_path(sprint) do %>
-            <i class="fas fa-search"></i>
-          <% end %>
-
-          <%= link_to sprint.trello_url do %>
-            <i class="fab fa-trello"></i>
-          <% end %>
-
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
 
+    </div>
   </div>
 </div>
 
