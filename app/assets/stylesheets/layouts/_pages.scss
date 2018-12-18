@@ -126,4 +126,91 @@
   padding: 20px;
 }
 
+// PAGE KNOWLEDGE
 
+.intermediary-title {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+//----- Header ------
+
+.header {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  .title{
+    margin-bottom: 20px;
+  }
+}
+
+//----- Sprint Process ------
+
+.process {
+  display: flex;
+  // justify-content: space-around;
+  width: 100%;
+  height: 42vh;
+.steps {
+  display: flex;
+  flex-direction: column;
+  // margin: 2px;
+  height: auto;
+  align-items: stretch;
+  .step-title {
+    font-size: 14px;
+    font-size: bolder;
+    height:15%;
+  }
+  .step-content {
+    height:85%;
+    font-size: 12px;
+  }
+}
+}
+
+// ------ Sprint Awesome Style Guide ------
+
+.size-card {
+  width: 340px;
+  height: 150px;
+  margin: 10px;
+  border-radius: 2px;
+  background-size: cover !important;
+  background-position: center;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
+  img {
+    background-size: cover;
+  }
+}
+
+//----- Teamplate ------
+
+
+.template {
+  display: flex;
+  color: white;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 80vh;
+  padding-top: 60px;
+  background-color: $trello-blue
+}
+
+.link-to-board-template {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 25vh;
+  margin-bottom: 40px;
+}
+
+.board-template {
+  width: 160vh;
+  height: 65vh;
+  background-size: cover !important;
+  transform: rotate(0deg)
+}
