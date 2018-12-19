@@ -17,13 +17,16 @@
   grid-column: 2 / span 10;
   line-height: 2.5;
   h1 {
-    color: $trello-blue;
+    color: $gray;
+  }
+  .btn {
+    width: 150px;
   }
 }
 
 .dashboard-progress {
   // background-color: $green;
-  grid-row: 2 / span 2;
+  grid-row: 2 / span 1;
   grid-column: 2 / span 10;
   // display: flex;
   // justify-content: space-between;
@@ -37,7 +40,7 @@
 .dashboard-burndown-chart {
   background-color: white;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
-  grid-row: 4 / span 6;
+  grid-row: 3 / span 6;
   grid-column: 2 / span 5;
   margin-bottom: 10px;
   margin-right: 5px;
@@ -52,7 +55,7 @@
 
 .dashboard-kpis {
   // background-color: $yellow;
-  grid-row: 4 / span 6;
+  grid-row: 3 / span 6;
   grid-column: 7 / span 5;
   display: flex;
   justify-content: space-around;
@@ -103,7 +106,7 @@
 
 .dashboard-story-points {
   background-color: white;
-  grid-row: 10 / span 6;
+  grid-row: 9 / span 7;
   grid-column: 2 / span 10;
   display: flex;
   flex-direction: column;
@@ -136,6 +139,7 @@
 
 // ----------- THIS SECOND PART IS FOR THE TEAM PAGE PERFORMACE PAGE ------------
 
+// <!-- TOP -->
 .team-performance-container {
   height: 100vh;
   display: grid;
@@ -150,35 +154,151 @@
   grid-column: 2 / span 10;
   line-height: 2.5;
   h1 {
-    color: $red;
+    color: $gray;
   }
 }
 
 .team-progress {
   background-color: white;
-  grid-row: 2 / span 2;
-  grid-column: 2 / span 5;
-  padding-top: 30px;
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 6;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
+  padding-top: 40px;
   padding-left: 30px;
   padding-right: 30px;
+  margin-right: 5px;
   margin-bottom: 10px;
 }
 
-.team-contributor {
+.team {
+  background-color : white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
+  padding: 20px;
+  width: 97%;
+  h2 {
+    font-size: 45px;
+  }
+  p {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: bolder;
+  }
+  i {
+    font-size: 45px;
+  }
+}
 
+.team-contributor {
+  grid-row: 2 / span 1;
+  grid-column: 8 / span 2;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+.team-observer {
+  // background-color : $blue;
+  grid-row: 2 / span 1;
+  grid-column: 10 / span 2;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+// <!-- MIDDLE -->
+.time-allocation-per-rank {
+  background-color : white;
+  grid-row: 3 / span 5;
+  grid-column: 2 / span 6;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  padding: 15px 40px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.teams-contributors {
+  background-color : $yellow;
+  grid-row: 3 / span 9;
+  grid-column: 8 / span 4;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
+  border-radius: 1px;
+  background-color: white;
+  &.team-members {
+    height: 100%;
+    overflow: scroll;
+  }
+}
+
+.full-graphs-1 {
+  background-color : white;
+  grid-row: 8 / span 4;
+  grid-column: 2 / span 3;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.full-graphs-2 {
+  background-color : white;
+  grid-row: 8 / span 4;
+  grid-column: 5 / span 3;
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 
+// <!-- BOTTOM -->
+.full-graphs-3 {
+  background-color : white;
+  grid-row: 12 / span 4;
+  grid-column: 2 / span 3;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+.full-graphs-4 {
+  background-color : white;
+  grid-row: 12 / span 4;
+  grid-column: 5 / span 3;
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-
-
-
-
-
-
-
-
+.small-graphs {
+  background-color : white;
+  grid-row: 12 / span 4;
+  grid-column: 8 / span 4;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+}
 
 
 // -------------------- MANUEL WORK CSS SHOW PAGE -----------------------
@@ -208,10 +328,10 @@
   border-radius: 3px;
   background-color: white;
   padding: 10px;
-  &.team-members {
-    height: 535px;
-    overflow: scroll;
-  }
+  // &.team-members {
+  //   height: 535px;
+  //   overflow: scroll;
+  // }
   .graph-section-title {
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
     background-color: $athens-gray;

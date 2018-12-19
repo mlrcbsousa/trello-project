@@ -6,9 +6,9 @@ Chartkick.options = {
     "#00ACC1",
     "#FFDE33",
     "#FF4D40",
+    "#555555",
     "#1BE2B0",
     "#222222",
-    "#555555",
     "#DCDEE0",
     "#FCF9F9"
   ],
