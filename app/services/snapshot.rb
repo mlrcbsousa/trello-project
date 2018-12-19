@@ -1,4 +1,5 @@
 class Snapshot
+  # @sprint, @description, @datetime_at_post
   def initialize(attrs = { description: 'general', datetime_at_post: Time.now })
     attrs.each { |k, v| instance_variable_set :"@#{k}", v }
     sprint_stats
@@ -43,10 +44,17 @@ class Snapshot
   ]
 
   MEMBER_STATS = %i[
-    total_cards
-    weighted_cards
+    available_hours
     weighted_cards_count
-    cards_per_size
+    weighted_cards_per_size
+    weighted_cards_per_rank
+    weighted_cards_per_size_per_rank
+    weighted_cards_per_size_per_rank_ck
+    conversion_per_size_per_rank
+    conversion_per_size_per_rank_ck
+    conversion_per_size
+    conversion_per_rank
+    total_conversion
     total_story_points
     progress
     story_points_progress
@@ -60,7 +68,7 @@ class Snapshot
   end
 
   def member_stats
-    @sprint.members.each do |member|
+    @sprint.contributors.each do |member|
       attrs = MEMBER_STATS.each_with_object({}) { |method, hash| hash[method] = member.send method }
       attrs[:datetime_at_post] = @datetime_at_post
       attrs[:description] = @description

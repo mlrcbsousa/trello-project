@@ -1,7 +1,7 @@
 class Member < ApplicationRecord
   belongs_to :sprint
   has_many :cards
-  has_many :member_stats
+  has_many :member_stats, dependent: :destroy
 
   # Validations
   validates :trello_ext_id, :hours_per_day, presence: true
@@ -12,6 +12,12 @@ class Member < ApplicationRecord
   before_validation :days_per_sprint_default
   before_validation :set_available_hours
 
+  # Callbacks
+  before_destroy :remove_association_cards
+
+  def remove_association_cards
+    cards.each { |card| card.update(member: nil) }
+  end
   # before_save :default_values
   # def default_values
   #   self.status ||= 'P' # note self.status = 'P' if self.status.nil? might be safer (per @frontendbeauty)

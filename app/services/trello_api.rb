@@ -1,11 +1,12 @@
 class TrelloAPI
-  ONBOARD = %i[webhook members lists cards]
+  METHODS = %i[members lists cards]
+  # webhook
 
   # @sprint, @type, @model
   def initialize(attrs = { type: :onboard, model: :sprint })
     attrs.each { |k, v| instance_variable_set :"@#{k}", v }
     @ext_board = @sprint.user.client.find(:boards, @sprint.trello_ext_id)
-    @type == :update ? parse : ONBOARD.each { |method| send method }
+    @type == :update ? parse : sprint
   end
 
   def parse
@@ -15,8 +16,7 @@ class TrelloAPI
   end
 
   def sprint
-    members
-    lists
+    METHODS.each { |method| send method }
   end
 
   # Members
@@ -91,12 +91,13 @@ class TrelloAPI
   end
 
   def update_list(list, ext_list, ind)
-    ###
-    #
-    #
-    update_cards
+    list.update!(
+      rank: (ind.positive? ? ind - 1 : 0),
+      name: ext_list.name
+    )
   end
 
+  # Webhook
   def webhook
     confirmation = @sprint.webhook_post
     # this part isnt working, not saving anything

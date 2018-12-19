@@ -6,6 +6,7 @@ class Sprint < ApplicationRecord
   has_many :cards, through: :lists, dependent: :destroy
   has_one :webhook, dependent: :destroy
   has_many :sprint_stats, dependent: :destroy
+  has_many :member_stats, through: :members, dependent: :destroy
   has_one :conversion, dependent: :destroy
 
   # Validations
