@@ -1,8 +1,8 @@
 class Snapshot
-  def initialize(sprint, method, datetime_at_post = Time.now)
-    @sprint = sprint
-    @datetime_at_post = datetime_at_post
-    send method
+  def initialize(attrs = { description: 'general', datetime_at_post: Time.now })
+    attrs.each { |k, v| instance_variable_set :"@#{k}", v }
+    sprint_stats
+    member_stats
   end
 
   SPRINT_STATS = %i[
@@ -23,17 +23,23 @@ class Snapshot
     story_points_per_size
     conversion_per_size
     total_conversion
-    available_hours_per_contributor
     conversion_per_size_per_contributor
+    conversion_per_size_per_contributor_ck
     weighted_cards_per_size_per_contributor
+    weighted_cards_per_size_per_contributor_ck
     conversion_per_contributor
+    available_hours_per_contributor
+    merged_conversion_per_contributor
     weighted_cards_per_size_per_rank
+    weighted_cards_per_size_per_rank_ck
     conversion_per_size_per_rank
+    conversion_per_size_per_rank_ck
     conversion_per_rank
+    progress_conversion_per_rank
+    merged_conversion_per_rank
+    progress_conversion
     progress
     story_points_progress
-    progress_conversion_per_rank
-    progress_conversion
   ]
 
   MEMBER_STATS = %i[
@@ -49,6 +55,7 @@ class Snapshot
   def sprint_stats
     attrs = SPRINT_STATS.each_with_object({}) { |method, hash| hash[method] = @sprint.send method }
     attrs[:datetime_at_post] = @datetime_at_post
+    attrs[:description] = @description
     @sprint.sprint_stats.create!(attrs)
   end
 
@@ -56,6 +63,7 @@ class Snapshot
     @sprint.members.each do |member|
       attrs = MEMBER_STATS.each_with_object({}) { |method, hash| hash[method] = member.send method }
       attrs[:datetime_at_post] = @datetime_at_post
+      attrs[:description] = @description
       member.member_stats.create!(attrs)
     end
   end

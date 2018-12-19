@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   before_action :set_sprint, only: %i[index edit update]
   before_action :set_sprint_id, only: %i[contribute contribute_patch]
   before_action :set_member, only: %i[edit update]
-  layout 'onboarding', only: %i[index edit contribute schedule contribute_patch update]
+  layout 'onboarding'
 
   def index
     @members = @sprint.members.where(contributor: true)
@@ -11,9 +11,7 @@ class MembersController < ApplicationController
   def edit; end
 
   def contribute
-    members = @sprint.members
-
-    @members = members.each { |member| member.update(contributor: true) }
+    @members = @sprint.members.each { |member| member.update(contributor: true) }
   end
 
   def contribute_patch
@@ -31,6 +29,7 @@ class MembersController < ApplicationController
     @member.update(member_params)
     if @member.save
       @sprint.update_available_man_hours
+      Snapshot.new(sprint: @sprint, description: 'member edit')
       redirect_to sprints_path, notice: 'member was successfully updated.'
     else
       render :edit, alert: 'Unable to update member.'

@@ -1,5 +1,5 @@
 class OnboardController < ApplicationController
-  layout 'onboarding', only: %i[pick contribute schedule complete]
+  layout 'onboarding'
   before_action :set_sprint, except: :pick
 
   def pick
@@ -27,6 +27,7 @@ class OnboardController < ApplicationController
     end
     # update man hours everytime you change labour hours
     @sprint.update_available_man_hours
+    Snapshot.new(sprint: @sprint, description: 'first after create')
     redirect_to sprint_path(@sprint), notice: "Successfully created your sprint"
   end
 

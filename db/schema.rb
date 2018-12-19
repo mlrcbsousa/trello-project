@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_192650) do
+ActiveRecord::Schema.define(version: 2018_12_18_224504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_192650) do
     t.float "progress"
     t.integer "story_points_progress"
     t.bigint "sprint_id"
+    t.string "description"
     t.index ["sprint_id"], name: "index_sprint_stats_on_sprint_id"
   end
 

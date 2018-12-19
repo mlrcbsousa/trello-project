@@ -19,12 +19,8 @@ class SprintsController < ApplicationController
   def create
     @sprint = Sprint.new(sprint_params)
     @sprint.user = current_user
-    # board request using client
-    ext_board = current_user.client.find(:boards, @sprint.trello_ext_id)
-
     if @sprint.save
-      # service class
-      Onboard.new(@sprint, ext_board)
+      TrelloAPI.new(@sprint)
       redirect_to new_conversion_path(@sprint)
     else
       render :new, alert: 'Unable to create your sprint!'
@@ -36,6 +32,7 @@ class SprintsController < ApplicationController
   def update
     @sprint.update(sprint_params)
     if @sprint.save
+      Snapshot.new(@sprint)
       redirect_to sprints_path, notice: 'Dates were successfully updated.'
     else
       render :edit, alert: 'Unable to update dates.'

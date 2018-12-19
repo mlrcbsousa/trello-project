@@ -32,6 +32,6 @@ Rails.application.routes.draw do
   post 'webhooks', to: 'webhooks#receive'
 
   # FRONT END TESTING ENVIRONMENT
-  # will use 'testing' layout unless otherwise specified in the pages#coontroller
+  # will use 'pages' layout unless otherwise specified in the pages#coontroller
   get 'testing', to: 'pages#testing'
 end
