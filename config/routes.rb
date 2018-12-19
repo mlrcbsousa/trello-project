@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   patch 'onboard/schedule/:id', to: 'onboard#schedule', as: 'schedule'
   patch 'onboard/complete/:id', to: 'onboard#complete', as: 'complete'
 
+  # Updating
+  post 'update/sprint/:id', to: 'update#sprint', as: 'update_sprint'
+  post 'update/members/:id', to: 'update#members', as: 'update_members'
+  post 'update/lists/:id', to: 'update#lists', as: 'update_lists'
+  post 'update/cards/:id', to: 'update#cards', as: 'update_cards'
+
   # Server side editing contributors
   get 'members/contribute/:id', to: 'members#contribute', as: 'edit_contributors'
   patch 'members/contribute_patch/:id', to: 'members#contribute_patch', as: 'update_contributors'

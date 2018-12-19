@@ -10,17 +10,25 @@ class TrelloAPI
   end
 
   def parse
-    Snapshot.new(sprint: @sprint, description: 'before update')
-    send :"#{@model}"
-    Snapshot.new(sprint: @sprint, description: 'after update')
+    Snapshot.new(sprint: @sprint, description: "before update #{@model}")
+    send @model
+    Snapshot.new(sprint: @sprint, description: "after update #{@model}")
   end
 
   def sprint
     METHODS.each { |method| send method }
   end
 
+  def clean(model)
+    internal = @sprint.send(model)
+    to_clean = internal.pluck(:trello_ext_id) - @ext_board.send(model).map(&:id)
+    to_clean.each { |ext_id| internal.find_by(trello_ext_id: ext_id).destroy } unless to_clean.empty?
+  end
+
   # Members
   def members
+    # destroy local if not in remote
+    clean(:members)
     @ext_board.members.each do |ext_member|
       member = @sprint.members.find_by(trello_ext_id: ext_member.id)
       member ? update_member(member, ext_member) : member(ext_member)
@@ -49,6 +57,8 @@ class TrelloAPI
   end
 
   def cards
+    # destroy local if not in remote
+    clean(:cards)
     @ext_board.cards.each do |ext_card|
       card = @sprint.cards.find_by(trello_ext_id: ext_card.id)
       size = card_size(ext_card)
@@ -75,6 +85,8 @@ class TrelloAPI
 
   # Lists
   def lists
+    # destroy local if not in remote
+    clean(:lists)
     @ext_board.lists.each_with_index do |ext_list, ind|
       list = @sprint.lists.find_by(trello_ext_id: ext_list.id)
       list ? update_list(list, ext_list, ind) : list(ext_list, ind)
