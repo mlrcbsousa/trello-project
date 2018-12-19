@@ -82,9 +82,25 @@ class Sprint < ApplicationRecord
     lists.where.not(rank: 0).count
   end
 
+  # ------ METRICS ON CARDS ------
   # integer
   def total_cards
     cards.count
+  end
+
+  # integer
+  def total_cards_done_or_after_done
+    ranks[ranks.count - 2].cards.count + ranks.last.cards.count
+  end
+
+  # integer
+  def total_cards_in_backlog
+    ranks[0].cards.count
+  end
+
+  # integer
+  def total_cards_in_progress
+    total_cards - (total_cards_done_or_after_done + total_cards_in_backlog)
   end
 
   # hash

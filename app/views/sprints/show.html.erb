@@ -1,3 +1,106 @@
+<div class="dashboard-container">
+<!-- ** TOP OF THE PAGE ** -->
+
+  <div class="dashboard-header text-center">
+    <h1><%= @sprint.name %></h1>
+    <p>Your sprint last <strong><%= @sprint.total_days %> days</strong>: it started <strong><%= @sprint.total_days_from_start %> days</strong> ago. You have reached <strong><%= (@sprint.progress * 100).to_i %> %</strong> of your backlog objectives. You have another <strong><%= @sprint.total_days_to_end %> days left</strong>.</p>
+  </div>
+
+  <div class="dashboard-progress">
+    <div class="progress">
+      <% value = (@sprint.progress * 100).to_i %>
+      <div class="progress-bar" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= value %>%;">
+        <%= value %>%
+      </div>
+    </div>
+  </div>
+
+<!-- ** MID LEVEL PAGE (From left to right)** -->
+
+  <div class="dashboard-kpis">
+    <div class="kpi time-kpi text-center">
+      <h2><i class="fas fa-clock"></i></h2>
+    </div>
+    <div class="kpi time-kpi text-center">
+      <h2><%= @sprint.available_man_hours %></h2>
+      <p>Total hours available</p>
+    </div>
+    <div class="kpi time-kpi text-center">
+      <h2><%= @sprint.total_conversion %></h2>
+      <p>Total hours planned</p>
+    </div>
+    <div class="kpi cards-kpi text-center">
+      <h2><i class="fab fa-trello"></i></h2>
+    </div>
+    <div class="kpi cards-kpi text-center">
+      <h2><%= @sprint.total_cards %></h2>
+      <p>Total number of cards in this sprint</p>
+    </div>
+    <div class="kpi cards-kpi text-center">
+      <h2><%= @sprint.total_cards_done_or_after_done %></h2>
+      <p>Total number of cards completed</p>
+    </div>
+  </div>
+
+  <div class="dashboard-burndown-chart">
+    <div class="burndown-chart ">
+        <!-- THIS IS A TEST AND SHOULD BE CHANGED WITH REAL DATA-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <div class="chart burndow-chart">
+          <canvas id="myChart" width="500" height="220"></canvas>
+        </div>
+    </div>
+    <h5 class="text-center">THE SPRINT BURNDOWN CHART</h5>
+  </div>
+
+<!-- ** BOTTOM LEVEL PAGE ** -->
+
+  <div class="dashboard-story-points">
+    <div class="dashboard-story-points-subtitle text-center"><h4>SPRINT STORY POINTS</h4></div>
+    <div class="dashboard-story-points-info">
+      <div class="dashboard-story-points-info-graph-1 text-center">
+        <%= column_chart @sprint.conversion_per_size, height: "200px" %>
+        <h5>Total conversion per size</h5>
+      </div>
+
+      <div class="dashboard-kpis">
+        <div class="kpi storypoints-kpi text-center">
+          <h2><%= @sprint.total_story_points %></h2>
+          <p>Total Story points</p>
+        </div>
+        <div class="kpi storypoints-kpi text-center">
+          <h2>40</h2>
+          <p>Total Story points completed</p>
+        </div>
+      </div>
+
+      <div class="dashboard-story-points-info-graph-2 text-center">
+        <%= column_chart @sprint.story_points_per_size, height: "200px" %>
+        <h5>Total story points per size</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORK FROM THIBAUT ON THE TEAM PAGE -->
+<div class="team-performance-container">
+
+  <div class="team-performance-header text-center">
+    <h1><%= @sprint.name %></h1>
+    <p>Your have a total of <strong><%= @sprint.available_man_hours %> hours</strong> man hours available for your sprint. You have planned <strong><%= @sprint.total_conversion %></strong> hours of work so far.</p>
+  </div>
+
+  <div class="team-progress"></div>
+  <div class="team-contributor"></div>
+
+</div>
+
+
+
+<!-- THIS IS THE CODE OF MANUEL -> WE CAN ALWAYS GO BACK TO THIS OR ADAPT. -->
+<!-- THE CSS IS IN THE _SHOW PAGE. IT'S ALL DONE ON THE TOP OF THE PAGE. WE CAN ALSO DELETE IT -->
+
+
 <div class="container">
   <div class="stats-header">
     <div class="row">

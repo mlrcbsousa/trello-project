@@ -1,3 +1,188 @@
+// ---------- THIBAUT WORK CSS SHOW PAGE-------------
+
+// *** MAIN CONTAINER ***
+.dashboard-container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+// ** TOP OF THE PAGE **
+.dashboard-header {
+  // background-color: $gray;
+  margin: 15px 0px;
+  padding-top: 20px;
+  grid-row: 1 / span 1;
+  grid-column: 2 / span 10;
+  line-height: 2.5;
+  h1 {
+    color: $trello-blue;
+  }
+}
+
+.dashboard-progress {
+  // background-color: $green;
+  grid-row: 2 / span 2;
+  grid-column: 2 / span 10;
+  // display: flex;
+  // justify-content: space-between;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 10px;
+}
+
+// ** MID LEVEL PAGE (From left to right)**
+.dashboard-burndown-chart {
+  background-color: white;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
+  grid-row: 4 / span 6;
+  grid-column: 2 / span 5;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: fex;
+  flex-direction: column;
+  justify-content: space-around;
+  // background-size: cover;
+}
+
+.dashboard-kpis {
+  // background-color: $yellow;
+  grid-row: 4 / span 6;
+  grid-column: 7 / span 5;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  flex-wrap: wrap;
+}
+
+.kpi {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-iterms: center;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
+  padding: 15px;
+  margin: 5px;
+  width: 160px;
+  h2 {
+    font-size: 45px;
+  }
+  p {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: bolder;
+  }
+}
+
+.time-kpi {
+  border-top: 2px solid $green;
+  i {
+    color: $green;
+  }
+}
+
+.cards-kpi {
+  border-top: 2px solid $trello-blue;
+  i {
+    color: $trello-blue;
+  }
+}
+
+.storypoints-kpi {
+  border-top: 2px solid $yellow;
+}
+
+// ** BOTTOM LEVEL PAGE **
+
+.dashboard-story-points {
+  background-color: white;
+  grid-row: 10 / span 6;
+  grid-column: 2 / span 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  height: 100%;
+}
+
+.dashboard-story-points-subtitle {
+  padding: 10px 0px;
+  height: 15%;
+}
+
+.dashboard-story-points-info {
+  display: flex;
+  justify-content: space-between;
+  height: 85%;
+  width: 100%;
+  .dashboard-story-points-info-graph-1 {
+    // background-color: $blue;
+    width: 50%;
+    padding: 10px;
+  }
+  .dashboard-story-points-info-graph-2 {
+    // background-color: $red;
+    width: 50%;
+    padding: 20px;
+  }
+}
+
+// ----------- THIS SECOND PART IS FOR THE TEAM PAGE PERFORMACE PAGE ------------
+
+.team-performance-container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.team-performance-header {
+  margin: 15px 0px;
+  padding-top: 20px;
+  grid-row: 1 / span 1;
+  grid-column: 2 / span 10;
+  line-height: 2.5;
+  h1 {
+    color: $red;
+  }
+}
+
+.team-progress {
+  background-color: white;
+  grid-row: 2 / span 2;
+  grid-column: 2 / span 5;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 10px;
+}
+
+.team-contributor {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -------------------- MANUEL WORK CSS SHOW PAGE -----------------------
+
 .stats-header {
   color: $gray;
   padding-top: 10px;
