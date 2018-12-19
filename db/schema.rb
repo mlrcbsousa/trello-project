@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_16_103524) do
+ActiveRecord::Schema.define(version: 2018_12_18_192650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,23 +59,6 @@ ActiveRecord::Schema.define(version: 2018_12_16_103524) do
     t.index ["sprint_id"], name: "index_lists_on_sprint_id"
   end
 
-  create_table "member_stats", force: :cascade do |t|
-    t.bigint "member_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "datetime_at_post"
-    t.integer "available_hours"
-    t.integer "total_cards"
-    t.integer "weighted_cards_count"
-    t.jsonb "weighted_cards_per_size"
-    t.jsonb "conversion_per_size"
-    t.jsonb "conversion_per_rank"
-    t.integer "total_story_points"
-    t.float "progress"
-    t.integer "story_points_progress"
-    t.index ["member_id"], name: "index_member_stats_on_member_id"
-  end
-
   create_table "members", force: :cascade do |t|
     t.string "trello_ext_id", null: false
     t.bigint "sprint_id"
@@ -91,7 +74,6 @@ ActiveRecord::Schema.define(version: 2018_12_16_103524) do
   end
 
   create_table "sprint_stats", force: :cascade do |t|
-    t.bigint "sprint_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "datetime_at_post"
@@ -113,16 +95,23 @@ ActiveRecord::Schema.define(version: 2018_12_16_103524) do
     t.jsonb "conversion_per_size"
     t.integer "total_conversion"
     t.jsonb "conversion_per_size_per_contributor"
+    t.jsonb "conversion_per_size_per_contributor_ck"
     t.jsonb "weighted_cards_per_size_per_contributor"
+    t.jsonb "weighted_cards_per_size_per_contributor_ck"
     t.jsonb "conversion_per_contributor"
+    t.jsonb "available_hours_per_contributor"
+    t.jsonb "merged_conversion_per_contributor"
     t.jsonb "weighted_cards_per_size_per_rank"
+    t.jsonb "weighted_cards_per_size_per_rank_ck"
     t.jsonb "conversion_per_size_per_rank"
+    t.jsonb "conversion_per_size_per_rank_ck"
     t.jsonb "conversion_per_rank"
+    t.jsonb "progress_conversion_per_rank"
+    t.jsonb "merged_conversion_per_rank"
+    t.integer "progress_conversion"
     t.float "progress"
     t.integer "story_points_progress"
-    t.jsonb "available_hours_per_contributor"
-    t.jsonb "progress_conversion_per_rank"
-    t.integer "progress_conversion"
+    t.bigint "sprint_id"
     t.index ["sprint_id"], name: "index_sprint_stats_on_sprint_id"
   end
 
@@ -174,7 +163,6 @@ ActiveRecord::Schema.define(version: 2018_12_16_103524) do
   add_foreign_key "cards", "members"
   add_foreign_key "conversions", "sprints"
   add_foreign_key "lists", "sprints"
-  add_foreign_key "member_stats", "members"
   add_foreign_key "members", "sprints"
   add_foreign_key "sprint_stats", "sprints"
   add_foreign_key "sprints", "users"
