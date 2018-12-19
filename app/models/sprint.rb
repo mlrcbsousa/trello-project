@@ -6,6 +6,7 @@ class Sprint < ApplicationRecord
   has_many :cards, through: :lists, dependent: :destroy
   has_one :webhook, dependent: :destroy
   has_many :sprint_stats, dependent: :destroy
+  has_many :member_stats, through: :members, dependent: :destroy
   has_one :conversion, dependent: :destroy
 
   # Validations
@@ -268,6 +269,9 @@ class Sprint < ApplicationRecord
     (progress * total_story_points).round(2)
   end
 
+  def stppot
+    sprint_stats.map { |s| [s.created_at, (s.total_story_points - s.story_points_progress)] }.to_h
+  end
   # # integer (hours)
   # def total_conversion
   #   conversion_per_rank.values.sum

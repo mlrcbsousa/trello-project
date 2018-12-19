@@ -123,6 +123,9 @@
         <p>Progress by card rank out of
           <strong class="text-primary"><%= @sprint.total_weighted_cards %></strong>&nbsp;weighted cards
         </p>
+        <%= link_to update_lists_path(@sprint), method: :post do %>
+          <i class="fas fa-sync-alt"></i>
+        <% end %>
         <div class="progress">
           <% value = (@sprint.progress * 100).to_i %>
           <div class="progress-bar" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= value %>%;">
@@ -142,3 +145,4 @@
   </div>
 </div>
 
+<%= area_chart @sprint.stppot %>

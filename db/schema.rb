@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_192650) do
+ActiveRecord::Schema.define(version: 2018_12_19_121651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,29 @@ ActiveRecord::Schema.define(version: 2018_12_18_192650) do
     t.datetime "updated_at", null: false
     t.integer "rank"
     t.index ["sprint_id"], name: "index_lists_on_sprint_id"
+  end
+
+  create_table "member_stats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "member_id"
+    t.string "description"
+    t.integer "available_hours"
+    t.integer "weighted_cards_count"
+    t.jsonb "weighted_cards_per_size"
+    t.jsonb "weighted_cards_per_rank"
+    t.jsonb "weighted_cards_per_size_per_rank"
+    t.jsonb "weighted_cards_per_size_per_rank_ck"
+    t.jsonb "conversion_per_size_per_rank"
+    t.jsonb "conversion_per_size_per_rank_ck"
+    t.jsonb "conversion_per_size"
+    t.jsonb "conversion_per_rank"
+    t.integer "total_conversion"
+    t.integer "total_story_points"
+    t.float "progress"
+    t.integer "story_points_progress"
+    t.datetime "datetime_at_post"
+    t.index ["member_id"], name: "index_member_stats_on_member_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -112,6 +135,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_192650) do
     t.float "progress"
     t.integer "story_points_progress"
     t.bigint "sprint_id"
+    t.string "description"
     t.index ["sprint_id"], name: "index_sprint_stats_on_sprint_id"
   end
 
@@ -163,6 +187,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_192650) do
   add_foreign_key "cards", "members"
   add_foreign_key "conversions", "sprints"
   add_foreign_key "lists", "sprints"
+  add_foreign_key "member_stats", "members"
   add_foreign_key "members", "sprints"
   add_foreign_key "sprint_stats", "sprints"
   add_foreign_key "sprints", "users"

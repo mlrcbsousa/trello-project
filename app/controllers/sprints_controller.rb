@@ -1,6 +1,5 @@
 class SprintsController < ApplicationController
   before_action :set_sprint, only: %i[show destroy edit update]
-  before_action :destroy_lists, only: [:destroy]
   layout 'onboarding', only: %i[new edit]
 
   def index
@@ -19,12 +18,8 @@ class SprintsController < ApplicationController
   def create
     @sprint = Sprint.new(sprint_params)
     @sprint.user = current_user
-    # board request using client
-    ext_board = current_user.client.find(:boards, @sprint.trello_ext_id)
-
     if @sprint.save
-      # service class
-      Onboard.new(@sprint, ext_board)
+      TrelloAPI.new(sprint: @sprint)
       redirect_to new_conversion_path(@sprint)
     else
       render :new, alert: 'Unable to create your sprint!'
@@ -36,6 +31,7 @@ class SprintsController < ApplicationController
   def update
     @sprint.update(sprint_params)
     if @sprint.save
+      Snapshot.new(sprint: @sprint, description: 'sprint edit')
       redirect_to sprints_path, notice: 'Dates were successfully updated.'
     else
       render :edit, alert: 'Unable to update dates.'
@@ -51,10 +47,6 @@ class SprintsController < ApplicationController
   end
 
   private
-
-  def destroy_lists
-    @sprint.lists.destroy_all
-  end
 
   def set_sprint
     @sprint = Sprint.find(params[:id])

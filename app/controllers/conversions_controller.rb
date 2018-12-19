@@ -23,6 +23,7 @@ class ConversionsController < ApplicationController
   def update
     @conversion.update(conversion_params)
     if @conversion.save
+      Snapshot.new(sprint: @sprint, description: 'conversion edit')
       redirect_to sprints_path, notice: 'Conversion was successfully updated.'
     else
       render :edit, alert: 'Unable to update conversion.'
