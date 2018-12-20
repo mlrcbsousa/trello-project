@@ -10,28 +10,28 @@
       <%= render 'shared/stat_card', stat: { value: member.available_hours, unit: "hrs", name: "Available" } %>
       <div class="member-section-piechart">
         <p>Cards /size</p>
-        <%= pie_chart member.weighted_cards_per_size, legend: false, height: "150px" %>
+        <%= pie_chart member.weighted_cards_per_size, legend: false, height: "25vh" %>
       </div>
     </div>
     <div class="col-sm-9">
       <div class="row">
         <div class="col-sm-6">
           <p>Allocated hours /rank</p>
-          <%= bar_chart member.conversion_per_rank, height: "150px", legend: false %>
+          <%= bar_chart member.conversion_per_rank, height: "25vh", legend: false %>
         </div>
         <div class="col-sm-6">
           <p>Allocated hours /size</p>
-          <%= column_chart member.conversion_per_size, height: "150px" %>
+          <%= column_chart member.conversion_per_size, height: "25vh" %>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <p>Cards /size /rank</p>
-          <%= bar_chart member.weighted_cards_per_size_per_rank_ck, height: "300px", legend: false %>
+          <%= bar_chart member.weighted_cards_per_size_per_rank_ck, height: "48vh", legend: false %>
         </div>
         <div class="col-sm-6">
           <p>Allocated work /size /rank</p>
-          <%= column_chart member.conversion_per_size_per_rank_ck, height: "300px", legend: false %>
+          <%= column_chart member.conversion_per_size_per_rank_ck, height: "48vh", legend: false %>
         </div>
       </div>
     </div>

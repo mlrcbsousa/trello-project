@@ -3,11 +3,9 @@
 <!-- header row -->
 <div class="row">
   <div class="col-xs-12">
-    <div class="team-dashboard-title">
-      <div class="dashboard-header text-center">
+    <div class="team-dashboard-title text-center">
         <h1><%= @sprint.name %></h1>
         <p>Your have a total of <strong><%= @sprint.available_man_hours %> hours</strong> man hours available for your sprint. You have planned <strong><%= @sprint.total_conversion %> hours</strong> of work so far.</p>
-      </div>
     </div>
   </div>
 </div>
@@ -21,8 +19,8 @@
       <div class="row">
 
         <div class="col-sm-12">
-          <div class="team-progress">
-            <div class="progress">
+          <div class="graph-section">
+            <div class="progress" style="margin-bottom: 5px;">
               <% value = (@sprint.progress * 100).to_i %>
               <div class="progress-bar" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= value %>%;">
                 <%= value %>%
@@ -32,47 +30,42 @@
         </div>
 
         <div class="col-sm-12">
-          <div class="time-allocation-per-rank text-center">
-            <%= bar_chart @sprint.merged_conversion_per_contributor, height: "17vh", legend: false %>
-            <h5>Assigned time vs. time available per contributor</h5>
+          <div class="graph-section">
+            <%= bar_chart @sprint.merged_conversion_per_contributor, height: "25vh", legend: false %>
+            <p>Assigned time vs. time available per contributor</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- bottom left side -->
+
+        <div class="col-sm-3">
+          <div class="graph-section">
+            <%= pie_chart @sprint.weighted_cards_per_size, height: "31vh", donut: true, legend: false %>
+            <p>Total number of cards per size</p>
           </div>
         </div>
 
-        <div class="row">
-          <!-- bottom left side -->
-          <div class="col-sm-6">
-            <div class="row">
-
-              <div class="col-sm-6">
-                <div class="full-graphs-1 text-center">
-                  <%= pie_chart @sprint.weighted_cards_per_size, height: "30vh", donut: true, legend: false %>
-                  <h5>Total number of cards per size</h4>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <div class="full-graphs-2 text-center">
-                  <%= pie_chart @sprint.weighted_cards_per_rank, height: "30vh", donut: true, legend: false %>
-                  <h5>Total number of cards per stage</h5>
-                </div>
-              </div>
-
-            </div>
+        <div class="col-sm-3">
+          <div class="graph-section">
+            <%= pie_chart @sprint.weighted_cards_per_rank, height: "31vh", donut: true, legend: false %>
+            <p>Total number of cards per stage</p>
           </div>
-          <!-- bottom right side -->
-          <div class="col-sm-6">
+        </div>
 
-            <div class="full-graphs-3 text-center">
-              <p>Weighted cards /size /member</p>
-              <%= column_chart @sprint.weighted_cards_per_size_per_contributor_ck, height: "15vh", legend: false %>
-            </div>
+        <!-- bottom right side -->
+        <div class="col-sm-6">
 
-            <div class="full-graphs-4 text-center">
-              <p>Allocated work /size /member</p>
-              <%= column_chart @sprint.conversion_per_size_per_contributor_ck, height: "15vh", legend: false %>
-            </div>
-
+          <div class="graph-section">
+            <%= column_chart @sprint.weighted_cards_per_size_per_contributor_ck, height: "13vh", legend: false %>
+            <p>Weighted cards /size /member</p>
           </div>
+
+          <div class="graph-section">
+            <%= column_chart @sprint.conversion_per_size_per_contributor_ck, height: "13vh", legend: false %>
+            <p>Allocated work /size /member</p>
+          </div>
+
         </div>
       </div>
     </div>
@@ -92,44 +85,48 @@
     <div class="row">
 
       <div class="col-sm-6">
-        <div class="team team-contributor text-center">
-          <i class="fas fa-user-md"></i>
+        <div class="graph-section text-center">
           <div>
-            <h2><%= @sprint.total_contributors %></h2>
+            <h2>
+              <i class="fas fa-user-md"></i>
+              <%= @sprint.total_contributors %>
+            </h2>
             <p>Total contributor(s)</p>
           </div>
         </div>
       </div>
 
       <div class="col-sm-6">
-        <div class="team team-observer text-center">
-          <i class="fas fa-glasses"></i>
+        <div class="graph-section text-center">
           <div>
-            <h2><%= @sprint.members.count - @sprint.total_contributors %></h2>
+            <h2>
+              <i class="fas fa-glasses"></i>
+              <%= @sprint.members.count - @sprint.total_contributors %>
+            </h2>
             <p>Total observer(s)</p>
           </div>
         </div>
       </div>
 
       <div class="col-sm-12">
-        <div class="teams-contributors">
 
-          <div class="graph-section team-members">
+          <div class="graph-section member-cards">
             <!-- member cards -->
             <%= render @sprint.contributors %>
           </div>
-        </div>
       </div>
 
-      <div class="col-sm-12">
-        <div class="small-graphs text-center">
-          <div class="small-graph-1 col-sm-6">
-            <%= column_chart @sprint.story_points_per_size, height: "115px" %>
-            <h5>Story points per size</h5>
-          </div>
-          <div class="small-graph-2 col-sm-6">
-            <%= column_chart @sprint.conversion_per_size, height: "115px" %>
-            <h5>Hours of work per hour</h5>
+        <div class="col-sm-12">
+      <div class="graph-section">
+          <div class="row">
+            <div class="col-sm-6">
+              <%= column_chart @sprint.story_points_per_size, height: "18vh" %>
+              <p>Story points /size</p>
+            </div>
+            <div class="col-sm-6">
+              <%= column_chart @sprint.conversion_per_size, height: "18vh" %>
+              <p>Hours of work /size</p>
+            </div>
           </div>
         </div>
       </div>

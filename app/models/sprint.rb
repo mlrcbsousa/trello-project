@@ -274,6 +274,7 @@ class Sprint < ApplicationRecord
     sprint_stats.map { |s| [s.created_at, (s.total_story_points - s.story_points_progress)] }.to_h
   end
 
+  # not usable by chartkick for some reason
   def stppot_merge_x
     s = sprint_stats.last
     [
