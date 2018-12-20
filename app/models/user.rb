@@ -51,7 +51,6 @@ class User < ApplicationRecord
 
   def self.boards(raw_info, user)
     # creates Board instances with idBoards from omniauth response
-    # Rails.logger.info "========>>>>> #{raw_info.inspect}"
     raw_info[:idBoards].each do |board_id|
       ext_board = user.client.find(:boards, board_id)
       user.boards.create!(
