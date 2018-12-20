@@ -5,7 +5,7 @@ class Member < ApplicationRecord
 
   # Validations
   validates :trello_ext_id, :hours_per_day, presence: true
-  validates :full_name, format: { with: /\A[a-zA-Z ]+\z/, message: "only allows letters" }
+  # validates :full_name, format: { with: /\A[a-zA-Z ]+\z/, message: "only allows letters" }
   validates :hours_per_day, numericality: true, inclusion: { in: (0..24) }
   # days_per_sprint
   validate :days_per_sprint_less_than_total
