@@ -29,3 +29,5 @@ deleteCard
 moveCardFromBoard
 moveCardToBoard
 removeMemberFromCard
+
+<%= favicon_link_tag asset_path('favicon.ico'), :rel => 'icon', :type =>  'image/png' %>

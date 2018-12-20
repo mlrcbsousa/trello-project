@@ -10,7 +10,7 @@
     <div class="row">
       <% @sprints.each do |sprint| %>
 
-        <div class="col-xs-12 col-sm-4" data-sprint-id="<%= sprint.id %>">
+        <div class="col-xs-12 col-sm-12" data-sprint-id="<%= sprint.id %>">
           <div class="sprint-list-cards">
 
             <div class="sprint-list-cards-trello-board">
@@ -19,55 +19,77 @@
 
             <div class="sprint-list-cards-description text-center">
 
-              <%= link_to sprint_path(sprint) do %>
-                <i class="fas fa-search"></i>
-              <% end %>
+              <!-- remote Edits links -->
+              <div class="edits text-justify">
+                <h5>Edit my Sprint Settings</h5>
+                <ul>
+                  <li>
+                    <%= link_to edit_sprint_conversion_path(sprint, sprint.conversion) do %>
+                      <i class="fas fa-pencil-alt"></i> Edit conversion
+                     <% end %>
+                  </li>
+                  <li>
+                    <%= link_to edit_sprint_path(sprint) do %>
+                      <i class="fas fa-pencil-alt"></i> Edit sprint dates
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to edit_contributors_path(sprint) do %>
+                      <i class="fas fa-pencil-alt"></i> Edit observers and schedule server side
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to sprint_members_path(sprint) do %>
+                      <i class="fas fa-pencil-alt"></i> Edit member schedule server side
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
 
-              <%= link_to sprint.trello_url do %>
-                <i class="fab fa-trello"></i>
-              <% end %>
+                <!-- remote update links -->
+              <div class="text-justify">
+                <h5>Edit my Sprint Settings</h5>
+                <div><%= link_to update_sprint_path(sprint), method: :post do %>
+                  <i class="fas fa-sync-alt"></i>Refresh sprint from trello
+                <% end %></div>
 
-              <%= link_to sprint_path(sprint),
+                <div><%= link_to update_members_path(sprint), method: :post do %>
+                  <i class="fas fa-sync-alt"></i>Refresh members from trello
+                <% end %></div>
+
+                <div><%= link_to update_lists_path(sprint), method: :post do %>
+                  <i class="fas fa-sync-alt"></i>Refresh lists from trello
+                <% end %></div>
+
+                <div><%= link_to update_cards_path(sprint), method: :post do %>
+                  <i class="fas fa-sync-alt"></i>Refresh cards from trello
+                <% end %></div>
+              </div>
+
+              <div class="call-to-actions">
+                <div>
+                  <%= link_to 'Visualize my Sprint', sprint_path(sprint), class: "btn btn-primary" %>
+                </div>
+                <div>
+                  <%= link_to sprint.trello_url do %>
+                    <i class="fab fa-trello"></i>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to sprint_path(sprint),
                     remote: true,
                     method: :delete,
                     data: { confirm: "Are you sure?" } do %>
                       <i class="far fa-trash-alt"></i>
-                    <% end %>
+                  <% end %>
+                </div>
+              </div>
 
-              <%= link_to edit_sprint_conversion_path(sprint, sprint.conversion) do %>
-                <i class="fas fa-pencil-alt"></i>edit conversion
-              <% end %>
-
-              <%= link_to edit_sprint_path(sprint) do %>
-                <i class="fas fa-pencil-alt"></i>edit sprint dates
-              <% end %>
-
-              <%= link_to edit_contributors_path(sprint) do %>
-                <i class="fas fa-pencil-alt"></i>edit observers and schedule server side
-              <% end %>
-
-              <%= link_to sprint_members_path(sprint) do %>
-                <i class="fas fa-pencil-alt"></i>edit member schedule server side
-              <% end %>
-
-              <!-- remote update links -->
-              <%= link_to update_sprint_path(sprint), method: :post do %>
-                <i class="fas fa-sync-alt"></i>refresh sprint from trello
-              <% end %>
-
-              <%= link_to update_members_path(sprint), method: :post do %>
-                <i class="fas fa-sync-alt"></i>refresh members from trello
-              <% end %>
-
-              <%= link_to update_lists_path(sprint), method: :post do %>
-                <i class="fas fa-sync-alt"></i>refresh lists from trello
-              <% end %>
-
-              <%= link_to update_cards_path(sprint), method: :post do %>
-                <i class="fas fa-sync-alt"></i>refresh cards from trello
-              <% end %>
-
+               <%= link_to sprint_path(sprint) do %>
+                  <i class="fas fa-search"></i>
+                <% end %>
             </div>
+
           </div>
         </div>
       <% end %>
