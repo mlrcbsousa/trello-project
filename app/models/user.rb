@@ -10,6 +10,7 @@ class User < ApplicationRecord
   # Associations
   has_many :sprints, dependent: :destroy
   has_many :boards, dependent: :destroy
+  has_many :webhooks
 
   # Validations
   validates :username,
@@ -69,5 +70,20 @@ class User < ApplicationRecord
       oauth_token: token,
       oauth_token_secret: secret
     )
+  end
+
+  # lists the users webhooks on trello
+  def trello_webhooks
+    HTTParty.get("https://api.trello.com/1/tokens/#{token}/webhooks/?key=#{ENV['TRELLO_KEY']}")
+  end
+
+  def delete_webhook(trello_webhook_id)
+    HTTParty.delete(
+      "https://api.trello.com/1/webhooks/#{trello_webhook_id}?key=#{ENV['TRELLO_KEY']}&token=#{token}"
+    )
+  end
+
+  def delete_all_webhooks
+    trello_webhooks.each { |webhook| delete_webhook(webhook["id"]) }
   end
 end

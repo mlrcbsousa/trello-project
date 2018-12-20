@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_19_121651) do
+ActiveRecord::Schema.define(version: 2018_12_20_221649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,14 +172,12 @@ ActiveRecord::Schema.define(version: 2018_12_19_121651) do
   end
 
   create_table "webhooks", force: :cascade do |t|
-    t.bigint "sprint_id"
+    t.bigint "user_id"
     t.string "description"
-    t.boolean "active"
-    t.string "trello_ext_id"
-    t.string "callback_url"
+    t.string "ext_board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sprint_id"], name: "index_webhooks_on_sprint_id"
+    t.index ["user_id"], name: "index_webhooks_on_user_id"
   end
 
   add_foreign_key "boards", "users"
@@ -191,5 +189,5 @@ ActiveRecord::Schema.define(version: 2018_12_19_121651) do
   add_foreign_key "members", "sprints"
   add_foreign_key "sprint_stats", "sprints"
   add_foreign_key "sprints", "users"
-  add_foreign_key "webhooks", "sprints"
+  add_foreign_key "webhooks", "users"
 end

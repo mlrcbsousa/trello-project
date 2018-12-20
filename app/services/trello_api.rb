@@ -1,6 +1,5 @@
 class TrelloAPI
   METHODS = %i[members lists cards]
-  # webhook
 
   # @sprint, @type, @model
   def initialize(attrs = { type: :onboard, model: :sprint })
@@ -106,19 +105,6 @@ class TrelloAPI
     list.update!(
       rank: (ind.positive? ? ind - 1 : 0),
       name: ext_list.name
-    )
-  end
-
-  # Webhook
-  def webhook
-    confirmation = @sprint.webhook_post
-    # this part isnt working, not saving anything
-    Webhook.create!(
-      description: confirmation["description"],
-      active: true,
-      callback_url: confirmation["callbackURL"],
-      trello_ext_id: confirmation["id"],
-      sprint: @sprint
     )
   end
 end

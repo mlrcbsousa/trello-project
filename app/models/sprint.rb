@@ -4,7 +4,6 @@ class Sprint < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :cards, through: :lists, dependent: :destroy
-  has_one :webhook, dependent: :destroy
   has_many :sprint_stats, dependent: :destroy
   has_many :member_stats, through: :members, dependent: :destroy
   has_one :conversion, dependent: :destroy
@@ -32,30 +31,6 @@ class Sprint < ApplicationRecord
   def update_available_man_hours
     update(available_man_hours: contributors.pluck(:available_hours).sum)
   end
-
-  def webhook_post
-    HTTParty.post(
-      "https://api.trello.com/1/tokens/#{user.token}/webhooks/?key=#{ENV['TRELLO_KEY']}",
-      query: {
-        description: "Sprint webhook user#{user.id}",
-        callbackURL: "#{ENV['BASE_URL']}webhooks",
-        idModel: trello_ext_id
-      },
-      headers: { "Content-Type" => "application/json" }
-    )
-  end
-
-  # def webhook_delete
-  #   HTTParty.delete(
-  #     "https://api.trello.com/1/tokens/#{user.token}/webhooks/?key=#{ENV['TRELLO_KEY']}",
-  #     query: {
-  #       description: "Sprint webhook user#{user.id}",
-  #       callbackURL: "#{ENV['BASE_URL']}webhooks",
-  #       idModel: trello_ext_id
-  #     },
-  #     headers: { "Content-Type" => "application/json" }
-  #   )
-  # end
 
   # STATISTICS
   # integer
