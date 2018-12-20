@@ -261,7 +261,8 @@ class Sprint < ApplicationRecord
 
   # decimal (percentage)
   def progress
-    total_weighted_cards.zero? ? 0 : (weighted_cards.map(&:progress).sum / total_weighted_cards).round(2)
+    progress_data = weighted_cards.map(&:progress).delete_if { |item| item.is_a?(String) }
+    total_weighted_cards.zero? ? 0 : (progress_data.sum / total_weighted_cards).round(2)
   end
 
   # integer
