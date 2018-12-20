@@ -275,12 +275,13 @@ class Sprint < ApplicationRecord
   end
 
   def stppot_merge
+    s = sprint_stats.last
     [
       { name: 'Actual', data: stppot },
       {
         name: 'Projection',
         data: {
-          sprint_stats.last.created_at => story_points_progress,
+          s.created_at => (s.total_story_points - s.story_points_progress),
           end_date => 0
         }
       }
