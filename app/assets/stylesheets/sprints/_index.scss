@@ -1,9 +1,10 @@
 @import "show";
 
+// ----- CSS FOR THE TITLE AND THE TITLE DESCRIPTION -----
 .sprint-list-title {
   line-height: 1.7em;
-  margin-top: 80px;
-  margin-bottom: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 0px 40px;
   display: flex;
   flex-direction: column;
@@ -18,22 +19,31 @@
   // margin-left: 20px;
 }
 
+// ----- CSS FOR THE LIST OF SPRINTS CARDS ------
+
 .sprint-list-cards {
   display: flex;
   background-color: $athens-gray;
-  flex-direction: column;
+  justify-content: center;
   border-radius: 1%;
-  justify-content: flex-center;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   padding-top: 15px;
   height: auto;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
   .sprint-list-cards-trello-board {
-    padding-left: 60px;
-    height: 85%;
+    display: flex;
+    justify-content: center;
+    // height: 85%;
   }
   .sprint-list-cards-description {
+    display: flex;
     padding-top: 3px;
-    height: 15%;
+    // height: 15%;
+  }
+  .edits {
+    font-size: 14px;
+  }
+  .updates {
+    font-size: 14px;
   }
 }
