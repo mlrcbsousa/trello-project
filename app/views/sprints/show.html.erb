@@ -48,10 +48,7 @@
   <div class="dashboard-burndown-chart">
     <div class="burndown-chart ">
         <!-- THIS IS A TEST AND SHOULD BE CHANGED WITH REAL DATA-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-        <div class="chart burndow-chart">
-          <canvas id="myChart" width="500" height="220"></canvas>
-        </div>
+        <%= area_chart @sprint.stppot, height: "200px" %>
     </div>
     <h5 class="text-center">THE SPRINT BURNDOWN CHART</h5>
   </div>
@@ -145,23 +142,23 @@
 
   <!-- BOTTOM -->
   <div class="full-graphs-3 text-center">
-    <%= column_chart @sprint.conversion_per_size_per_rank_ck, stacked: true, height: "120px", legend: false %>
+    <%= column_chart @sprint.conversion_per_size_per_rank_ck, stacked: true, height: "115px", legend: false %>
     <h5>Total # of cards per hours and per stage</h5>
   </div>
 
   <div class="full-graphs-4 text-center">
-    <%= column_chart @sprint.weighted_cards_per_size_per_rank_ck, stacked: true, legend: false, height: "120px" %>
+    <%= column_chart @sprint.weighted_cards_per_size_per_rank_ck, stacked: true, legend: false, height: "115px" %>
     <h5>Total # of cards per size and per stage</h5>
   </div>
 
   <div class="small-graphs text-center">
     <div class="small-graph-1 col-sm-6">
-      <%= column_chart @sprint.story_points_per_size, height: "140px" %>
-      <h5>This is a title</h5>
+      <%= column_chart @sprint.story_points_per_size, height: "115px" %>
+      <h5>Story points per size</h5>
     </div>
     <div class="small-graph-2 col-sm-6">
-      <%= column_chart @sprint.conversion_per_size, height: "140px" %>
-      <h5>This is a title</h5>
+      <%= column_chart @sprint.conversion_per_size, height: "115px" %>
+      <h5>Hours of work per hour</h5>
     </div>
   </div>
 
