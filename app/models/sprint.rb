@@ -274,7 +274,7 @@ class Sprint < ApplicationRecord
     sprint_stats.map { |s| [s.created_at, (s.total_story_points - s.story_points_progress)] }.to_h
   end
 
-  def stppot_merge
+  def stppot_merge_x
     s = sprint_stats.last
     [
       { name: 'Actual', data: stppot },
@@ -286,5 +286,13 @@ class Sprint < ApplicationRecord
         }
       }
     ]
+  end
+
+  def stppot_merge
+    s = sprint_stats.last
+    stppot.merge(
+      s.created_at => (s.total_story_points - s.story_points_progress),
+      end_date => 0
+    )
   end
 end
