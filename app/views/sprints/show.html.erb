@@ -201,9 +201,12 @@
       </div>
     </div>
   </div>
-  <div class="row" id="sprint-stats_js">
-    <!-- SPRINT STATS (sprints/show) partial: _sprint_stats -->
-    <%= render 'sprint_stats', sprint: @sprint %>
+
+  <div class="refresh_test" id="refresh_test_<%= @sprint.id %>">
+    <div class="row" id="sprint-stats_js">
+      <!-- SPRINT STATS (sprints/show) partial: _sprint_stats -->
+      <%= render 'sprint_stats', sprint: @sprint %>
+    </div>
   </div>
   <div class="row" id="team-stats_js">
     <!-- TEAM STATS (sprints/show) partial: _team_stats -->
@@ -212,3 +215,26 @@
 </div>
 
 <%= area_chart @sprint.stppot %>
+
+<!-- JAVASCRIPT HACKY CRACKY TO UPDATE WHICHEVER STATS SECTION I CHOOSE EVERY 5 SECONDS FOR NEW
+INFORMATIN FROM THE SERVER -->
+
+<script type="text/javascript">
+  const TIMEOUT = 10000;
+  const div = document.querySelector(".refresh_test");
+  const id = div.id.split('_')[2]
+
+  const poll = () => {
+    fetch(`/sprints/refresh/${id}`)
+      .then(response => response.text())
+      .then((data) => {
+        console.log(data);
+        console.log(div);
+        console.log(id);
+        div.innerHTML = ""
+        div.insertAdjacentHTML("beforeend", data);
+      });
+  }
+
+  setInterval(poll, TIMEOUT);
+</script>

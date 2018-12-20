@@ -1,5 +1,5 @@
 class SprintsController < ApplicationController
-  before_action :set_sprint, only: %i[show destroy edit update]
+  before_action :set_sprint, only: %i[show destroy edit update refresh]
   layout 'onboarding', only: %i[new edit]
 
   def index
@@ -14,6 +14,10 @@ class SprintsController < ApplicationController
   end
 
   def show; end
+
+  def refresh
+    render 'sprints/_sprint_stats', sprint: @sprint, layout: false
+  end
 
   def create
     @sprint = Sprint.new(sprint_params)
