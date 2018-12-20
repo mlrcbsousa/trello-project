@@ -280,7 +280,7 @@ class Sprint < ApplicationRecord
       {
         name: 'Projection',
         data: {
-          start_date => total_story_points,
+          sprint_stats.last.created_at => story_points_progress,
           end_date => 0
         }
       }
