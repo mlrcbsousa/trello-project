@@ -2,49 +2,54 @@
 @import "team_stats";
 
 // ----- CSS FOR THE TITLE AND THE TITLE DESCRIPTION -----
-.sprint-list-title {
-  line-height: 1.7em;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 0px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
-.sprint-list-title-description {
-    margin-top: 20px;
-  }
-
+// TEST
 .sprint-list {
-  // margin-left: 20px;
+  // box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
 }
 
-// ----- CSS FOR THE LIST OF SPRINTS CARDS ------
+.sprint-list-title {
+  margin: 50px 0px;
+  // padding: 20px;
+}
 
 .sprint-list-cards {
+  background-color: white;
   display: flex;
-  background-color: $athens-gray;
-  justify-content: center;
-  border-radius: 1%;
-  margin-bottom: 20px;
-  padding-top: 15px;
-  height: auto;
+  flex-direction: column;
+  // justify-content : center;
+  margin: 20px;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14);
-  .sprint-list-cards-trello-board {
+}
+
+.trello-board {
+  margin-top: 10px;
+}
+
+.edits-and-updates {
+  display: flex;
+  justify-content : center;
+  margin: 15px 0px;
+  h1 {
+    color: black;
+  }
+  li {
+    font-size: 12px;
+    color: $gray;
+    // text-decoration: none;
+  }
+}
+
+.call-to-actions {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  .secondary-call-to-actions {
+    padding-bottom: 20px;
+    width: 50%;
     display: flex;
     justify-content: center;
-    // height: 85%;
-  }
-  .sprint-list-cards-description {
-    display: flex;
-    padding-top: 3px;
-    // height: 15%;
-  }
-  .edits {
-    font-size: 14px;
-  }
-  .updates {
-    font-size: 14px;
   }
 }
