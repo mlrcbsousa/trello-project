@@ -34,40 +34,56 @@
       <div class="row">
         <div class="col-sm-3">
           <div class="kpi cards-kpi">
-            <h2><%= @sprint.total_weighted_cards %></h2>
-            <p><i class="fab fa-trello"></i> Weighted Cards</p>
+            <div>
+              <h2><%= @sprint.total_weighted_cards %></h2>
+              <p><i class="fab fa-trello"></i> Weighted Cards</p>
+            </div>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="kpi cards-kpi">
-            <h2><%= @sprint.total_cards_done_or_after_done %></h2>
-            <p><i class="fab fa-trello"></i> Cards completed</p>
+            <div>
+              <h2><%= @sprint.total_cards_done_or_after_done %></h2>
+              <p><i class="fab fa-trello"></i> Cards completed</p>
+            </div>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="kpi time-kpi">
-            <h2><%= @sprint.available_man_hours %></h2>
-            <p><i class="fas fa-clock"></i> Hours available</p>
+            <div>
+              <h2><%= @sprint.available_man_hours %></h2>
+              <p><i class="fas fa-clock"></i> Hours available</p>
+            </div>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="kpi time-kpi">
-            <h2><%= @sprint.total_conversion %></h2>
-            <p><i class="fas fa-clock"></i> Hours planned</p>
+            <div>
+              <h2><%= @sprint.total_conversion %></h2>
+              <p><i class="fas fa-clock"></i> Hours planned</p>
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
-          <div class="kpi cards-kpi">
-            <%= column_chart @sprint.story_points_per_size, height: "13vh" %>
-            <p>Total story points per size</p>
+          <div class="graph-section cards-kpi">
+            <div>
+              <div>
+                <%= column_chart @sprint.story_points_per_size, height: "13vh" %>
+              </div>
+              <p>Total story points per size</p>
+            </div>
           </div>
         </div>
         <div class="col-sm-6">
-          <div class="kpi time-kpi">
-            <%= column_chart @sprint.conversion_per_size, height: "13vh" %>
-            <p>Total hours per size</p>
+          <div class="graph-section time-kpi">
+            <div>
+              <div>
+                <%= column_chart @sprint.conversion_per_size, height: "13vh" %>
+              </div>
+              <p>Total hours per size</p>
+            </div>
           </div>
         </div>
       </div>
@@ -88,12 +104,16 @@
     <div class="col-sm-2">
       <div class="dashboard-kpis">
         <div class="kpi storypoints-kpi text-center">
-          <h2><%= @sprint.total_story_points %></h2>
-          <p>Total Story points</p>
+          <div>
+            <h2><%= @sprint.total_story_points %></h2>
+            <p>Total Story points</p>
+          </div>
         </div>
         <div class="kpi storypoints-kpi text-center">
-          <h2><%= @sprint.story_points_progress %></h2>
-          <p>Story points completed</p>
+          <div>
+            <h2><%= @sprint.story_points_progress %></h2>
+            <p>Story points completed</p>
+          </div>
         </div>
       </div>
     </div>
