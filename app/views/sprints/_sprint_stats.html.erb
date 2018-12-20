@@ -21,57 +21,58 @@
 </div>
 <!-- first row with burndown chart -->
 <div class="row">
-    <div class="col-sm-6">
-      <div class="graph-section">
-        <%= area_chart @sprint.stppot, height: "33vh" %>
-        <h5 class="text-center">THE SPRINT BURNDOWN CHART</h5>
-      </div>
+
+  <div class="col-sm-6">
+    <div class="graph-section">
+      <%= area_chart @sprint.stppot_merge, stacked: true, height: "33vh" %>
+      <h5 class="text-center">THE SPRINT BURNDOWN CHART</h5>
     </div>
-    <!-- 6 cards on right side of burndown chart -->
-    <div class="col-sm-6">
-      <div class="dashboard-kpis">
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="kpi cards-kpi">
-              <h2><%= @sprint.total_weighted_cards %></h2>
-              <p><i class="fab fa-trello"></i> Weighted Cards</p>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="kpi cards-kpi">
-              <h2><%= @sprint.total_cards_done_or_after_done %></h2>
-              <p><i class="fab fa-trello"></i> Cards completed</p>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="kpi time-kpi">
-              <h2><%= @sprint.available_man_hours %></h2>
-              <p><i class="fas fa-clock"></i> Hours available</p>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="kpi time-kpi">
-              <h2><%= @sprint.total_conversion %></h2>
-              <p><i class="fas fa-clock"></i> Hours planned</p>
-            </div>
+  </div>
+  <!-- 6 cards on right side of burndown chart -->
+  <div class="col-sm-6">
+    <div class="dashboard-kpis">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="kpi cards-kpi">
+            <h2><%= @sprint.total_weighted_cards %></h2>
+            <p><i class="fab fa-trello"></i> Weighted Cards</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="kpi cards-kpi">
-              <%= column_chart @sprint.story_points_per_size, height: "13vh" %>
-              <p>Total story points per size</p>
-            </div>
+        <div class="col-sm-3">
+          <div class="kpi cards-kpi">
+            <h2><%= @sprint.total_cards_done_or_after_done %></h2>
+            <p><i class="fab fa-trello"></i> Cards completed</p>
           </div>
-          <div class="col-sm-6">
-            <div class="kpi time-kpi">
-              <%= column_chart @sprint.conversion_per_size, height: "13vh" %>
-              <p>Total hours per size</p>
-            </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="kpi time-kpi">
+            <h2><%= @sprint.available_man_hours %></h2>
+            <p><i class="fas fa-clock"></i> Hours available</p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="kpi time-kpi">
+            <h2><%= @sprint.total_conversion %></h2>
+            <p><i class="fas fa-clock"></i> Hours planned</p>
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="kpi cards-kpi">
+            <%= column_chart @sprint.story_points_per_size, height: "13vh" %>
+            <p>Total story points per size</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="kpi time-kpi">
+            <%= column_chart @sprint.conversion_per_size, height: "13vh" %>
+            <p>Total hours per size</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <!-- second row on main dashboard -->
 <div class="graph-section">

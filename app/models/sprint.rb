@@ -272,8 +272,17 @@ class Sprint < ApplicationRecord
   def stppot
     sprint_stats.map { |s| [s.created_at, (s.total_story_points - s.story_points_progress)] }.to_h
   end
-  # # integer (hours)
-  # def total_conversion
-  #   conversion_per_rank.values.sum
-  # end
+
+  def stppot_merge
+    [
+      { name: 'Actual', data: stppot },
+      {
+        name: 'Projection',
+        data: {
+          start_date => total_story_points,
+          end_date => 0
+        }
+      }
+    ]
+  end
 end
