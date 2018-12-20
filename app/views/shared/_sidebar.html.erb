@@ -41,10 +41,16 @@
         </div>
         <!-- --------------- end of javascript tabs -->
 
-        <!-- TRELLO BOARD -->
-        <%= link_to @sprint.trello_url, target: "_blank", class: "sidebar-link-trello" do %>
-          <i class="fab fa-trello"></i>
-        <% end %>
+        <div style="display: flex; flex-direction: column;">
+          <!-- TRELLO BOARD -->
+          <%= link_to @sprint.trello_url, target: "_blank", class: "sidebar-link-trello" do %>
+            <i class="fab fa-trello"></i>
+          <% end %>
+
+          <%= link_to update_sprint_path(@sprint), method: :post do %>
+            <i class="fas fa-sync-alt"></i>
+          <% end %>
+        </div>
 
       <% end %>
 
