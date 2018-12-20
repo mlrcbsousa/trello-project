@@ -1,58 +1,108 @@
 <!-- _sprint_stats.html.erb -->
-<div class="col-sm-6">
-  <div class="graph-section">
-    <div class="row">
-      <div class="col-sm-8">
-        <p>Progress and Work /rank</p>
-        <%= bar_chart @sprint.merged_conversion_per_rank, height: "150px" %>
-        <p>Hours /size /rank</p>
-        <%= column_chart @sprint.conversion_per_size_per_rank_ck, stacked: true, height: "300px", legend: "bottom" %>
+
+<!-- header row -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="dashboard-title">
+      <div class="dashboard-header text-center">
+        <h1><%= @sprint.name %></h1>
+        <p>Your sprint last <strong><%= @sprint.total_days %> days</strong>: it started <strong><%= @sprint.total_days_from_start %> days</strong> ago. You have reached <strong><%= (@sprint.progress * 100).to_i %> %</strong> of your backlog objectives. You have another <strong><%= @sprint.total_days_to_end %> days left</strong>.</p>
       </div>
-      <div class="col-sm-4">
-        <div class="graph-section-title">
-          <h1>Rank</h1>
-        </div>
-        <%= render 'shared/stat_card', stat: { value: @sprint.progress_conversion, unit: "hrs", name: "Work Done" } %>
-        <%= render 'shared/stat_card', stat: { value: @sprint.total_conversion, unit: "hrs", name: "Total work" } %>
-        <div class="graph-section-piechart">
-          <p>Weighted cards /rank</p>
-          <%= pie_chart @sprint.weighted_cards_per_rank, height: "200px", donut: true, legend: false %>
+      <div class="dashboard-progress">
+        <div class="progress">
+          <% value = (@sprint.progress * 100).to_i %>
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= value %>%;">
+            <%= value %>%
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="col-sm-6">
-  <div class="graph-section">
-    <div class="row">
-      <div class="col-sm-8">
+<!-- first row with burndown chart -->
+<div class="row">
+    <div class="col-sm-6">
+      <div class="graph-section">
+        <%= area_chart @sprint.stppot, height: "33vh" %>
+        <h5 class="text-center">THE SPRINT BURNDOWN CHART</h5>
+      </div>
+    </div>
+    <!-- 6 cards on right side of burndown chart -->
+    <div class="col-sm-6">
+      <div class="dashboard-kpis">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="kpi cards-kpi">
+              <h2><%= @sprint.total_weighted_cards %></h2>
+              <p><i class="fab fa-trello"></i> Weighted Cards</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="kpi cards-kpi">
+              <h2><%= @sprint.total_cards_done_or_after_done %></h2>
+              <p><i class="fab fa-trello"></i> Cards completed</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="kpi time-kpi">
+              <h2><%= @sprint.available_man_hours %></h2>
+              <p><i class="fas fa-clock"></i> Hours available</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="kpi time-kpi">
+              <h2><%= @sprint.total_conversion %></h2>
+              <p><i class="fas fa-clock"></i> Hours planned</p>
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-sm-6">
-            <p>Story points /size</p>
-            <%= column_chart @sprint.story_points_per_size, height: "150px" %>
+            <div class="kpi cards-kpi">
+              <%= column_chart @sprint.story_points_per_size, height: "13vh" %>
+              <p>Total story points per size</p>
+            </div>
           </div>
           <div class="col-sm-6">
-            <p>Hours of work /size</p>
-            <%= column_chart @sprint.conversion_per_size, height: "150px" %>
+            <div class="kpi time-kpi">
+              <%= column_chart @sprint.conversion_per_size, height: "13vh" %>
+              <p>Total hours per size</p>
+            </div>
           </div>
         </div>
-        <p>Weighted cards /size /rank</p>
-        <%= column_chart @sprint.weighted_cards_per_size_per_rank_ck, stacked: true, legend: "bottom", height: "300px" %>
-      </div>
-      <div class="col-sm-4">
-        <div class="graph-section-title">
-          <h1>Size</h1>
-        </div>
-        <!-- relevant grouping -->
-        <%= render 'shared/stat_card', stat: { value: @sprint.story_points_progress.to_i, unit: "pts", name: "Points progress" } %>
-        <%= render 'shared/stat_card', stat: { value: @sprint.total_story_points, unit: "pts", name: "Total Story points" } %>
-
-        <div class="graph-section-piechart">
-          <p>Weighted cards /size</p>
-          <%= pie_chart @sprint.weighted_cards_per_size, height: "200px", donut: true, legend: false %>
-        </div>
-        <!--  -->
       </div>
     </div>
+</div>
+<!-- second row on main dashboard -->
+<div class="graph-section">
+  <div class="row text-center">
+
+    <h4>SPRINT STORY POINTS</h4>
+    <div class="col-sm-5">
+      <div class="text-center">
+        <p>Hours /size /rank</p>
+        <%= column_chart @sprint.conversion_per_size_per_rank_ck, stacked: true, legend: false, height: "25vh" %>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="dashboard-kpis">
+        <div class="kpi storypoints-kpi text-center">
+          <h2><%= @sprint.total_story_points %></h2>
+          <p>Total Story points</p>
+        </div>
+        <div class="kpi storypoints-kpi text-center">
+          <h2><%= @sprint.story_points_progress %></h2>
+          <p>Story points completed</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="text-center">
+        <p>Weighted cards /size /rank</p>
+        <%= column_chart @sprint.weighted_cards_per_size_per_rank_ck, stacked: true, legend: false, height: "25vh" %>
+      </div>
+    </div>
+
   </div>
 </div>
+

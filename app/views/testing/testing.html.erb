@@ -1,18 +1,35 @@
-<div id="info">
-  Numero random: <strong><%= rand(0...1000) %></strong>
-</div>
+  <div class="stats-title">
+    <div class="stats-title-description">
+      <div class="stats-title-days">
+        <div class="stats-title-labour">
+        </div>
+      </div>
+    </div>
+  </div>
 
-<%= javascript_pack_tag 'application' %>
-<script type="text/javascript">
-  var TIMEOUT = 5000;
 
-  function poll() {
-    $.get('/testing/testing', function(data) {
-      console.log(data);
+          <div class="graph-section-title">
+            <h1>Rank</h1>
+          </div>
 
-      $('#info').replaceWith(data);
-    });
-  }
+          <%= render 'shared/stat_card', stat: { value: @sprint.progress_conversion, unit: "hrs", name: "Work Done" } %>
+          <%= render 'shared/stat_card', stat: { value: @sprint.total_conversion, unit: "hrs", name: "Total work" } %>
+          <div class="graph-section-piechart">
+            <p>Weighted cards /rank</p>
+            <%= pie_chart @sprint.weighted_cards_per_rank, height: "200px", donut: true, legend: false %>
+          </div>
 
-  setInterval(poll, TIMEOUT);
-</script>
+            <p>Hours of work /size</p>
+            <%= column_chart @sprint.conversion_per_size, height: "150px" %>
+        <div class="graph-section-title">
+          <h1>Size</h1>
+        </div>
+        <!-- relevant grouping -->
+        <%= render 'shared/stat_card', stat: { value: @sprint.story_points_progress.to_i, unit: "pts", name: "Points progress" } %>
+        <%= render 'shared/stat_card', stat: { value: @sprint.total_story_points, unit: "pts", name: "Total Story points" } %>
+
+        <div class="graph-section-piechart">
+          <p>Weighted cards /size</p>
+          <%= pie_chart @sprint.weighted_cards_per_size, height: "200px", donut: true, legend: false %>
+        </div>
+        <!--  -->

@@ -16,7 +16,7 @@ class SprintsController < ApplicationController
   def show; end
 
   def refresh
-    render 'sprints/_sprint_stats', sprint: @sprint, layout: false
+    render 'sprints/_stats_dashboard', sprint: @sprint, layout: false
   end
 
   def create
@@ -24,6 +24,7 @@ class SprintsController < ApplicationController
     @sprint.user = current_user
     if @sprint.save
       TrelloAPI.new(sprint: @sprint)
+      @sprint.webhook_post
       redirect_to new_conversion_path(@sprint)
     else
       render :new, alert: 'Unable to create your sprint!'

@@ -266,7 +266,7 @@ class Sprint < ApplicationRecord
 
   # integer
   def story_points_progress
-    (progress * total_story_points).round(2)
+    (progress * total_story_points).to_i
   end
 
   def stppot
