@@ -13,8 +13,21 @@ class Sprint < ApplicationRecord
   # validates_timeliness gem
   # rails generate validates_timeliness:install
   validates_date :end_date, on_or_after: :start_date
-  # after_create :create_webhook
 
+  # argument is a sprint object
+  def post_webhook
+    HTTParty.post(
+      "https://api.trello.com/1/tokens/#{user.token}/webhooks/?key=#{ENV['TRELLO_KEY']}",
+      query: {
+        description: "Sprint webhook user#{user.id}",
+        callbackURL: "#{ENV['BASE_URL']}webhooks",
+        idModel: trello_ext_id
+      },
+      headers: { "Content-Type" => "application/json" }
+    )
+  end
+
+  # helper methods
   def weighted_cards
     cards.where.not(size: :o)
   end

@@ -24,6 +24,8 @@ class SprintsController < ApplicationController
     @sprint.user = current_user
     if @sprint.save
       TrelloAPI.new(sprint: @sprint)
+      response = @sprint.post_webhook
+      Rails.logger.info "=M=A=D=A=F=U=K=I=N=====W=E=B=H=O=O=K======>>>>>>>>>>>>>> #{response.inspect}"
       redirect_to new_conversion_path(@sprint)
     else
       render :new, alert: 'Unable to create your sprint!'
