@@ -1,6 +1,7 @@
 // ---------- THIBAUT WORK CSS SHOW PAGE-------------
 
 // *** MAIN CONTAINER ***
+
 .dashboard-container {
   height: 100vh;
   display: grid;
@@ -300,6 +301,15 @@
   padding: 10px;
 }
 
+
+@media(max-width: 992px) {
+  .dashboard-container {
+    display: block;
+  }
+  .team-performance-container {
+    display: block;
+  }
+}
 
 // -------------------- MANUEL WORK CSS SHOW PAGE -----------------------
 
