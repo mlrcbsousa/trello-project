@@ -17,71 +17,69 @@
 
             <div class="edits-and-updates">
               <div class="edit">
-                <a class="btn btn-default" data-toggle="collapse" href="#collapseEditer<%= sprint.id%>" role="button" aria-expanded="false" aria-controls="collapseEditer<%= sprint.id%>">
+                <a class="btn btn-default" data-toggle="collapse" href="#collapseEdit<%= sprint.id %>" role="button" aria-expanded="false" aria-controls="collapseEdit<%= sprint.id %>">
                   <h5><i class="fas fa-pencil-alt"></i></h5>
                 </a>
               </div>
 
               <div class="update">
-                  <a class="btn btn-default" data-toggle="collapse" href="#collapseUpdate<%= sprint.id%>" role="button" aria-expanded="false" aria-controls="collapseUpdate<%= sprint.id%>">
+                  <a class="btn btn-default" data-toggle="collapse" href="#collapseUpdate<%= sprint.id %>" role="button" aria-expanded="false" aria-controls="collapseUpdate<%= sprint.id %>">
                     <h5><i class="fas fa-sync-alt"></i></h5>
                   </a>
-
               </div>
             </div>
-
-
-            <div class="collapse" id="collapseEditer<%= sprint.id%>">
+            <!-- EDIT COLLAPSE -->
+            <div class="collapse" id="collapseEdit<%= sprint.id %>">
               <div class="card card-body">
-                  <ul>
-                    <li>
-                      <%= link_to edit_sprint_conversion_path(sprint, sprint.conversion) do %>
-                        Edit conversion
-                       <% end %>
-                    </li>
-                    <li>
-                      <%= link_to edit_sprint_path(sprint) do %>
-                        Edit sprint dates
-                      <% end %>
-                    </li>
-                    <li>
-                      <%= link_to edit_contributors_path(sprint) do %>
-                        Edit observers and schedule server side
-                      <% end %>
-                    </li>
-                    <li>
-                      <%= link_to sprint_members_path(sprint) do %>
-                        Edit member schedule server side
-                      <% end %>
-                    </li>
-                  </ul>
+                <ul>
+                  <li>
+                    <%= link_to edit_sprint_conversion_path(sprint, sprint.conversion) do %>
+                      Edit conversion
+                     <% end %>
+                  </li>
+                  <li>
+                    <%= link_to edit_sprint_path(sprint) do %>
+                      Edit sprint dates
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to edit_contributors_path(sprint) do %>
+                      Edit observers and schedule server side
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to sprint_members_path(sprint) do %>
+                      Edit member schedule server side
+                    <% end %>
+                  </li>
+                </ul>
               </div>
             </div>
-
-            <div class="collapse" id="collapseUpdate<%= sprint.id%>">
+            <!-- UPDATE COLLAPSE -->
+            <div class="collapse" id="collapseUpdate<%= sprint.id %>">
               <div class="card card-body">
-                  <ul>
-                    <li>
-                      <%= link_to update_sprint_path(sprint), method: :post do %>
-                        Refresh sprint from trello
-                      <% end %>
-                    </li>
-                    <li>
-                      <%= link_to update_members_path(sprint), method: :post do %>
-                        Refresh members from trello
-                      <% end %>
-                    </li>
-                    <li>
-                      <%= link_to update_lists_path(sprint), method: :post do %>
-                        Refresh lists from trello
-                      <% end %>
-                    </li>
-                    <li>
-                      <%= link_to update_cards_path(sprint), method: :post do %>
-                         Refresh cards from trello
-                       <% end %>
-                    </li>
-                  </ul>
+                <ul>
+                  <li>
+                    <%= link_to update_sprint_path(sprint), method: :post do %>
+                      Refresh sprint from trello
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to update_members_path(sprint), method: :post do %>
+                      Refresh members from trello
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to update_lists_path(sprint), method: :post do %>
+                      Refresh lists from trello
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to update_cards_path(sprint), method: :post do %>
+                       Refresh cards from trello
+                     <% end %>
+                  </li>
+                </ul>
               </div>
             </div>
 

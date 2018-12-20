@@ -1,0 +1,13 @@
+<!-- _stats_dashboard.html.erb -->
+<div class="dashboard">
+  <div class="container">
+    <div id="sprint-stats_js">
+      <!-- SPRINT STATS (sprints/show) partial: _sprint_stats -->
+      <%= render 'sprint_stats', sprint: sprint %>
+    </div>
+    <div id="team-stats_js">
+      <!-- TEAM STATS (sprints/show) partial: _team_stats -->
+      <%= render 'team_stats', sprint: sprint %>
+    </div>
+  </div>
+</div>

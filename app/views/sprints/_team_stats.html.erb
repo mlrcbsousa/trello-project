@@ -1,50 +1,139 @@
 <!-- _team_stats.html.erb -->
-<div class="col-sm-8">
 
-  <div class="graph-section" id="members-stats_js">
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="graph-section-title">
-          <h1>Team</h1>
-        </div>
-        <%= render 'shared/stat_card', stat: { value: @sprint.total_contributors, name: "Members" } %>
-        <%= render 'shared/stat_card', stat: { value: @sprint.total_conversion, unit: "hrs", name: "Total work" } %>
-        <div class="graph-section-piechart">
-          <p>Cards /member</p>
-          <%= pie_chart @sprint.weighted_cards_per_contributor, legend: false, height: "200px" %>
-        </div>
-      </div>
-      <div class="col-sm-9">
-        <div class="row">
-          <div class="col-sm-6">
-            <p>Allocated & Available hrs /member</p>
-            <%= bar_chart @sprint.merged_conversion_per_contributor, height: "150px", legend: false %>
-          </div>
-
-          <div class="col-sm-6">
-            <p>Weighted cards /size /member</p>
-            <%= line_chart @sprint.weighted_cards_per_size_per_contributor_ck, height: "150px", legend: false %>
-          </div>
-        </div>
-        <p>Allocated work /size /member</p>
-        <%= column_chart @sprint.conversion_per_size_per_contributor_ck, height: "300px" %>
+<!-- header row -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="team-dashboard-title">
+      <div class="team-performance-header text-center">
+        <h1><%= @sprint.name %></h1>
+        <p>Your have a total of <strong><%= @sprint.available_man_hours %> hours</strong> man hours available for your sprint. You have planned <strong><%= @sprint.total_conversion %> hours</strong> of work so far.</p>
       </div>
     </div>
   </div>
-
-  <div id="member-stats_js">
-    <!-- member sections -->
-    <% @sprint.contributors.each do |member| %>
-      <%= render 'member_stats', member: member %>
-    <% end %>
-  </div>
-
-</div>
-<div class="col-sm-4">
-  <div class="graph-section team-members">
-    <!-- member cards -->
-    <%= render @sprint.contributors %>
-  </div>
 </div>
 
+<!-- remaining team stats row -->
+<div class="row">
+  <!-- main team dashboard -->
+  <div class="col-sm-8">
+    <!-- whole of team stats -->
+    <div id="members-stats_js">
+      <div class="row">
 
+        <div class="col-sm-12">
+          <div class="team-progress">
+            <div class="progress">
+              <% value = (@sprint.progress * 100).to_i %>
+              <div class="progress-bar" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= value %>%;">
+                <%= value %>%
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="time-allocation-per-rank text-center">
+            <%= bar_chart @sprint.merged_conversion_per_contributor, height: "17vh", legend: false %>
+            <h5>Assigned time vs. time available per contributor</h5>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- bottom left side -->
+          <div class="col-sm-6">
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="full-graphs-1 text-center">
+                  <%= pie_chart @sprint.weighted_cards_per_size, height: "30vh", donut: true, legend: false %>
+                  <h5>Total number of cards per size</h4>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="full-graphs-2 text-center">
+                  <%= pie_chart @sprint.weighted_cards_per_rank, height: "30vh", donut: true, legend: false %>
+                  <h5>Total number of cards per stage</h5>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- bottom right side -->
+          <div class="col-sm-6">
+
+            <div class="full-graphs-3 text-center">
+              <p>Weighted cards /size /member</p>
+              <%= column_chart @sprint.weighted_cards_per_size_per_contributor_ck, height: "15vh", legend: false %>
+            </div>
+
+            <div class="full-graphs-4 text-center">
+              <p>Allocated work /size /member</p>
+              <%= column_chart @sprint.conversion_per_size_per_contributor_ck, height: "15vh", legend: false %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- each members individual stats -->
+    <div id="member-stats_js">
+      <% @sprint.contributors.each do |member| %>
+        <%= render 'member_stats', member: member %>
+      <% end %>
+    </div>
+
+  </div>
+
+  <!-- left side member list etc -->
+  <div class="col-sm-4">
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="team team-contributor text-center">
+          <i class="fas fa-user-md"></i>
+          <div>
+            <h2><%= @sprint.total_contributors %></h2>
+            <p>Total contributor(s)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="team team-observer text-center">
+          <i class="fas fa-glasses"></i>
+          <div>
+            <h2><%= @sprint.members.count - @sprint.total_contributors %></h2>
+            <p>Total observer(s)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="teams-contributors">
+
+          <div class="graph-section team-members">
+            <!-- member cards -->
+            <%= render @sprint.contributors %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="small-graphs text-center">
+          <div class="small-graph-1 col-sm-6">
+            <%= column_chart @sprint.story_points_per_size, height: "115px" %>
+            <h5>Story points per size</h5>
+          </div>
+          <div class="small-graph-2 col-sm-6">
+            <%= column_chart @sprint.conversion_per_size, height: "115px" %>
+            <h5>Hours of work per hour</h5>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
