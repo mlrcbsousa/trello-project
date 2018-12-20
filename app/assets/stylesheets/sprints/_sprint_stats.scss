@@ -2,10 +2,17 @@
   height: 100vh;
   .dashboard-title {
     height: 15vh;
+    margin-top: 40px;
     .dashboard-header {
-      h1 { color: $gray; }
+      h1 {
+        color: $gray;
+        margin-bottom: 20px;
+      }
     }
-    .dashboard-progress { padding: 0 30px; }
+    .dashboard-progress {
+      padding: 0 30px;
+      margin-top: 10px;
+    }
   }
 }
 .dashboard-burndown-chart {
