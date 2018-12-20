@@ -1,0 +1,124 @@
+// _team_stats.scss
+.team-dashboard-title {
+ height: 10vh;
+}
+.team-performance-header {
+  margin: 15px 0px;
+  padding-top: 20px;
+  line-height: 2.5;
+  h1 {
+    color: $gray;
+  }
+}
+.team-progress {
+  background-color: white;
+  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+  padding-top: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+.team {
+  background-color : white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  width: 97%;
+  h2 {
+    font-size: 45px;
+  }
+  p {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: bolder;
+  }
+  i {
+    font-size: 45px;
+  }
+}
+.team-contributor {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+.team-observer {
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+// <!-- MIDDLE -->
+.time-allocation-per-rank {
+  background-color : white;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  padding: 15px 40px;
+  // overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.teams-contributors {
+  background-color : $yellow;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 1px;
+  background-color: white;
+  &.team-members {
+    height: 100%;
+    overflow: scroll;
+  }
+}
+
+.full-graphs-1 {
+  background-color : white;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.full-graphs-2 {
+  background-color : white;
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+// <!-- BOTTOM -->
+.full-graphs-3 {
+  background-color : white;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.full-graphs-4 {
+  background-color : white;
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.small-graphs {
+  background-color : white;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+}
