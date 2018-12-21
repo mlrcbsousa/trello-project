@@ -24,7 +24,7 @@
 
   <div class="col-sm-6">
     <div class="graph-section">
-      <%= area_chart @sprint.stppot_merge, stacked: true, height: "33vh" %>
+      <%= area_chart @sprint.stppot_merge, stacked: true, height: "33vh", id: SecureRandom.hex(7) %>
       <h5 class="text-center">THE SPRINT BURNDOWN CHART</h5>
     </div>
   </div>
@@ -70,7 +70,7 @@
           <div class="graph-section cards-kpi">
             <div>
               <div>
-                <%= column_chart @sprint.story_points_per_size, height: "13vh" %>
+                <%= column_chart @sprint.story_points_per_size, height: "13vh", id: SecureRandom.hex(7) %>
               </div>
               <p>Total story points per size</p>
             </div>
@@ -80,7 +80,7 @@
           <div class="graph-section time-kpi">
             <div>
               <div>
-                <%= column_chart @sprint.conversion_per_size, height: "13vh" %>
+                <%= column_chart @sprint.conversion_per_size, height: "13vh", id: SecureRandom.hex(7) %>
               </div>
               <p>Total hours per size</p>
             </div>
@@ -98,7 +98,7 @@
     <div class="col-sm-5">
       <div class="text-center">
         <p>Hours /size /rank</p>
-        <%= column_chart @sprint.conversion_per_size_per_rank_ck, stacked: true, legend: false, height: "25vh" %>
+        <%= column_chart @sprint.conversion_per_size_per_rank_ck, stacked: true, legend: false, height: "25vh", id: SecureRandom.hex(7) %>
       </div>
     </div>
     <div class="col-sm-2">
@@ -120,7 +120,7 @@
     <div class="col-sm-5">
       <div class="text-center">
         <p>Weighted cards /size /rank</p>
-        <%= column_chart @sprint.weighted_cards_per_size_per_rank_ck, stacked: true, legend: false, height: "25vh" %>
+        <%= column_chart @sprint.weighted_cards_per_size_per_rank_ck, stacked: true, legend: false, height: "25vh", id: SecureRandom.hex(7) %>
       </div>
     </div>
 

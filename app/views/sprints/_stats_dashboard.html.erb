@@ -3,11 +3,11 @@
   <div class="container">
     <div id="sprint-stats_js">
       <!-- SPRINT STATS (sprints/show) partial: _sprint_stats -->
-      <%= render 'sprint_stats', sprint: sprint %>
+      <%= render 'sprint_stats', sprint: (sprint ||= @sprint) %>
     </div>
-    <div id="team-stats_js">
+    <div id="team-stats_js" class="hidden">
       <!-- TEAM STATS (sprints/show) partial: _team_stats -->
-      <%= render 'team_stats', sprint: sprint %>
+      <%= render 'team_stats', sprint: (sprint ||= @sprint) %>
     </div>
   </div>
 </div>

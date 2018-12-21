@@ -31,7 +31,7 @@
 
         <div class="col-sm-12">
           <div class="graph-section">
-            <%= bar_chart @sprint.merged_conversion_per_contributor, height: "25vh", legend: false %>
+            <%= bar_chart @sprint.merged_conversion_per_contributor, height: "25vh", legend: false, id: SecureRandom.hex(7) %>
             <p>Assigned time vs. time available per contributor</p>
           </div>
         </div>
@@ -41,14 +41,14 @@
 
         <div class="col-sm-3">
           <div class="graph-section">
-            <%= pie_chart @sprint.weighted_cards_per_size, height: "31vh", donut: true, legend: false %>
+            <%= pie_chart @sprint.weighted_cards_per_size, height: "31vh", donut: true, legend: false, id: SecureRandom.hex(7) %>
             <p>Total number of cards per size</p>
           </div>
         </div>
 
         <div class="col-sm-3">
           <div class="graph-section">
-            <%= pie_chart @sprint.weighted_cards_per_rank, height: "31vh", donut: true, legend: false %>
+            <%= pie_chart @sprint.weighted_cards_per_rank, height: "31vh", donut: true, legend: false, id: SecureRandom.hex(7) %>
             <p>Total number of cards per stage</p>
           </div>
         </div>
@@ -57,12 +57,12 @@
         <div class="col-sm-6">
 
           <div class="graph-section">
-            <%= column_chart @sprint.weighted_cards_per_size_per_contributor_ck, height: "13vh", legend: false %>
+            <%= column_chart @sprint.weighted_cards_per_size_per_contributor_ck, height: "13vh", legend: false, id: SecureRandom.hex(7) %>
             <p>Weighted cards /size /member</p>
           </div>
 
           <div class="graph-section">
-            <%= column_chart @sprint.conversion_per_size_per_contributor_ck, height: "13vh", legend: false %>
+            <%= column_chart @sprint.conversion_per_size_per_contributor_ck, height: "13vh", legend: false, id: SecureRandom.hex(7) %>
             <p>Allocated work /size /member</p>
           </div>
 
@@ -116,15 +116,15 @@
           </div>
       </div>
 
-        <div class="col-sm-12">
-      <div class="graph-section">
+      <div class="col-sm-12">
+        <div class="graph-section">
           <div class="row">
             <div class="col-sm-6">
-              <%= column_chart @sprint.story_points_per_size, height: "18vh" %>
+              <%= column_chart @sprint.story_points_per_size, height: "18vh", id: SecureRandom.hex(7) %>
               <p>Story points /size</p>
             </div>
             <div class="col-sm-6">
-              <%= column_chart @sprint.conversion_per_size, height: "18vh" %>
+              <%= column_chart @sprint.conversion_per_size, height: "18vh", id: SecureRandom.hex(7) %>
               <p>Hours of work /size</p>
             </div>
           </div>
