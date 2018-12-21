@@ -1,5 +1,7 @@
 "<%= favicon_link_tag asset_path('favicon.ico'), :rel => 'icon', :type =>  'image/png' %>"
-
+  <%= #link_to update_sprint_path(@sprint), method: :post do %>
+            <!-- <i class="fas fa-sync-alt"></i> -->
+          <% #end %>
 # sprint
 updateBoard
 
