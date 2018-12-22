@@ -14,7 +14,7 @@ class Sprint < ApplicationRecord
   # rails generate validates_timeliness:install
   validates_date :end_date, on_or_after: :start_date
 
-  # argument is a sprint object
+  # sends post request for creation of webhook on trello
   def post_webhook
     HTTParty.post(
       "https://api.trello.com/1/tokens/#{user.token}/webhooks/?key=#{ENV['TRELLO_KEY']}",
@@ -277,6 +277,7 @@ class Sprint < ApplicationRecord
     ]
   end
 
+  # actual burndown chart patch used
   def stppot_merge
     s = sprint_stats.last
     stppot.merge(
