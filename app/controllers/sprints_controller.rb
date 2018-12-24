@@ -22,16 +22,14 @@ class SprintsController < ApplicationController
   def create
     @sprint = Sprint.new(sprint_params)
     @sprint.user = current_user
-    # separated the next 2 lines because the first requires a http response
-    byebug
-    webhook = @sprint.attach_webhook
-    @sprint.webhook = webhook
     if @sprint.save
+      # check if that sprint is already setup in the app by another user
+      webhook = Webhook.find_by(ext_board_id: @sprint.trello_ext_id)
+      webhook ? @sprint.update(webhook: webhook) : @sprint.create_webhook
       TrelloAPI.new(sprint: @sprint)
       redirect_to new_conversion_path(@sprint)
     else
       render :new, alert: 'Unable to create your sprint!'
-      raise
     end
   end
 

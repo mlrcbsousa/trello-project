@@ -10,7 +10,6 @@ class User < ApplicationRecord
   # Associations
   has_many :sprints, dependent: :destroy
   has_many :boards, dependent: :destroy
-  has_many :webhooks
 
   # Validations
   validates :username,
