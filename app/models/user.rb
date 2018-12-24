@@ -35,7 +35,6 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20] # Fake password for validation
       user.save
     end
-    boards(auth.extra.raw_info, user)
     return user
   end
 
@@ -50,17 +49,32 @@ class User < ApplicationRecord
     user_params.to_h
   end
 
-  def self.boards(raw_info, user)
-    # creates Board instances with idBoards from omniauth response
-    raw_info[:idBoards].each do |board_id|
-      ext_board = user.client.find(:boards, board_id)
-      user.boards.create!(
-        trello_ext_id: ext_board.id,
-        name: ext_board.name,
-        trello_url: ext_board.url
-      )
+  # ------------
+  # boards
+  # argument is an array
+  def create_boards(ext_board_ids)
+    # destroy local if not in remote
+    clean_boards(ext_board_ids)
+    ext_board_ids.each do |ext_id|
+      ext_board = client.find(:boards, ext_id)
+      board = boards.find_by(trello_ext_id: ext_id)
+      board ? update_board(board, ext_board) : create_board(ext_board)
     end
   end
+
+  def clean_boards(ext_board_ids)
+    to_clean = boards.pluck(:trello_ext_id) - ext_board_ids
+    to_clean.each { |ext_id| boards.find_by(trello_ext_id: ext_id).destroy } unless to_clean.empty?
+  end
+
+  def update_board(board, ext_board)
+    board.update!(name: ext_board.name, trello_url: ext_board.url)
+  end
+
+  def create_board(ext_board)
+    boards.create!(trello_ext_id: ext_board.id, name: ext_board.name, trello_url: ext_board.url)
+  end
+  # ------------
 
   # create a client with ruby-trello gem to make requests to trello api
   def client
@@ -72,18 +86,26 @@ class User < ApplicationRecord
     )
   end
 
-  # lists the users webhooks on trello
+  # lists the user's webhooks on trello
   def trello_webhooks
     HTTParty.get("https://api.trello.com/1/tokens/#{token}/webhooks/?key=#{ENV['TRELLO_KEY']}")
   end
 
-  def delete_webhook(trello_webhook_id)
+  # takes a string as an argument
+  def delete_wh_by_ext_id(trello_webhook_id)
     HTTParty.delete(
       "https://api.trello.com/1/webhooks/#{trello_webhook_id}?key=#{ENV['TRELLO_KEY']}&token=#{token}"
     )
   end
 
+  # takes a sprint as an argument
+  def delete_wh_by_sprint(sprint)
+    trello_webhook_id = trello_webhooks.select { |webhook| webhook["idModel"] = sprint.trello_ext_id }[0]["id"]
+    delete_wh_by_ext_id(trello_webhook_id)
+  end
+
+  # helper method, for use in console
   def delete_all_webhooks
-    trello_webhooks.each { |webhook| delete_webhook(webhook["id"]) }
+    trello_webhooks.each { |webhook| delete_wh_by_ext_id(webhook["id"]) }
   end
 end

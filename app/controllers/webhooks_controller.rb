@@ -40,7 +40,7 @@ class WebhooksController < ActionController::Base
   def receive
     sprints = Sprint.where(trello_ext_id: params[:model][:id])
     event = params[:event][:type]
-    EVENTS.each { |k, v| sprints.each { |sprint| trello(sprint, k) } if v.include?(event) }
+    EVENTS.each { |model, events| sprints.each { |sprint| trello(sprint, model) } if events.include?(event) }
   end
 
   private

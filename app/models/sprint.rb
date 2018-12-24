@@ -1,6 +1,7 @@
 class Sprint < ApplicationRecord
   require 'trello'
   belongs_to :user
+  belongs_to :webhook
   has_many :members, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :cards, through: :lists, dependent: :destroy
@@ -14,9 +15,35 @@ class Sprint < ApplicationRecord
   # rails generate validates_timeliness:install
   validates_date :end_date, on_or_after: :start_date
 
+  # Callbacks
+  after_destroy :delete_webhook
+
+  # Must include the fact that only one webhook will be created per sprint
+  # even if more then one user sets up the same board as a sprint on the app
+  def delete_webhook
+    # delete webhook if no other sprint is using that webhook
+    if webhook.sprints.count > 1
+      # find the next sprint using that webhook, and recreate webhook in that sprint.user's name
+      new_webhook_sprints = webhook.sprints.where.not(user: user)
+      new_webhook = new_webhook_sprints[0].post_webhook
+      new_webhook_sprints.each { |sprint| sprint.update!(webhook: new_webhook) }
+    else
+      webhook.destroy
+    end
+    user.delete_wh_by_sprint(self)
+  end
+
+  # --------- Trello webhook
+  # check if that sprint is already setup in the app by another user
+  # else returns new webhook
+  def attach_webhook
+    local_webhook = Webhook.find_by(ext_board_id: trello_ext_id)
+    local_webhook || post_webhook
+  end
+
   # sends post request for creation of webhook on trello
   def post_webhook
-    HTTParty.post(
+    response = HTTParty.post(
       "https://api.trello.com/1/tokens/#{user.token}/webhooks/?key=#{ENV['TRELLO_KEY']}",
       query: {
         description: "Sprint webhook user#{user.id}",
@@ -25,8 +52,21 @@ class Sprint < ApplicationRecord
       },
       headers: { "Content-Type" => "application/json" }
     )
+    create_local_webhook(response) unless response["idModel"].nil?
   end
 
+  def create_local_webhook(response)
+    Webhook.create!(
+      ext_board_id: response["idModel"],
+      description: response["description"],
+      user: user
+      # response["active"]
+      # response["id"]
+    )
+    Rails.logger.info "=M=A=D=A=F=U=K=I=N=====W=E=B=H=O=O=K======>>>>>>>>>>>>>> #{response.inspect}"
+  end
+
+  # ----------
   # helper methods
   def weighted_cards
     cards.where.not(size: :o)

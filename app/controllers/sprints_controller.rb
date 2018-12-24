@@ -22,13 +22,16 @@ class SprintsController < ApplicationController
   def create
     @sprint = Sprint.new(sprint_params)
     @sprint.user = current_user
+    # separated the next 2 lines because the first requires a http response
+    byebug
+    webhook = @sprint.attach_webhook
+    @sprint.webhook = webhook
     if @sprint.save
       TrelloAPI.new(sprint: @sprint)
-      response = @sprint.post_webhook
-      Rails.logger.info "=M=A=D=A=F=U=K=I=N=====W=E=B=H=O=O=K======>>>>>>>>>>>>>> #{response.inspect}"
       redirect_to new_conversion_path(@sprint)
     else
       render :new, alert: 'Unable to create your sprint!'
+      raise
     end
   end
 
@@ -66,7 +69,8 @@ class SprintsController < ApplicationController
       :start_date,
       :end_date,
       :man_hours,
-      :trello_ext_id
+      :trello_ext_id,
+      :webhook_id
     )
   end
 end
