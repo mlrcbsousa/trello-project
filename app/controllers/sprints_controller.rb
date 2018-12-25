@@ -23,9 +23,10 @@ class SprintsController < ApplicationController
     @sprint = Sprint.new(sprint_params)
     @sprint.user = current_user
     if @sprint.save
+      # check if that sprint board is already setup in the app by another user
+      webhook = Webhook.find_by(ext_board_id: @sprint.trello_ext_id)
+      webhook ? @sprint.update(webhook: webhook) : @sprint.create_webhook
       TrelloAPI.new(sprint: @sprint)
-      response = @sprint.post_webhook
-      Rails.logger.info "=M=A=D=A=F=U=K=I=N=====W=E=B=H=O=O=K======>>>>>>>>>>>>>> #{response.inspect}"
       redirect_to new_conversion_path(@sprint)
     else
       render :new, alert: 'Unable to create your sprint!'
@@ -66,7 +67,8 @@ class SprintsController < ApplicationController
       :start_date,
       :end_date,
       :man_hours,
-      :trello_ext_id
+      :trello_ext_id,
+      :webhook_id
     )
   end
 end

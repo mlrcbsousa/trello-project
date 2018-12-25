@@ -1,6 +1,7 @@
 class Sprint < ApplicationRecord
   require 'trello'
   belongs_to :user
+  belongs_to :webhook, optional: true
   has_many :members, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :cards, through: :lists, dependent: :destroy
@@ -13,6 +14,27 @@ class Sprint < ApplicationRecord
   # validates_timeliness gem
   # rails generate validates_timeliness:install
   validates_date :end_date, on_or_after: :start_date
+
+  # Callbacks
+  after_destroy :delete_webhook
+
+  # --------- Trello webhook
+  # Must include the fact that only one webhook will be created per sprint
+  # even if more then one user sets up the same board as a sprint on the app
+  def delete_webhook
+    # find the next sprint using that webhook, and recreate webhook in that sprint.user's name
+    # delete webhook if no other sprint is using that webhook
+    if webhook
+      webhook.sprints.count > 1 ? webhook.sprints.where.not(user: user)[0].post_webhook : webhook.destroy
+    end
+    user.delete_wh_by_sprint(self)
+  end
+
+  def create_webhook
+    post_webhook
+    # Rails.logger.info "=M=A=D=A=F=U=K=I=N=====W=E=B=H=O=O=K======>>>>>>>>>>>>>> #{response.inspect}"
+    update(webhook: Webhook.create!(ext_board_id: trello_ext_id))
+  end
 
   # sends post request for creation of webhook on trello
   def post_webhook
@@ -27,6 +49,7 @@ class Sprint < ApplicationRecord
     )
   end
 
+  # ----------
   # helper methods
   def weighted_cards
     cards.where.not(size: :o)
