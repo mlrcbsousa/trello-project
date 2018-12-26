@@ -65,7 +65,7 @@ class Member < ApplicationRecord
   # hash of hashes
   def weighted_cards_per_size_per_rank
     weighted_cards.group_by(&:list).each_with_object({}) do |(k, v), h|
-      h[k.name] = v.group_by(&:size).each_with_object({}) { |(k2, v2), h2| h2[k2] = v2.count }
+      h[k.name] = v.group_by(&:size).transform_values(&:count)
     end
   end
 
@@ -76,8 +76,8 @@ class Member < ApplicationRecord
 
   # hash of hashes
   def conversion_per_size_per_rank
-    weighted_cards_per_size_per_rank.each_with_object({}) do |(k, v), h|
-      h[k] = v.each_with_object({}) { |(k2, v2), h2| h2[k2] = v2 * sprint.conversion.send(k2) }
+    member.weighted_cards_per_size_per_rank.transform_values do |value|
+      value.each_with_object({}) { |(k, v), h| h[k] = v * sprint.conversion.send(k) }
     end
   end
 
@@ -93,7 +93,8 @@ class Member < ApplicationRecord
 
   # hash
   def conversion_per_rank
-    conversion_per_size_per_rank.each_with_object({}) { |(k, v), h| h[k] = v.values.sum }
+    conversion_per_size_per_rank.transform_values(&:values).transform_values(&:sum)
+    # conversion_per_size_per_rank.each_with_object({}) { |(k, v), h| h[k] = v.values.sum }
   end
 
   # integer

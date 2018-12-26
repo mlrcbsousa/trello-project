@@ -165,7 +165,7 @@ class Sprint < ApplicationRecord
 
   # hash
   def conversion_per_size
-    weighted_cards_per_size.each_with_object({}) { |(key, value), hash| hash[key] = value * conversion.send(key) }
+    weighted_cards_per_size.each_with_object({}) { |(k, v), h| h[k] = v * conversion.send(k) }
   end
 
   # integer
@@ -175,10 +175,8 @@ class Sprint < ApplicationRecord
 
   # hash of hashes
   def conversion_per_size_per_contributor
-    weighted_cards_per_size_per_contributor.each_with_object({}) do |(key, value), hash|
-      hash[key] = value.each_with_object({}) do |(key2, value2), hash2|
-        hash2[key2] = value2 * conversion.send(key2)
-      end
+    weighted_cards_per_size_per_contributor.transform_values do |value|
+      value.each_with_object({}) { |(k, v), h| h[k] = v * conversion.send(k) }
     end
   end
 
@@ -202,9 +200,7 @@ class Sprint < ApplicationRecord
   # ----------------
   # hash
   def conversion_per_contributor
-    conversion_per_size_per_contributor.each_with_object({}) do |(key, value), hash|
-      hash[key] = value.values.sum
-    end
+    conversion_per_size_per_contributor.transform_values(&:values).transform_values(&:sum)
   end
 
   # hash
@@ -233,10 +229,8 @@ class Sprint < ApplicationRecord
 
   # hash of hashes
   def conversion_per_size_per_rank
-    weighted_cards_per_size_per_rank.each_with_object({}) do |(key, value), hash|
-      hash[key] = value.each_with_object({}) do |(key2, value2), hash2|
-        hash2[key2] = value2 * conversion.send(key2)
-      end
+    weighted_cards_per_size_per_rank.transform_values do |value|
+      value.each_with_object({}) { |(k, v), h| h[k] = v * conversion.send(k) }
     end
   end
 
@@ -248,7 +242,8 @@ class Sprint < ApplicationRecord
   # ---------------
   # hash of hashes
   def conversion_per_rank
-    conversion_per_size_per_rank.each_with_object({}) { |(k, v), h| h[k] = v.values.sum }
+    conversion_per_size_per_rank.transform_values(&:values).transform_values(&:sum)
+    # conversion_per_size_per_rank.each_with_object({}) { |(k, v), h| h[k] = v.values.sum }
   end
 
   def progress_conversion_per_rank
