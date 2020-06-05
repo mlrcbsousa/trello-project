@@ -9,7 +9,7 @@ The idea was to create a data visualisation tool for project managers during con
 #### The Live Demo-day Recording
 Ours starts at *26:05*, link should start there automatically.
 
-[![Demo-day live recording](http://img.youtube.com/vi/RapAsDeoog8/0.jpg)](https://youtu.be/RapAsDeoog8?t=1563)
+[![Demo-day live recording](http://img.youtube.com/vi/RapAsDeoog8/0.jpg)](https://youtu.be/RapAsDeoog8?t=1301)
 
 Essentially an add-on to Trello. Trello is an awesome tool for organization. Not just aimed at developers, but everybody.
 Seriously, [check it out](http://www.trello.com/).
