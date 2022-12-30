@@ -2,7 +2,7 @@
   "name": "trello-project",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "3.5",
+    "@rails/webpacker": "5.4",
     "bootstrap": "3",
     "chart.js": "^2.7.3",
     "chartkick": "^3.0.1",
